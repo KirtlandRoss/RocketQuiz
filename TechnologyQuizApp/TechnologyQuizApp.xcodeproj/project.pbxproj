@@ -15,6 +15,7 @@
 		BC21E00026471AC100688D90 /* TechnologyQuizApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC21DFFE26471AC100688D90 /* TechnologyQuizApp.xcdatamodeld */; };
 		BC21E00B26471AC100688D90 /* TechnologyQuizAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21E00A26471AC100688D90 /* TechnologyQuizAppTests.swift */; };
 		BC21E01626471AC100688D90 /* TechnologyQuizAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21E01526471AC100688D90 /* TechnologyQuizAppUITests.swift */; };
+		BC21E02426475D4300688D90 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21E02326475D4300688D90 /* Protocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		BC21E01126471AC100688D90 /* TechnologyQuizAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TechnologyQuizAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC21E01526471AC100688D90 /* TechnologyQuizAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyQuizAppUITests.swift; sourceTree = "<group>"; };
 		BC21E01726471AC100688D90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC21E02326475D4300688D90 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				BC21E00126471AC100688D90 /* Info.plist */,
 				BC21DFFE26471AC100688D90 /* TechnologyQuizApp.xcdatamodeld */,
 				BC21DFF926471AC100688D90 /* Preview Content */,
+				BC21E02326475D4300688D90 /* Protocols.swift */,
 			);
 			path = TechnologyQuizApp;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC21E02426475D4300688D90 /* Protocols.swift in Sources */,
 				BC21E00026471AC100688D90 /* TechnologyQuizApp.xcdatamodeld in Sources */,
 				BC21DFFD26471AC100688D90 /* Persistence.swift in Sources */,
 				BC21DFF626471AC000688D90 /* ContentView.swift in Sources */,
