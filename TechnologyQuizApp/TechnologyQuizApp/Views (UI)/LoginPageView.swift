@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
+struct LoginView: View {
 
     @State var username: String = ""
     @State var password: String = ""
@@ -37,13 +37,19 @@ struct SwiftUIView: View {
                     .padding(.bottom, 50)
                 
                 VStack {
-                    TextField("Username", text: $username)
+                    CustomTextField(
+                        placeholder: Text("Username").foregroundColor(.gray),
+                        text: $username
+                    )
                       .padding()
                       .foregroundColor(.white)
                       .background(Color.lightPurpleGray)
                       .cornerRadius(20.0)
                                   
-                    SecureField("Password", text: $password)
+                    CustomTextField(
+                        placeholder: Text("Password").foregroundColor(.gray),
+                        text: $password
+                    )
                       .padding()
                       .foregroundColor(.white)
                       .background(Color.lightPurpleGray)
@@ -97,8 +103,8 @@ struct SwiftUIView: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIView()
+        LoginView()
     }
 }

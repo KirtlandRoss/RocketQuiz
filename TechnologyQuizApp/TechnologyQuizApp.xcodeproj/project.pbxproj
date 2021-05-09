@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E18CA142648889500AF1F15 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CA132648889500AF1F15 /* SignUpView.swift */; };
+		5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */; };
 		5EFE881626477B4900F4C387 /* LoginPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE881526477B4900F4C387 /* LoginPageView.swift */; };
 		5EFE881826477BBF00F4C387 /* UIshapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE881726477BBF00F4C387 /* UIshapes.swift */; };
+		5EFE881A2648864900F4C387 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE88192648864900F4C387 /* ContentView.swift */; };
 		BC21DFF426471AC000688D90 /* TechnologyQuizAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21DFF326471AC000688D90 /* TechnologyQuizAppApp.swift */; };
 		BC21DFF826471AC100688D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC21DFF726471AC100688D90 /* Assets.xcassets */; };
 		BC21DFFB26471AC100688D90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC21DFFA26471AC100688D90 /* Preview Assets.xcassets */; };
@@ -36,8 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E18CA132648889500AF1F15 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		5EFE881526477B4900F4C387 /* LoginPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageView.swift; sourceTree = "<group>"; };
 		5EFE881726477BBF00F4C387 /* UIshapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIshapes.swift; sourceTree = "<group>"; };
+		5EFE88192648864900F4C387 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BC21DFF026471AC000688D90 /* TechnologyQuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechnologyQuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC21DFF326471AC000688D90 /* TechnologyQuizAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyQuizAppApp.swift; sourceTree = "<group>"; };
 		BC21DFF726471AC100688D90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,8 +87,11 @@
 		5EFE881426477AED00F4C387 /* Views (UI) */ = {
 			isa = PBXGroup;
 			children = (
-				5EFE881726477BBF00F4C387 /* UIshapes.swift */,
+				5EFE88192648864900F4C387 /* ContentView.swift */,
 				5EFE881526477B4900F4C387 /* LoginPageView.swift */,
+				5E18CA132648889500AF1F15 /* SignUpView.swift */,
+				5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */,
+				5EFE881726477BBF00F4C387 /* UIshapes.swift */,
 			);
 			path = "Views (UI)";
 			sourceTree = "<group>";
@@ -277,7 +286,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC21E00026471AC100688D90 /* TechnologyQuizApp.xcdatamodeld in Sources */,
+				5E18CA142648889500AF1F15 /* SignUpView.swift in Sources */,
+				5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */,
 				5EFE881826477BBF00F4C387 /* UIshapes.swift in Sources */,
+				5EFE881A2648864900F4C387 /* ContentView.swift in Sources */,
 				BC21DFFD26471AC100688D90 /* Persistence.swift in Sources */,
 				BC21DFF426471AC000688D90 /* TechnologyQuizAppApp.swift in Sources */,
 				5EFE881626477B4900F4C387 /* LoginPageView.swift in Sources */,
