@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F5055c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Question" representedClassName="Question" syncable="YES">
+        <attribute name="answer" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="question" attributeType="String"/>
+        <relationship name="questionBank" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionBank" inverseName="questions" inverseEntity="QuestionBank"/>
+    </entity>
+    <entity name="QuestionBank" representedClassName="QuestionBank" syncable="YES">
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Question" inverseName="questionBank" inverseEntity="Question"/>
+    </entity>
+    <entity name="Quiz" representedClassName="Quiz" syncable="YES">
+        <attribute name="answers" optional="YES" attributeType="Transformable" customClassName="[Int64]"/>
+        <attribute name="grade" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="questions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Question"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="quiz" inverseEntity="User"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="name" attributeType="String"/>
+        <attribute name="password" attributeType="String"/>
+        <relationship name="quiz" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quiz" inverseName="user" inverseEntity="Quiz"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Question" positionX="-54" positionY="18" width="128" height="74"/>
+        <element name="QuestionBank" positionX="-36" positionY="45" width="128" height="44"/>
+        <element name="Quiz" positionX="-63" positionY="9" width="128" height="89"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="74"/>
     </elements>
 </model>
