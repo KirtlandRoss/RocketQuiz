@@ -27,7 +27,7 @@ struct LoginView: View {
                 .font(.system(size: 60))
                 .foregroundColor(Color.white)
 
-                Image("")
+                Image("rocket")
                     .resizable()
                     .frame(width: 200, height: 200)
                     .clipShape(Circle())
