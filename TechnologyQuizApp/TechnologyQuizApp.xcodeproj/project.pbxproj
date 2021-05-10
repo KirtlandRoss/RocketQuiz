@@ -26,7 +26,6 @@
 		BC3CCDC92648C4A5003598D8 /* Question+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3CCDC12648C4A5003598D8 /* Question+CoreDataClass.swift */; };
 		BC3CCDCA2648C4A5003598D8 /* Question+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3CCDC22648C4A5003598D8 /* Question+CoreDataProperties.swift */; };
 		BC65362C264998BE0085BC6F /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC65362B264998BE0085BC6F /* DBHelper.swift */; };
-		BCA586A92648AE3000F7DE33 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA586A82648AE3000F7DE33 /* ContentView.swift */; };
 		BCECC7EA2649BA0F00DABFE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCECC7E82649BA0F00DABFE4 /* AppDelegate.swift */; };
 		BCECC7EB2649BA0F00DABFE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCECC7E92649BA0F00DABFE4 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -74,7 +73,6 @@
 		BC3CCDC12648C4A5003598D8 /* Question+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BC3CCDC22648C4A5003598D8 /* Question+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BC65362B264998BE0085BC6F /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
-		BCA586A82648AE3000F7DE33 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BCECC7E82649BA0F00DABFE4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCECC7E92649BA0F00DABFE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,7 +143,6 @@
 				BCECC7E92649BA0F00DABFE4 /* SceneDelegate.swift */,
 				BC21E00126471AC100688D90 /* Info.plist */,
 				BC65362B264998BE0085BC6F /* DBHelper.swift */,
-				BCA586A82648AE3000F7DE33 /* ContentView.swift */,
 				BC21DFFE26471AC100688D90 /* TechnologyQuizApp.xcdatamodeld */,
 				BC21DFF926471AC100688D90 /* Preview Content */,
 				BC21E02326475D4300688D90 /* Protocols.swift */,
@@ -326,7 +323,6 @@
 				BC3CCDC72648C4A5003598D8 /* Quiz+CoreDataClass.swift in Sources */,
 				BC21E02426475D4300688D90 /* Protocols.swift in Sources */,
 				BC3CCDC82648C4A5003598D8 /* Quiz+CoreDataProperties.swift in Sources */,
-				BCA586A92648AE3000F7DE33 /* ContentView.swift in Sources */,
 				BC3CCDC32648C4A5003598D8 /* QuestionBank+CoreDataClass.swift in Sources */,
 				BC21E00026471AC100688D90 /* TechnologyQuizApp.xcdatamodeld in Sources */,
 				BC3CCDC42648C4A5003598D8 /* QuestionBank+CoreDataProperties.swift in Sources */,

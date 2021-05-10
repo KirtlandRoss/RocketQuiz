@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-import UIKit
+import SwiftUI
 
 class DBHelper{
     static var inst = DBHelper()
@@ -18,7 +18,7 @@ class DBHelper{
         user.name = object["name"]
         user.password = object["password"]
 
-        print(user.results!.array.count)
+        print(user)
         do{
             try context.save()
             print("Data Saved")
@@ -85,7 +85,7 @@ class DBHelper{
             let req = try context.fetch(fetchReq)
             if (req.count != 0 ){
                 st = req.first as! User
-                st.results = user.results
+                st = user
                 
             }
             try! context.save()

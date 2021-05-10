@@ -11,6 +11,6 @@ import CoreData
 
 
 @objc(Quiz)
-public class Quiz: NSManagedObject, QuizDelegate {
+public class Quiz: NSManagedObject {
 
 }

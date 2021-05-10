@@ -6,9 +6,21 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SignUpView: View {
-    
+    //setup context and variable for holding data
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @EnvironmentObject var user : User
+
+    //fetch users
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true),
+        ]
+    ) var users : FetchedResults<User>
+
     @State var signUpUsername: String = ""
     @State var signUpPassword: String = ""
     @State var signUpFirstName: String = ""
@@ -85,7 +97,9 @@ struct SignUpView: View {
                   .background(Color.lightPurpleGray)
                   .cornerRadius(20.0)
                 
-                Button(action: { action() }) {
+                Button(action: { action(
+
+                ) }) {
                   Text("Submit")
                     .font(.headline)
                     .fontWeight(.bold)

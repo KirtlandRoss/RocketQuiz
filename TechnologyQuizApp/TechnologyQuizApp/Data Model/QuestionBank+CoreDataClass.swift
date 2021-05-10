@@ -11,6 +11,6 @@ import CoreData
 
 
 @objc(QuestionBank)
-public class QuestionBank: NSManagedObject, QuestionBankDelegate {
+public class QuestionBank: NSManagedObject {
 
 }
