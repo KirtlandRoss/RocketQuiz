@@ -11,14 +11,14 @@
 		5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */; };
 		5EFE881626477B4900F4C387 /* LoginPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE881526477B4900F4C387 /* LoginPageView.swift */; };
 		5EFE881826477BBF00F4C387 /* UIshapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE881726477BBF00F4C387 /* UIshapes.swift */; };
-		5EFE881A2648864900F4C387 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE88192648864900F4C387 /* ContentView.swift */; };
-		BC21DFF426471AC000688D90 /* TechnologyQuizAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21DFF326471AC000688D90 /* TechnologyQuizAppApp.swift */; };
 		BC21DFF826471AC100688D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC21DFF726471AC100688D90 /* Assets.xcassets */; };
 		BC21DFFB26471AC100688D90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC21DFFA26471AC100688D90 /* Preview Assets.xcassets */; };
 		BC21DFFD26471AC100688D90 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21DFFC26471AC100688D90 /* Persistence.swift */; };
 		BC21E00026471AC100688D90 /* TechnologyQuizApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC21DFFE26471AC100688D90 /* TechnologyQuizApp.xcdatamodeld */; };
 		BC21E00B26471AC100688D90 /* TechnologyQuizAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21E00A26471AC100688D90 /* TechnologyQuizAppTests.swift */; };
 		BC21E01626471AC100688D90 /* TechnologyQuizAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21E01526471AC100688D90 /* TechnologyQuizAppUITests.swift */; };
+		BCECC7EA2649BA0F00DABFE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCECC7E82649BA0F00DABFE4 /* AppDelegate.swift */; };
+		BCECC7EB2649BA0F00DABFE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCECC7E92649BA0F00DABFE4 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,9 +43,7 @@
 		5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		5EFE881526477B4900F4C387 /* LoginPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageView.swift; sourceTree = "<group>"; };
 		5EFE881726477BBF00F4C387 /* UIshapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIshapes.swift; sourceTree = "<group>"; };
-		5EFE88192648864900F4C387 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BC21DFF026471AC000688D90 /* TechnologyQuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechnologyQuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BC21DFF326471AC000688D90 /* TechnologyQuizAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyQuizAppApp.swift; sourceTree = "<group>"; };
 		BC21DFF726471AC100688D90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC21DFFA26471AC100688D90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BC21DFFC26471AC100688D90 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -57,6 +55,8 @@
 		BC21E01126471AC100688D90 /* TechnologyQuizAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TechnologyQuizAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC21E01526471AC100688D90 /* TechnologyQuizAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyQuizAppUITests.swift; sourceTree = "<group>"; };
 		BC21E01726471AC100688D90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCECC7E82649BA0F00DABFE4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BCECC7E92649BA0F00DABFE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,6 @@
 		5EFE881426477AED00F4C387 /* Views (UI) */ = {
 			isa = PBXGroup;
 			children = (
-				5EFE88192648864900F4C387 /* ContentView.swift */,
 				5EFE881526477B4900F4C387 /* LoginPageView.swift */,
 				5E18CA132648889500AF1F15 /* SignUpView.swift */,
 				5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */,
@@ -119,9 +118,10 @@
 		BC21DFF226471AC000688D90 /* TechnologyQuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				BC21DFF326471AC000688D90 /* TechnologyQuizAppApp.swift */,
 				5EFE881426477AED00F4C387 /* Views (UI) */,
 				BC21DFF726471AC100688D90 /* Assets.xcassets */,
+				BCECC7E82649BA0F00DABFE4 /* AppDelegate.swift */,
+				BCECC7E92649BA0F00DABFE4 /* SceneDelegate.swift */,
 				BC21DFFC26471AC100688D90 /* Persistence.swift */,
 				BC21E00126471AC100688D90 /* Info.plist */,
 				BC21DFFE26471AC100688D90 /* TechnologyQuizApp.xcdatamodeld */,
@@ -288,10 +288,10 @@
 				BC21E00026471AC100688D90 /* TechnologyQuizApp.xcdatamodeld in Sources */,
 				5E18CA142648889500AF1F15 /* SignUpView.swift in Sources */,
 				5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */,
+				BCECC7EA2649BA0F00DABFE4 /* AppDelegate.swift in Sources */,
 				5EFE881826477BBF00F4C387 /* UIshapes.swift in Sources */,
-				5EFE881A2648864900F4C387 /* ContentView.swift in Sources */,
+				BCECC7EB2649BA0F00DABFE4 /* SceneDelegate.swift in Sources */,
 				BC21DFFD26471AC100688D90 /* Persistence.swift in Sources */,
-				BC21DFF426471AC000688D90 /* TechnologyQuizAppApp.swift in Sources */,
 				5EFE881626477B4900F4C387 /* LoginPageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
