@@ -92,7 +92,6 @@ struct ContentView_Previews1: PreviewProvider {
     }
 }
 
-
 // Custom Text Field
 struct CustomTextField: View {
     var placeholder: Text
