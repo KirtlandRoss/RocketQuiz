@@ -25,6 +25,7 @@ struct LoginView: View {
             VStack {
               Text("Quiz App")
                 .font(.system(size: 60))
+                .fontWeight(.bold)
                 .foregroundColor(Color.white)
 
                 Image("rocket")
@@ -65,8 +66,13 @@ struct LoginView: View {
                 }.padding([.leading, .trailing], 27.5)
                 
                 Button(action: { action() }) {
+                  AppImage(width: 50, height: 50, cornerRadius: 0, name: "facebook")
+                }
+                
+                Button(action: { action() }) {
                   Text("Sign In")
                     .font(.headline)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 300, height: 50)
@@ -77,6 +83,7 @@ struct LoginView: View {
                 Button(action: { action() }) {
                   Text("Forgot Password")
                     .font(.headline)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 300, height: 50)
@@ -94,6 +101,7 @@ struct LoginView: View {
                 Button(action: { action() }) {
                   Text("Tap here to sign up!")
                     .font(.system(size: 30))
+                    .fontWeight(.bold)
                     .foregroundColor(.purple)
                     .padding()
                     .cornerRadius(15.0)
@@ -108,3 +116,5 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
+
+
