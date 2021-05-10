@@ -13,7 +13,6 @@
 		5EFE881826477BBF00F4C387 /* UIshapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE881726477BBF00F4C387 /* UIshapes.swift */; };
 		BC21DFF826471AC100688D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC21DFF726471AC100688D90 /* Assets.xcassets */; };
 		BC21DFFB26471AC100688D90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC21DFFA26471AC100688D90 /* Preview Assets.xcassets */; };
-		BC21DFFD26471AC100688D90 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21DFFC26471AC100688D90 /* Persistence.swift */; };
 		BC21E00026471AC100688D90 /* TechnologyQuizApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC21DFFE26471AC100688D90 /* TechnologyQuizApp.xcdatamodeld */; };
 		BC21E00B26471AC100688D90 /* TechnologyQuizAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21E00A26471AC100688D90 /* TechnologyQuizAppTests.swift */; };
 		BC21E01626471AC100688D90 /* TechnologyQuizAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21E01526471AC100688D90 /* TechnologyQuizAppUITests.swift */; };
@@ -57,7 +56,6 @@
 		BC21DFF026471AC000688D90 /* TechnologyQuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechnologyQuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC21DFF726471AC100688D90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC21DFFA26471AC100688D90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		BC21DFFC26471AC100688D90 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BC21DFFF26471AC100688D90 /* TechnologyQuizApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TechnologyQuizApp.xcdatamodel; sourceTree = "<group>"; };
 		BC21E00126471AC100688D90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC21E00626471AC100688D90 /* TechnologyQuizAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TechnologyQuizAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,12 +139,10 @@
 			isa = PBXGroup;
 			children = (
 				BCDE85132648C5BF009F86F8 /* Data Model */,
-				BC21DFF326471AC000688D90 /* TechnologyQuizAppApp.swift */,
 				5EFE881426477AED00F4C387 /* Views (UI) */,
 				BC21DFF726471AC100688D90 /* Assets.xcassets */,
 				BCECC7E82649BA0F00DABFE4 /* AppDelegate.swift */,
 				BCECC7E92649BA0F00DABFE4 /* SceneDelegate.swift */,
-				BC21DFFC26471AC100688D90 /* Persistence.swift */,
 				BC21E00126471AC100688D90 /* Info.plist */,
 				BC65362B264998BE0085BC6F /* DBHelper.swift */,
 				BCA586A82648AE3000F7DE33 /* ContentView.swift */,
@@ -334,9 +330,7 @@
 				BC3CCDC32648C4A5003598D8 /* QuestionBank+CoreDataClass.swift in Sources */,
 				BC21E00026471AC100688D90 /* TechnologyQuizApp.xcdatamodeld in Sources */,
 				BC3CCDC42648C4A5003598D8 /* QuestionBank+CoreDataProperties.swift in Sources */,
-				BC21DFFD26471AC100688D90 /* Persistence.swift in Sources */,
 				BC3CCDC52648C4A5003598D8 /* User+CoreDataClass.swift in Sources */,
-				BC21DFF426471AC000688D90 /* TechnologyQuizAppApp.swift in Sources */,
 				BC65362C264998BE0085BC6F /* DBHelper.swift in Sources */,
 				BC3CCDCA2648C4A5003598D8 /* Question+CoreDataProperties.swift in Sources */,
 				BC3CCDC62648C4A5003598D8 /* User+CoreDataProperties.swift in Sources */,
@@ -346,7 +340,6 @@
 				BCECC7EA2649BA0F00DABFE4 /* AppDelegate.swift in Sources */,
 				5EFE881826477BBF00F4C387 /* UIshapes.swift in Sources */,
 				BCECC7EB2649BA0F00DABFE4 /* SceneDelegate.swift in Sources */,
-				BC21DFFD26471AC100688D90 /* Persistence.swift in Sources */,
 				5EFE881626477B4900F4C387 /* LoginPageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
