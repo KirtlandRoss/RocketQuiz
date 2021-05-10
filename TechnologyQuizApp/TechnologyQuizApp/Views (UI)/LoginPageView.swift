@@ -25,6 +25,7 @@ struct LoginView: View {
             VStack {
               Text("Quiz App")
                 .font(.system(size: 60))
+                .fontWeight(.bold)
                 .foregroundColor(Color.white)
 
                 Image("rocket")

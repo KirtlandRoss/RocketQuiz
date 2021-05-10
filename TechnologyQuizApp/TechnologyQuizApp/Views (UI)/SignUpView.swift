@@ -26,7 +26,8 @@ struct SignUpView: View {
                 .ignoresSafeArea()
             VStack {
                 Text("Sign Up Below")
-                    .font(.system(size: 60))
+                    .font(.system(size: 50))
+                    .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .padding(.bottom, 50)
 

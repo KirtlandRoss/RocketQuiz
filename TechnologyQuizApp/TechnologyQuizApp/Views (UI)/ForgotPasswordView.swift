@@ -24,6 +24,7 @@ struct ForgotPasswordView: View {
                 
                 Text("Reset Password")
                     .font(.system(size: 50))
+                    .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .padding(.bottom, 50)
 
@@ -48,6 +49,7 @@ struct ForgotPasswordView: View {
                 Button(action: { action() }) {
                   Text("Submit")
                     .font(.headline)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 300, height: 50)
