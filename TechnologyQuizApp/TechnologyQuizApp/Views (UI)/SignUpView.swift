@@ -88,6 +88,7 @@ struct SignUpView: View {
                 Button(action: { action() }) {
                   Text("Submit")
                     .font(.headline)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 300, height: 50)

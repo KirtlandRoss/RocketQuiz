@@ -68,6 +68,7 @@ struct LoginView: View {
                 Button(action: { action() }) {
                   Text("Sign In")
                     .font(.headline)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 300, height: 50)
@@ -78,6 +79,7 @@ struct LoginView: View {
                 Button(action: { action() }) {
                   Text("Forgot Password")
                     .font(.headline)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 300, height: 50)
@@ -95,6 +97,7 @@ struct LoginView: View {
                 Button(action: { action() }) {
                   Text("Tap here to sign up!")
                     .font(.system(size: 30))
+                    .fontWeight(.bold)
                     .foregroundColor(.purple)
                     .padding()
                     .cornerRadius(15.0)
