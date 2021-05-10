@@ -107,3 +107,20 @@ struct CustomTextField: View {
         }
     }
 }
+
+// Custom Images
+struct AppImage: View {
+    var width : CGFloat = 0
+    var height : CGFloat = 0
+    var cornerRadius : CGFloat = 0
+    var name : String = ""
+    
+    var body : some View {
+        ZStack {
+            Image(name)
+                .resizable()
+                .frame(width: width, height: height)
+                .cornerRadius(cornerRadius)
+        }
+    }
+}

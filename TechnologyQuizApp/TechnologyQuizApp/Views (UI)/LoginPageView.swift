@@ -66,6 +66,10 @@ struct LoginView: View {
                 }.padding([.leading, .trailing], 27.5)
                 
                 Button(action: { action() }) {
+                  AppImage(width: 50, height: 50, cornerRadius: 0, name: "facebook")
+                }
+                
+                Button(action: { action() }) {
                   Text("Sign In")
                     .font(.headline)
                     .fontWeight(.bold)
@@ -112,3 +116,5 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
+
+
