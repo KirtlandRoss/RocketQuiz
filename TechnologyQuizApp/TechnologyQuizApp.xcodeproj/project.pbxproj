@@ -28,6 +28,7 @@
 		BC3CCDC82648C4A5003598D8 /* Quiz+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3CCDC02648C4A5003598D8 /* Quiz+CoreDataProperties.swift */; };
 		BC3CCDC92648C4A5003598D8 /* Question+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3CCDC12648C4A5003598D8 /* Question+CoreDataClass.swift */; };
 		BC3CCDCA2648C4A5003598D8 /* Question+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3CCDC22648C4A5003598D8 /* Question+CoreDataProperties.swift */; };
+		BC65362C264998BE0085BC6F /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC65362B264998BE0085BC6F /* DBHelper.swift */; };
 		BCA586A92648AE3000F7DE33 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA586A82648AE3000F7DE33 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		BC3CCDC02648C4A5003598D8 /* Quiz+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quiz+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BC3CCDC12648C4A5003598D8 /* Question+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BC3CCDC22648C4A5003598D8 /* Question+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BC65362B264998BE0085BC6F /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		BCA586A82648AE3000F7DE33 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +147,7 @@
 				BC21DFF726471AC100688D90 /* Assets.xcassets */,
 				BC21DFFC26471AC100688D90 /* Persistence.swift */,
 				BC21E00126471AC100688D90 /* Info.plist */,
+				BC65362B264998BE0085BC6F /* DBHelper.swift */,
 				BCA586A82648AE3000F7DE33 /* ContentView.swift */,
 				BC21DFFE26471AC100688D90 /* TechnologyQuizApp.xcdatamodeld */,
 				BC21DFF926471AC100688D90 /* Preview Content */,
@@ -333,6 +336,7 @@
 				BC21DFFD26471AC100688D90 /* Persistence.swift in Sources */,
 				BC3CCDC52648C4A5003598D8 /* User+CoreDataClass.swift in Sources */,
 				BC21DFF426471AC000688D90 /* TechnologyQuizAppApp.swift in Sources */,
+				BC65362C264998BE0085BC6F /* DBHelper.swift in Sources */,
 				BC3CCDCA2648C4A5003598D8 /* Question+CoreDataProperties.swift in Sources */,
 				BC3CCDC62648C4A5003598D8 /* User+CoreDataProperties.swift in Sources */,
 				BC3CCDC92648C4A5003598D8 /* Question+CoreDataClass.swift in Sources */,

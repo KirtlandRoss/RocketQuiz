@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import CoreData
 protocol UserDelegate{
     var name : String { get }
     var password : String { get set }
@@ -37,6 +37,13 @@ protocol QuizDelegate{
 
 }
 
+protocol DatabaseDelegate{
+
+    func createUser()
+    func fetchUser()
+    func updateData()
+
+}
 
 // this is an Int64 as to allow easy Core Data integration
 enum Answer : Int64 {
