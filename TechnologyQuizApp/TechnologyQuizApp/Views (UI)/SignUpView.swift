@@ -10,8 +10,8 @@ import CoreData
 
 struct SignUpView: View {
     //setup context and variable for holding data
-    @Environment(\.managedObjectContext) var context
-    private var user : User?
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @EnvironmentObject var user : User
 
     //fetch users
     @FetchRequest(
@@ -113,29 +113,7 @@ struct SignUpView: View {
             }.padding([.leading, .trailing], 27.5)
         }
     }
-    //validates data entry to make sure nothing crashes, can add other criteria here
-    func dataValidation() -> Bool{
-        if signUpUsername.count > 1 && signUpPassword.count > 5{
-            return true
-        }
-        return false
-    }
-    mutating func submit(){
-        if dataValidation(){
-            self.user = User(context: context)
-            user!.name = signUpUsername
-            user!.password = signUpPassword
-            do{
-                try self.context.save()
-            }
-            catch{
-                print("SignUpView.submit error with saving")
-            }
-        }
-    }
 }
-
-
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
