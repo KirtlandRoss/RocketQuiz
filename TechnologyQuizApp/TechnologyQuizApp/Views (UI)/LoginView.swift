@@ -35,9 +35,15 @@ struct LoginView: View {
                     .overlay(Circle()
                         .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ), lineWidth: 4))
                     .shadow(radius: 10)
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 10)
                 
                 VStack {
+                    Button(action: { action() }) {
+                      AppImage(width: 50, height: 50, cornerRadius: 0, name: "facebook")
+                        Text("Login with Faceook")
+                            .fontWeight(.heavy)
+                    }.padding([.trailing], 150)
+                    
                     CustomTextField(
                         placeholder: Text("Username").foregroundColor(.gray),
                         text: $username
@@ -64,10 +70,6 @@ struct LoginView: View {
                         if rememberMe {
                         }
                 }.padding([.leading, .trailing], 27.5)
-                
-                Button(action: { action() }) {
-                  AppImage(width: 50, height: 50, cornerRadius: 0, name: "facebook")
-                }
                 
                 Button(action: { action() }) {
                   Text("Sign In")
@@ -116,5 +118,3 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-
-
