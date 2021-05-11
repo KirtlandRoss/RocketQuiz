@@ -2,7 +2,7 @@
 //  Quiz+CoreDataProperties.swift
 //  TechnologyQuizApp
 //
-//  Created by Kirtland Ross on 5/9/21.
+//  Created by Kirtland Ross on 5/11/21.
 //
 //
 

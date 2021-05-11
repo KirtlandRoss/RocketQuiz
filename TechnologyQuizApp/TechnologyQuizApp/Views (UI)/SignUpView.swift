@@ -11,15 +11,9 @@ import CoreData
 struct SignUpView: View {
     //setup context and variable for holding data
     @Environment(\.managedObjectContext) var context
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
 
-    //fetch users
-    @FetchRequest(
-        entity: User.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \User.name, ascending: true),
-        ]
-    ) var users : FetchedResults<User>
 
     @State var signUpUsername: String = ""
     @State var signUpPassword: String = ""
@@ -27,11 +21,14 @@ struct SignUpView: View {
     @State var signUpLastName: String = ""
     @State var signUpEmail: String = ""
     @State var signUpPhoneNumber: String = ""
-    
-    func action () {
-        print("hello")
-    }
-    
+    //fetch users
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true)]
+    ) var users : FetchedResults<User>
+
+
     var body: some View {
 
         ZStack {
@@ -99,8 +96,8 @@ struct SignUpView: View {
                 .background(Color.lightPurpleGray)
                 .cornerRadius(20.0)
                 
-                Button(action: { action(
-
+                Button(action: { (
+                    submit()
                 ) }) {
                     Text("Submit")
                         .font(.headline)
@@ -116,18 +113,27 @@ struct SignUpView: View {
         }
     }
     func submit(){
-        if validateData(){
-            var user = User(context: context)
+
+        //checks if data is valid and if database contains a user with the same username
+        if validateData() && !users.contains(where: { user in
+            user.name == signUpUsername
+        }){
+            let user = User(context: context)
             user.name = signUpUsername
             user.password = signUpPassword
             do{
                 try context.save()
+                print("user created?!")
+                print(users)
+                self.presentationMode.wrappedValue.dismiss()
+
             }
             catch{
                 print("SignUpView.submit save error")
             }
 
         }
+        else{  print("user already exists")}
     }
 
     //data validation, basic to make sure it doesn't crash. Can be changed later
@@ -139,6 +145,8 @@ struct SignUpView: View {
     }
 
 }
+
+
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
