@@ -16,8 +16,8 @@
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES" codeGenerationType="category">
         <attribute name="email" optional="YES" attributeType="String"/>
-        <attribute name="firstName" optional="YES" attributeType="String"/>
-        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="firstName" attributeType="String"/>
+        <attribute name="lastName" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="password" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

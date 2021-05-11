@@ -121,6 +121,8 @@ struct SignUpView: View {
             let user = User(context: context)
             user.name = signUpUsername
             user.password = signUpPassword
+            user.firstName = signUpFirstName
+            user.lastName = signUpLastName
             do{
                 try context.save()
                 print("user created?!")
@@ -138,10 +140,24 @@ struct SignUpView: View {
 
     //data validation, basic to make sure it doesn't crash. Can be changed later
     func validateData() -> Bool{
-        if signUpUsername.count > 3 && signUpPassword.count > 3{
-            return true
+        if signUpUsername.count < 3
+        {
+            print("Username is too short")
+            return false
         }
-        return false
+        else if signUpPassword.count < 3{
+            print("Password is too short")
+            return false
+        }
+        else if signUpFirstName.count < 3{
+            print("First Name is too short")
+            return false
+        }
+        else if signUpLastName.count < 3{
+            print("Last Name is too short")
+            return false
+        }
+        return true
     }
 
 }
