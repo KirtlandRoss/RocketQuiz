@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SideMenu: View {
     @State var showMenu = false // holds state for menu toggle
-
+    
     var body: some View {
         // allows Drag Gesture to close the side menu.
         let drag = DragGesture()

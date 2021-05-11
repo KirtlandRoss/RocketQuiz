@@ -13,21 +13,6 @@ class DBHelper{
     static var inst = DBHelper()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-    func createUser(_ object: [String:String]) -> User{
-        let user = User(context: context)
-        user.name = object["name"]
-        user.password = object["password"]
-
-        print(user)
-        do{
-            try context.save()
-            print("Data Saved")
-        }
-        catch{
-            print("data not saved")
-        }
-        return user
-    }
 
     func fetchUser(name : String) throws -> User {
         var st : User?
