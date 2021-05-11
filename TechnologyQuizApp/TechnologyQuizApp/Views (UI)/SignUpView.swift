@@ -10,8 +10,8 @@ import CoreData
 
 struct SignUpView: View {
     //setup context and variable for holding data
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @EnvironmentObject var user : User
+    @Environment(\.managedObjectContext) var context
+
 
     //fetch users
     @FetchRequest(
@@ -33,7 +33,9 @@ struct SignUpView: View {
     }
     
     var body: some View {
+
         ZStack {
+
             Color.purpleGray
                 .ignoresSafeArea()
             VStack {
@@ -47,72 +49,95 @@ struct SignUpView: View {
                     placeholder: Text("First Name").foregroundColor(.gray),
                     text: $signUpFirstName
                 )
-                  .padding()
-                  .foregroundColor(.white)
-                  .background(Color.lightPurpleGray)
-                  .cornerRadius(20.0)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.lightPurpleGray)
+                .cornerRadius(20.0)
                 
                 CustomTextField(
                     placeholder: Text("Last Name").foregroundColor(.gray),
                     text: $signUpLastName
                 )
-                  .padding()
-                  .foregroundColor(.white)
-                  .background(Color.lightPurpleGray)
-                  .cornerRadius(20.0)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.lightPurpleGray)
+                .cornerRadius(20.0)
                 
                 CustomTextField(
                     placeholder: Text("Email").foregroundColor(.gray),
                     text: $signUpEmail
                 )
-                  .padding()
-                  .foregroundColor(.white)
-                  .background(Color.lightPurpleGray)
-                  .cornerRadius(20.0)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.lightPurpleGray)
+                .cornerRadius(20.0)
                 
                 CustomTextField(
                     placeholder: Text("Phone Number").foregroundColor(.gray),
                     text: $signUpPhoneNumber
                 )
-                  .padding()
-                  .foregroundColor(.white)
-                  .background(Color.lightPurpleGray)
-                  .cornerRadius(20.0)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.lightPurpleGray)
+                .cornerRadius(20.0)
                 
                 CustomTextField(
                     placeholder: Text("Username").foregroundColor(.gray),
                     text: $signUpUsername
                 )
-                  .padding()
-                  .foregroundColor(.white)
-                  .background(Color.lightPurpleGray)
-                  .cornerRadius(20.0)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.lightPurpleGray)
+                .cornerRadius(20.0)
                 
                 CustomTextField(
                     placeholder: Text("Password").foregroundColor(.gray),
                     text: $signUpPassword
                 )
-                  .padding()
-                  .foregroundColor(.white)
-                  .background(Color.lightPurpleGray)
-                  .cornerRadius(20.0)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.lightPurpleGray)
+                .cornerRadius(20.0)
                 
                 Button(action: { action(
 
                 ) }) {
-                  Text("Submit")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 300, height: 50)
-                    .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
-                    .cornerRadius(15.0)
+                    Text("Submit")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 300, height: 50)
+                        .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
+                        .cornerRadius(15.0)
                 }.offset(x: 0, y: 50)
                 
             }.padding([.leading, .trailing], 27.5)
         }
     }
+    func submit(){
+        if validateData(){
+            var user = User(context: context)
+            user.name = signUpUsername
+            user.password = signUpPassword
+            do{
+                try context.save()
+            }
+            catch{
+                print("SignUpView.submit save error")
+            }
+
+        }
+    }
+
+    //data validation, basic to make sure it doesn't crash. Can be changed later
+    func validateData() -> Bool{
+        if signUpUsername.count > 3 && signUpPassword.count > 3{
+            return true
+        }
+        return false
+    }
+
 }
 
 struct SignUpView_Previews: PreviewProvider {
