@@ -30,7 +30,7 @@ struct SignUpView: View {
 
 
     var body: some View {
-
+        
         ZStack {
 
             Color.purpleGray
