@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct LoginView: View {
 
@@ -97,9 +98,6 @@ struct LoginView: View {
                         .padding()
                         .cornerRadius(15.0)
                         .offset(x: 0, y: 70)
-
-
-
                     NavigationLink(destination: SignUpView()){
                         Text("Tap here to sign up!")
                             .font(.system(size: 30))
@@ -107,7 +105,6 @@ struct LoginView: View {
                             .foregroundColor(.purple)
                             .padding()
                             .cornerRadius(15.0)
-
                     }.offset(x: 0, y: 30)
 
                     }
