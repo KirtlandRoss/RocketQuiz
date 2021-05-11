@@ -117,14 +117,11 @@ struct LoginView: View {
                     }.offset(x: 0, y: 30)
 
                     }
-
             }
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)
     }
-
-
 }
 
 struct LoginView_Previews: PreviewProvider {
@@ -132,5 +129,3 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-
-

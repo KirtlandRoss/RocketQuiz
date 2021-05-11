@@ -11,6 +11,8 @@
 		5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */; };
 		5EA643072649CD4E008519F1 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA643062649CD4E008519F1 /* SideMenu.swift */; };
 		5EA643092649CEB3008519F1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA643082649CEB3008519F1 /* MenuView.swift */; };
+		5EE60BCD264ACA7B00BC2735 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */; };
+		5EE60BCF264ADBEC00BC2735 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE60BCE264ADBEC00BC2735 /* QuizView.swift */; };
 		5EFE881626477B4900F4C387 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE881526477B4900F4C387 /* LoginView.swift */; };
 		5EFE881826477BBF00F4C387 /* UICustomElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE881726477BBF00F4C387 /* UICustomElements.swift */; };
 		BC21DFF826471AC100688D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC21DFF726471AC100688D90 /* Assets.xcassets */; };
@@ -50,6 +52,8 @@
 		5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		5EA643062649CD4E008519F1 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		5EA643082649CEB3008519F1 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		5EE60BCE264ADBEC00BC2735 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		5EFE881526477B4900F4C387 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5EFE881726477BBF00F4C387 /* UICustomElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomElements.swift; sourceTree = "<group>"; };
 		BC21DFF026471AC000688D90 /* TechnologyQuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechnologyQuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,9 +114,11 @@
 		5EFE881426477AED00F4C387 /* Views (UI) */ = {
 			isa = PBXGroup;
 			children = (
-				5EFE881526477B4900F4C387 /* LoginView.swift */,
-				5E18CA132648889500AF1F15 /* SignUpView.swift */,
 				5EA6430A2649D80C008519F1 /* Side Menu */,
+				5EFE881526477B4900F4C387 /* LoginView.swift */,
+				5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */,
+				5EE60BCE264ADBEC00BC2735 /* QuizView.swift */,
+				5E18CA132648889500AF1F15 /* SignUpView.swift */,
 				5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */,
 				5EFE881726477BBF00F4C387 /* UICustomElements.swift */,
 			);
@@ -327,10 +333,13 @@
 				BC65362C264998BE0085BC6F /* DBHelper.swift in Sources */,
 				5E18CA142648889500AF1F15 /* SignUpView.swift in Sources */,
 				5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */,
-				5EA643072649CD4E008519F1 /* SideMenu.swift in Sources */,
 				BCDD19A8264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift in Sources */,
 				BCDD19AA264AE3730023E2C5 /* Quiz+CoreDataClass.swift in Sources */,
 				BCDD19A6264AE3730023E2C5 /* User+CoreDataClass.swift in Sources */,
+				5EE60BCF264ADBEC00BC2735 /* QuizView.swift in Sources */,
+				5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */,
+				5EA643072649CD4E008519F1 /* SideMenu.swift in Sources */,
+				5EE60BCD264ACA7B00BC2735 /* WelcomeView.swift in Sources */,
 				BCECC7EA2649BA0F00DABFE4 /* AppDelegate.swift in Sources */,
 				5EA643092649CEB3008519F1 /* MenuView.swift in Sources */,
 				5EFE881826477BBF00F4C387 /* UICustomElements.swift in Sources */,
