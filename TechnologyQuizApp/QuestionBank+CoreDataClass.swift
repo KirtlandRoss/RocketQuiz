@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(QuestionBank)
+
 public class QuestionBank: NSManagedObject {
 
 }
