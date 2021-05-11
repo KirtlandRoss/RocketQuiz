@@ -92,7 +92,6 @@ struct ContentView_Previews1: PreviewProvider {
     }
 }
 
-
 // Custom Text Field
 struct CustomTextField: View {
     var placeholder: Text
@@ -104,6 +103,23 @@ struct CustomTextField: View {
         ZStack(alignment: .leading) {
             if text.isEmpty { placeholder }
             TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
+        }
+    }
+}
+
+// Custom Images
+struct AppImage: View {
+    var width : CGFloat = 0
+    var height : CGFloat = 0
+    var cornerRadius : CGFloat = 0
+    var name : String = ""
+    
+    var body : some View {
+        ZStack {
+            Image(name)
+                .resizable()
+                .frame(width: width, height: height)
+                .cornerRadius(cornerRadius)
         }
     }
 }
