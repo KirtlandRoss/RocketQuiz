@@ -1,0 +1,6 @@
+framework module Pods_TechnologyQuizApp_TechnologyQuizAppUITests {
+  umbrella header "Pods-TechnologyQuizApp-TechnologyQuizAppUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
