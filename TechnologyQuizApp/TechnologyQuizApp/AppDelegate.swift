@@ -4,7 +4,6 @@
 //
 //  Created by Kirtland Ross on 5/10/21.
 //
-
 // Swift
 //
 // AppDelegate.swift
