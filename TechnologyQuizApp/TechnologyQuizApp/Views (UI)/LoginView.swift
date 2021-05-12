@@ -133,6 +133,7 @@ struct LoginView: View {
         .navigationBarHidden(true)
     }
     }
+    
     func submit(){
 //        checks if data is valid and if database contains a user with the same username
         if users.first(where: { user in

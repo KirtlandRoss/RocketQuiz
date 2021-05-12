@@ -18,7 +18,6 @@ struct QuizView: View {
     var answers = ["The answer to this question is A, because thats what I am saying.", "The answer to this question is B, because thats what I am saying.", "The answer to this question is C, because thats what I am saying.", "The answer to this question is D, because thats what I am saying."]
     
     var body: some View {
-        NavigationView{
         ZStack { // ZStack for whole view
             Color.purpleGray
                 .ignoresSafeArea()
@@ -103,7 +102,6 @@ struct QuizView: View {
                     .font(.system(size: 23))
             }.offset(y: -60)
         }
-    }
     }
 }
 
