@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    func action() {
-        print("hello")
-    }
-    
+    @State private var user : User?
     var body: some View {
 
         ZStack { // ZStack for whole view
