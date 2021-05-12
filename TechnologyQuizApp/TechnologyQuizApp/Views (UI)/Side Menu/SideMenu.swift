@@ -7,9 +7,12 @@
 
 import SwiftUI
 
-struct SideMenu: View {
-    @State var showMenu = false // holds state for menu toggle
-    
+struct SideMenu<Content: View> : View {
+    @State private var showMenu = false // holds state for menu toggle
+    let content : Content
+    init(@ViewBuilder content: () -> Content) {
+            self.content = content()
+        }
     var body: some View {
         // allows Drag Gesture to close the side menu.
         let drag = DragGesture()
@@ -24,7 +27,7 @@ struct SideMenu: View {
         return NavigationView {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    MainView(showMenu: self.$showMenu)
+                    content
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         // Offset is for the main view size to shrink or grow depending on if the side menu is open, using ternary operator.
                         .offset(x: self.showMenu ? geometry.size.width / 2 : 0)
@@ -72,7 +75,8 @@ struct MainView: View {
 }
 
 struct SideMenu_Previews: PreviewProvider {
+    @State static var boo : Bool = false
     static var previews: some View {
-        SideMenu()
+        SideMenu(content: {SignUpView()})
     }
 }

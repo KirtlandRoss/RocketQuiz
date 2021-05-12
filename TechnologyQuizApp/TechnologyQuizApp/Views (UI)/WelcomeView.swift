@@ -13,6 +13,7 @@ struct WelcomeView: View {
     }
     
     var body: some View {
+
         ZStack { // ZStack for whole view
             Color.purpleGray
                 .ignoresSafeArea()
@@ -63,6 +64,7 @@ struct WelcomeView: View {
 
                 ZStack { // Buttons to start quizzes
                     Button(action: action) { // top button
+                        NavigationLink(destination: QuizView()){
                         Text("Start Quiz 1")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -71,9 +73,10 @@ struct WelcomeView: View {
                             .frame(width: 350, height: 75)
                             .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                             .cornerRadius(15.0)
-                    }.offset(x: 0, y: -90)
+                        }}.offset(x: 0, y: -90)
                     
                     Button(action:action) { // bottom button
+                        NavigationLink(destination: QuizView()){
                         Text("Start Quiz 2")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -82,7 +85,7 @@ struct WelcomeView: View {
                             .frame(width: 350, height: 75)
                             .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                             .cornerRadius(15.0)
-                    }
+                        }}
                 }
             }
         }

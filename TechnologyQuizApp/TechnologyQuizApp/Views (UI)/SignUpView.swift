@@ -13,8 +13,6 @@ struct SignUpView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-
-
     @State var signUpUsername: String = ""
     @State var signUpPassword: String = ""
     @State var signUpFirstName: String = ""
@@ -28,9 +26,7 @@ struct SignUpView: View {
             NSSortDescriptor(keyPath: \User.name, ascending: true)]
     ) var users : FetchedResults<User>
 
-
     var body: some View {
-
         ZStack {
 
             Color.purpleGray
@@ -123,6 +119,7 @@ struct SignUpView: View {
             user.password = signUpPassword
             user.firstName = signUpFirstName
             user.lastName = signUpLastName
+            user.hasSubscription = false
             do{
                 try context.save()
                 print("user created?!")
@@ -159,6 +156,7 @@ struct SignUpView: View {
         }
         return true
     }
+    
 
 }
 

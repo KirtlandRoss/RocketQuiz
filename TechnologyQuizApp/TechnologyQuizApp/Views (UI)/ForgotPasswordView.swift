@@ -59,7 +59,6 @@ struct ForgotPasswordView: View {
                 
             }.padding([.leading, .trailing], 27.5)
         }
-       
     }
 }
 
