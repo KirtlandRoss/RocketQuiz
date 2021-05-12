@@ -1,5 +1,5 @@
 //
-//  DiscussionBoard.swift
+//  DiscussionBoardUI.swift
 //  TechnologyQuizApp
 //
 //  Created by Scott Benson on 5/11/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DiscussionBoard: View {
+struct DiscussionBoardUI: View {
     @State var messages: Array = ["hello", "does", "this", "work?"]
     @State var usernames: Array = ["hello", "does", "this", "work?"]
     
@@ -20,6 +20,6 @@ struct DiscussionBoard: View {
 
 struct DiscussionBoard_Previews: PreviewProvider {
     static var previews: some View {
-        DiscussionBoard()
+        DiscussionBoardUI()
     }
 }
