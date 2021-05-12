@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,7 @@
 		BC37187E264C1DB8003B47CD /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC37187A264C1DB8003B47CD /* Post+CoreDataClass.swift */; };
 		BC371880264C1DB8003B47CD /* DiscussionBoard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC37187C264C1DB8003B47CD /* DiscussionBoard+CoreDataClass.swift */; };
 		BC65362C264998BE0085BC6F /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC65362B264998BE0085BC6F /* DBHelper.swift */; };
+		BCB996CE264C3A02008BFDE4 /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB996CD264C3A02008BFDE4 /* FacebookButton.swift */; };
 		BCDD19A4264AE3730023E2C5 /* Question+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD199C264AE3730023E2C5 /* Question+CoreDataClass.swift */; };
 		BCDD19A6264AE3730023E2C5 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD199E264AE3730023E2C5 /* User+CoreDataClass.swift */; };
 		BCDD19A8264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD19A0264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift */; };
@@ -85,6 +86,7 @@
 		BC37187A264C1DB8003B47CD /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BC37187C264C1DB8003B47CD /* DiscussionBoard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscussionBoard+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BC65362B264998BE0085BC6F /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		BCB996CD264C3A02008BFDE4 /* FacebookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookButton.swift; sourceTree = "<group>"; };
 		BCDD199C264AE3730023E2C5 /* Question+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BCDD199E264AE3730023E2C5 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BCDD19A0264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionBank+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -143,6 +145,7 @@
 				5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */,
 				5EEBBBB0264B344900E1C736 /* DiscussionBoardUI.swift */,
 				5EFE881726477BBF00F4C387 /* UICustomElements.swift */,
+				BCB996CD264C3A02008BFDE4 /* FacebookButton.swift */,
 			);
 			path = "Views (UI)";
 			sourceTree = "<group>";
@@ -245,7 +248,6 @@
 				099A5ACD244F39836F633437 /* Pods-TechnologyQuizAppTests.debug.xcconfig */,
 				2E424676FC54E529335DCF31 /* Pods-TechnologyQuizAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -501,6 +503,7 @@
 				5EA643072649CD4E008519F1 /* SideMenu.swift in Sources */,
 				5EE60BCD264ACA7B00BC2735 /* WelcomeView.swift in Sources */,
 				BCECC7EA2649BA0F00DABFE4 /* AppDelegate.swift in Sources */,
+				BCB996CE264C3A02008BFDE4 /* FacebookButton.swift in Sources */,
 				5EA643092649CEB3008519F1 /* MenuView.swift in Sources */,
 				5EFE881826477BBF00F4C387 /* UICustomElements.swift in Sources */,
 				BCECC7EB2649BA0F00DABFE4 /* SceneDelegate.swift in Sources */,

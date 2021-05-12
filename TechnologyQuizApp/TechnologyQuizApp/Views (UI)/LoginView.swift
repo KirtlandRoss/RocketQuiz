@@ -39,7 +39,7 @@ struct LoginView: View {
                     .ignoresSafeArea()
                 VStack {
                     Text("Quiz App")
-                        .font(.system(size: 60))
+                        .font(.system(size: 50))
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
 
@@ -50,7 +50,7 @@ struct LoginView: View {
                         .overlay(Circle()
                                     .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ), lineWidth: 4))
                         .shadow(radius: 10)
-                        .padding(.bottom, 50)
+                        .padding(.bottom, 20)
 
                     VStack {
                         CustomTextField(
@@ -78,11 +78,9 @@ struct LoginView: View {
                             .padding([.leading, .trailing], 5)
                         if rememberMe {
                         }
-                    }.padding([.leading, .trailing], 27.5)
 
-                    Button(action: { action() }) {
-                        AppImage(width: 50, height: 50, cornerRadius: 0, name: "facebook")
-                    }
+                        FacebookButton()
+                            .frame(width: 20, height: 30, alignment: .center)
 
                     Button(action: { (
                         submit()
@@ -97,10 +95,8 @@ struct LoginView: View {
                             .cornerRadius(15.0)
                     }.offset(x: 0, y: 50)
 
-                    
-                    Button(action: { (
-                        action()
-                    ) }) {
+
+
                         NavigationLink(destination: ForgotPasswordView()){
                         Text("Forgot Password")
                             .font(.headline)
@@ -110,7 +106,7 @@ struct LoginView: View {
                             .frame(width: 300, height: 50)
                             .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                             .cornerRadius(15.0)
-                    }}.offset(x: 0, y: 50)
+                    }.offset(x: 0, y: 50)
 
                     Text("Dont have an account?")
                         .font(.system(size: 20))
@@ -127,7 +123,10 @@ struct LoginView: View {
                             .cornerRadius(15.0)
                     }.offset(x: 0, y: 30)
                     }
+                    
+                }.padding([.leading, .trailing], 27.5)
             }
+
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)
