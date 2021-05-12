@@ -39,7 +39,7 @@ struct LoginView: View {
                         .ignoresSafeArea()
 
                     // Navigation links to each page -- Listens for selection variable value to match tag, then navigates to that page.
-                    NavigationLink(destination: WelcomeView(), tag: "welcome", selection: $selection.selection){EmptyView()}
+                    NavigationLink(destination: WelcomeView(user: self.user), tag: "welcome", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: QuizView(), tag: "quiz", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: DiscussionBoardUI(), tag: "discussion", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection.selection){EmptyView()}
