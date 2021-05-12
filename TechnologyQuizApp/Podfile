@@ -1,0 +1,21 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'TechnologyQuizApp' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for TechnologyQuizApp
+
+  pod 'FBSDKLoginKit'
+
+  target 'TechnologyQuizAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'TechnologyQuizAppUITests' do
+    # Pods for testing
+  end
+
+end
