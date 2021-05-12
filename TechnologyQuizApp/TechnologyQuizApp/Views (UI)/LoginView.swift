@@ -25,6 +25,8 @@ struct LoginView: View {
     @State var user : User?
     @State var loggedIn : Bool = false
     
+    @EnvironmentObject var selection : GlobalSelection // holds value for Navigation Link tags
+    
     func action () {
         print("hello")
     }
@@ -37,6 +39,15 @@ struct LoginView: View {
             ZStack {
                 Color.purpleGray
                     .ignoresSafeArea()
+                
+            // Navigation links to each page -- Listens for selection variable value to match tag, then navigates to that page.
+                NavigationLink(destination: WelcomeView(), tag: "welcome", selection: $selection.selection){EmptyView()}
+            NavigationLink(destination: QuizView(), tag: "quiz", selection: $selection.selection){EmptyView()}
+            NavigationLink(destination: DiscussionBoardUI(), tag: "discussion", selection: $selection.selection){EmptyView()}
+            NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection.selection){EmptyView()}
+            NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection.selection){EmptyView()}
+            //                                                                                         //
+                
                 VStack {
                     Text("Quiz App")
                         .font(.system(size: 60))
@@ -84,9 +95,9 @@ struct LoginView: View {
                         AppImage(width: 50, height: 50, cornerRadius: 0, name: "facebook")
                     }
 
-                    Button(action: { (
+                    Button(action: {(
                         submit()
-                    ) }) {
+                     )}) {
                         Text("Sign In")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -98,10 +109,10 @@ struct LoginView: View {
                     }.offset(x: 0, y: 50)
 
                     
-                    Button(action: { (
-                        action()
+                    Button(action: {(
+                        selection.selection = "forgotPassword"
                     ) }) {
-                        NavigationLink(destination: ForgotPasswordView()){
+
                         Text("Forgot Password")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -110,7 +121,7 @@ struct LoginView: View {
                             .frame(width: 300, height: 50)
                             .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                             .cornerRadius(15.0)
-                    }}.offset(x: 0, y: 50)
+                    }.offset(x: 0, y: 50)
 
                     Text("Dont have an account?")
                         .font(.system(size: 20))
@@ -118,20 +129,23 @@ struct LoginView: View {
                         .padding()
                         .cornerRadius(15.0)
                         .offset(x: 0, y: 70)
-                    NavigationLink(destination: SignUpView()){
-                        Text("Tap here to sign up!")
+                    
+                    Button(action: {(
+                        selection.selection = "signUp"
+                    ) }) {
+                    Text("Tap here to sign up!")
                             .font(.system(size: 30))
                             .fontWeight(.bold)
                             .foregroundColor(.purple)
                             .padding()
                             .cornerRadius(15.0)
-                    }.offset(x: 0, y: 30)
-                    }
+                    .offset(x: 0, y: 30)
+                    }}
             }
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)
-    }
+        }
     }
     
     func submit(){
@@ -150,7 +164,7 @@ struct LoginView: View {
         if user?.password != nil {
             if validatePassword(enteredPassword: password, retrievedPassword: user!.password!) {
                 print("Logged in!")
-                loggedIn = true
+                selection.selection = "welcome"
             } else {
                 print("invalid username/password")
             }
@@ -166,6 +180,10 @@ struct LoginView: View {
         else {
             return false
         }
+    }
+    
+    class GlobalSelection: ObservableObject {
+        @Published var selection: String? = nil
     }
 }
 
