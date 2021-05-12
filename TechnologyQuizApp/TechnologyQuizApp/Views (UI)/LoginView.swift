@@ -23,12 +23,16 @@ struct LoginView: View {
     @State var password: String = ""
     @State private var rememberMe = true
     @State var user : User?
-
+    @State var loggedIn : Bool = false
+    
     func action () {
         print("hello")
     }
 
     var body: some View {
+        if loggedIn {
+            WelcomeView()
+        } else {
         NavigationView {
             ZStack {
                 Color.purpleGray
@@ -126,7 +130,7 @@ struct LoginView: View {
         .navigationBarTitle("")
         .navigationBarHidden(true)
     }
-    
+    }
     func submit(){
 //        checks if data is valid and if database contains a user with the same username
         if users.first(where: { user in
@@ -140,10 +144,15 @@ struct LoginView: View {
             print("username not found")
         }
         
-        if validatePassword(enteredPassword: password, retrievedPassword: user!.password!) {
-            print("Logged in!")
-        } else {
-            print("invalid username/password")
+        if user?.password != nil {
+            if validatePassword(enteredPassword: password, retrievedPassword: user!.password!) {
+                print("Logged in!")
+                loggedIn = true
+            } else {
+                print("invalid username/password")
+            }
+        } else{
+            print("no")
         }
     }
     
