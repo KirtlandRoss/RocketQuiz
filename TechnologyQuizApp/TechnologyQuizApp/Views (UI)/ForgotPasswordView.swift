@@ -16,7 +16,6 @@ struct ForgotPasswordView: View {
     }
     
     var body: some View {
-        NavigationView {
         ZStack {
             Color.purpleGray
                 .ignoresSafeArea()
@@ -59,7 +58,6 @@ struct ForgotPasswordView: View {
                 }.offset(x: 0, y: 50)
                 
             }.padding([.leading, .trailing], 27.5)
-        }
         }
     }
 }

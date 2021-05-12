@@ -13,8 +13,6 @@ struct SignUpView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-
-
     @State var signUpUsername: String = ""
     @State var signUpPassword: String = ""
     @State var signUpFirstName: String = ""
@@ -28,9 +26,7 @@ struct SignUpView: View {
             NSSortDescriptor(keyPath: \User.name, ascending: true)]
     ) var users : FetchedResults<User>
 
-
     var body: some View {
-        NavigationView {
         ZStack {
 
             Color.purpleGray
@@ -110,7 +106,6 @@ struct SignUpView: View {
                 }.offset(x: 0, y: 50)
                 
             }.padding([.leading, .trailing], 27.5)
-        }
         }
     }
     func submit(){
