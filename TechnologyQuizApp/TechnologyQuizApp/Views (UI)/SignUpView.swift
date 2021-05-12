@@ -124,6 +124,7 @@ struct SignUpView: View {
             user.password = signUpPassword
             user.firstName = signUpFirstName
             user.lastName = signUpLastName
+            user.hasSubscription = false
             do{
                 try context.save()
                 print("user created?!")
