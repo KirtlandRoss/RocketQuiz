@@ -22,12 +22,34 @@ public class QuestionBank: NSManagedObject
      
      Kirt said there should be a fetch method in property file extensions (Apres fait: C'est vrai)
      Don't mess w/ property files and settings
+     
+     Kirt's suggestion: Ditch the fetch request and rework to use self.Questions - return array of Questions
      */
     
-    func getQs()
+    func getQs() -> [Question]
     {
+        var quest = self.questions.allObjects
+        
+        var indexCap = quest.count
+        
+        var questList = [Question]()
+        
+        //var used = [Int]()
+        
+        for _ in 0..<25
+        {
+            
+            let indexUse = Int.random(in: 0..<indexCap)
+            
+            questList.append(quest[indexUse])
+            //used.append(indexUse)
+        }
+        
+        return questList
+        
+        
         // get array of all questions and then call extension methods to add to bank
-        var quest = [Question]()
+        /*var quest = [Question]()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Question")
         
         // create context for query
@@ -71,7 +93,7 @@ public class QuestionBank: NSManagedObject
             quest.remove(at: indexUse)
         }
         
-        try! context.save()
+        try! context.save()*/
     }
     
     
