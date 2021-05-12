@@ -25,7 +25,7 @@ struct LoginView: View {
     @State var user : User?
     @State var loggedIn : Bool = false
     
-    @EnvironmentObject var selection : GlobalSelection // holds value for Navigation Link tags
+    @StateObject var selection : GlobalSelection // holds value for Navigation Link tags
     
 
 
@@ -189,6 +189,6 @@ class GlobalSelection: ObservableObject {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(selection: GlobalSelection())
     }
 }
