@@ -14,8 +14,11 @@ struct QuizView: View {
     var time : String = "2:00"
     var questionnumber : Int = 1
     var quizName : String = "SwiftUI Fundamentals"
+    let question : String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+    var answers = ["The answer to this question is A, because thats what I am saying.", "The answer to this question is B, because thats what I am saying.", "The answer to this question is C, because thats what I am saying.", "The answer to this question is D, because thats what I am saying."]
     
     var body: some View {
+        NavigationView{
         ZStack { // ZStack for whole view
             Color.purpleGray
                 .ignoresSafeArea()
@@ -35,7 +38,7 @@ struct QuizView: View {
             
             ZStack { // Question text
                 Card(shape: "rectangle", width: 350, height: 200, cornerRadius: 30, padding: 40, color: .lightPurpleGray)
-                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.")
+                Text(question)
                     .font(.system(size: 22))
                     .fontWeight(.bold)
                     .frame(width: 325, height: 175, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -46,7 +49,7 @@ struct QuizView: View {
             VStack { // Answers
                 ZStack { // Top(first) answer
                     Button(action:action) {
-                        Text("The answer to this question is A, because thats what I am saying.")
+                        Text(answers[0])
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -58,7 +61,7 @@ struct QuizView: View {
                 }
                 ZStack { // Second answer
                     Button(action:action) {
-                        Text("The answer to this question is B, because thats what I am saying.")
+                        Text(answers[1])
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -70,7 +73,7 @@ struct QuizView: View {
                 }
                 ZStack { // Third answer
                     Button(action:action) {
-                        Text("The answer to this question is C, because thats what I am saying.")
+                        Text(answers[2])
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -82,7 +85,7 @@ struct QuizView: View {
                 }
                 ZStack { // Bottom(last) answer
                     Button(action:action) {
-                        Text("The answer to this question is D, because thats what I am saying.")
+                        Text(answers[3])
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -100,6 +103,7 @@ struct QuizView: View {
                     .font(.system(size: 23))
             }.offset(y: -60)
         }
+    }
     }
 }
 

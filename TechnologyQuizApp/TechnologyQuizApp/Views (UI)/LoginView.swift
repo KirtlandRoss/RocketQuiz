@@ -97,9 +97,11 @@ struct LoginView: View {
                             .cornerRadius(15.0)
                     }.offset(x: 0, y: 50)
 
+                    
                     Button(action: { (
-                        submit()
+                        action()
                     ) }) {
+                        NavigationLink(destination: ForgotPasswordView()){
                         Text("Forgot Password")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -108,7 +110,7 @@ struct LoginView: View {
                             .frame(width: 300, height: 50)
                             .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                             .cornerRadius(15.0)
-                    }.offset(x: 0, y: 50)
+                    }}.offset(x: 0, y: 50)
 
                     Text("Dont have an account?")
                         .font(.system(size: 20))
