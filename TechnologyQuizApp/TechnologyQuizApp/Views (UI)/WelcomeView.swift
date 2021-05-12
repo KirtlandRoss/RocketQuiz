@@ -60,7 +60,10 @@ struct WelcomeView: View {
                 }.padding(.leading, 40)
 
                 ZStack { // Buttons to start quizzes
-                    Button(action: action) { // top button
+                    Button(action: {(
+                        action()
+//                        selection.selection = "quiz"
+                    ) }) { // top button
                         NavigationLink(destination: QuizView()){
                         Text("Start Quiz 1")
                             .font(.headline)
@@ -72,8 +75,10 @@ struct WelcomeView: View {
                             .cornerRadius(15.0)
                         }}.offset(x: 0, y: -90)
                     
-                    Button(action:action) { // bottom button
-                        NavigationLink(destination: QuizView()){
+                    Button(action: {(
+                        action()
+//                        selection = "quiz"
+                    ) }) { // bottom button
                         Text("Start Quiz 2")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -82,7 +87,7 @@ struct WelcomeView: View {
                             .frame(width: 350, height: 75)
                             .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                             .cornerRadius(15.0)
-                        }}
+                    }
                 }
             }
         }
