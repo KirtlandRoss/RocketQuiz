@@ -22,12 +22,17 @@ struct LoginView: View {
     @State var username: String = ""
     @State var password: String = ""
     @State private var rememberMe = true
-
+    @State var user : User?
+    @State var loggedIn : Bool = false
+    
     func action () {
         print("hello")
     }
 
     var body: some View {
+        if loggedIn {
+            WelcomeView()
+        } else {
         NavigationView {
             ZStack {
                 Color.purpleGray
@@ -79,7 +84,9 @@ struct LoginView: View {
                         AppImage(width: 50, height: 50, cornerRadius: 0, name: "facebook")
                     }
 
-                    Button(action: { action() }) {
+                    Button(action: { (
+                        submit()
+                    ) }) {
                         Text("Sign In")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -90,7 +97,9 @@ struct LoginView: View {
                             .cornerRadius(15.0)
                     }.offset(x: 0, y: 50)
 
-                    Button(action: { action() }) {
+                    Button(action: { (
+                        submit()
+                    ) }) {
                         Text("Forgot Password")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -115,12 +124,45 @@ struct LoginView: View {
                             .padding()
                             .cornerRadius(15.0)
                     }.offset(x: 0, y: 30)
-
                     }
             }
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)
+    }
+    }
+    func submit(){
+//        checks if data is valid and if database contains a user with the same username
+        if users.first(where: { user in
+            user.name == username
+        }) != nil {
+            user = users.first(where: { user in
+                user.name == username
+            })! as User
+
+        } else {
+            print("username not found")
+        }
+        
+        if user?.password != nil {
+            if validatePassword(enteredPassword: password, retrievedPassword: user!.password!) {
+                print("Logged in!")
+                loggedIn = true
+            } else {
+                print("invalid username/password")
+            }
+        } else{
+            print("no")
+        }
+    }
+    
+    func validatePassword(enteredPassword: String, retrievedPassword: String) -> Bool {
+        if retrievedPassword == enteredPassword {
+            return true
+        }
+        else {
+            return false
+        }
     }
 }
 
