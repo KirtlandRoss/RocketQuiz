@@ -22,8 +22,7 @@ struct LoginView: View {
     @State var username: String = ""
     @State var password: String = ""
     @State private var rememberMe = true
-    @State var retrievedUsername = ""
-    @State var retrievedPassword = ""
+    @State var user : User?
 
     func action () {
         print("hello")
@@ -130,23 +129,26 @@ struct LoginView: View {
     
     func submit(){
 //        checks if data is valid and if database contains a user with the same username
-        if ((users.first(where: { user in
+        if users.first(where: { user in
             user.name == username
-        }) != nil)){
-            print(users)
-            retrievedPassword = users[0].password!
-            if validatePassword(enteredPassword: password, retrievedpassword: retrievedPassword) {
-                print("Logged in!")
-            } else {
-                print("invalid username/password")
-            }
+        }) != nil {
+            user = users.first(where: { user in
+                user.name == username
+            })! as User
+
+        } else {
+            print("username not found")
         }
-        else{  print("invalid username/pasword")}
+        
+        if validatePassword(enteredPassword: password, retrievedPassword: user!.password!) {
+            print("Logged in!")
+        } else {
+            print("invalid username/password")
+        }
     }
     
-    func validatePassword(enteredPassword: String, retrievedpassword: String) -> Bool {
-        print(enteredPassword, retrievedpassword)
-        if retrievedPassword == password {
+    func validatePassword(enteredPassword: String, retrievedPassword: String) -> Bool {
+        if retrievedPassword == enteredPassword {
             return true
         }
         else {
