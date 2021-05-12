@@ -30,7 +30,7 @@ struct SignUpView: View {
 
 
     var body: some View {
-
+        NavigationView {
         ZStack {
 
             Color.purpleGray
@@ -111,6 +111,7 @@ struct SignUpView: View {
                 
             }.padding([.leading, .trailing], 27.5)
         }
+        }
     }
     func submit(){
 
@@ -159,6 +160,7 @@ struct SignUpView: View {
         }
         return true
     }
+    
 
 }
 

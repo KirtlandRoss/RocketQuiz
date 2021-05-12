@@ -12,9 +12,11 @@ struct DiscussionBoardUI: View {
     @State var usernames: Array = ["hello", "does", "this", "work?"]
     
     var body: some View {
+        NavigationView {
         List(messages, id: \.self) {
             Text($0)
         }
+    }
     }
 }
 
