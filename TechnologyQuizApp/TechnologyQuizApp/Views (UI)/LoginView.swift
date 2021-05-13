@@ -24,20 +24,25 @@ struct LoginView: View {
     @State private var rememberMe = true
     @State var user : User?
     @State var loggedIn : Bool = false
+    @State var isAdmin : Bool = false
     
-    @StateObject var selection : GlobalSelection // holds value for Navigation Link tags
+    @State var selection : String? // holds value for Navigation Link tags
 
     var body: some View {
         if loggedIn {
-            WelcomeView(user: user, selection: GlobalSelection())
-        } else {
+            WelcomeView(user!)
+        }
+        else if isAdmin{
+            AdminView()
+        }
+        else {
             NavigationView {
                 ZStack {
                     Color.purpleGray
                         .ignoresSafeArea()
                     // Navigation links to each page -- Listens for selection variable value to match tag, then navigates to that page.
-                    NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection.selection){EmptyView()}
-                    NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection.selection){EmptyView()}
+                    NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection){EmptyView()}
+                    NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection){EmptyView()}
 
                     VStack {
                         Text("Quiz App")
@@ -98,7 +103,7 @@ struct LoginView: View {
                             }.offset(x: 0, y: 50)
 
                             Button(action: {(
-                                selection.selection = "forgotPassword"
+                                selection = "forgotPassword"
                             ) }) {
 
                                 Text("Forgot Password")
@@ -119,7 +124,7 @@ struct LoginView: View {
                                 .offset(x: 0, y: 70)
 
                             Button(action: {(
-                                selection.selection = "signUp"
+                                selection = "signUp"
                             ) }) {
                                 Text("Tap here to sign up!")
                                     .font(.system(size: 30))
@@ -154,9 +159,10 @@ struct LoginView: View {
 
                 print("Logged in!")
                 loggedIn = true
-                selection.selection = "welcome"
+                selection = "welcome"
         }
-            else if username == "admin" && password == "pass"{
+            else if username == "Admin" && password == "Pass"{
+                isAdmin = true
                 print("now this is what I call security")
                 
             }
@@ -175,12 +181,10 @@ struct LoginView: View {
         }
     }
 
-class GlobalSelection: ObservableObject {
-    @Published var selection: String? = nil
-}
+
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(selection: GlobalSelection())
+        LoginView()
     }
 }

@@ -10,10 +10,18 @@ import SwiftUI
 struct WelcomeView: View {
 
     @State var user : User?
-    @StateObject var selection : GlobalSelection
+    @State var selection : String?
+    init(){
+        user = User()
+        selection = "welcome"
+    }
+    init (_ user: User){
+        self.user = user
+        selection = "welcome"
+    }
 
     var body: some View {
-        SideMenu(){
+        SideMenu(user!){
         ZStack { // ZStack for whole view
             Color.purpleGray
                 .ignoresSafeArea()
@@ -83,7 +91,7 @@ struct WelcomeView: View {
 
                         ZStack { // Buttons to start quizzes
                             // top button
-                            NavigationLink(destination: QuizView(user: user!)){
+                            NavigationLink(destination: QuizView( user!)){
                                 Text("Start Quiz 1")
                                     .font(.headline)
                                     .fontWeight(.bold)
@@ -121,7 +129,7 @@ struct WelcomeView: View {
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
 
-            WelcomeView(selection: GlobalSelection())
+            WelcomeView()
 
     }
 }
