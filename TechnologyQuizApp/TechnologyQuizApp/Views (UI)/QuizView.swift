@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct QuizView: View {
+    @FetchRequest(
+        entity: QuestionBank.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(),
+        ]
+    ) var qb : FetchedResults<QuestionBank>
+    var user : User
     func action() {
         print("hello")
     }
@@ -106,7 +113,9 @@ struct QuizView: View {
 }
 
 struct QuizView_Previews: PreviewProvider {
+
     static var previews: some View {
-        QuizView()
+        let user = User()
+        QuizView(user: user)
     }
 }
