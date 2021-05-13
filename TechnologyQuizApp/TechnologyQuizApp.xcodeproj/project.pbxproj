@@ -27,15 +27,17 @@
 		BC21E02426475D4300688D90 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21E02326475D4300688D90 /* Protocols.swift */; };
 		BC37187E264C1DB8003B47CD /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC37187A264C1DB8003B47CD /* Post+CoreDataClass.swift */; };
 		BC371880264C1DB8003B47CD /* DiscussionBoard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC37187C264C1DB8003B47CD /* DiscussionBoard+CoreDataClass.swift */; };
+		BC50A475264D67FE00A2DCF7 /* CategoryGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC50A473264D67FE00A2DCF7 /* CategoryGroup+CoreDataClass.swift */; };
 		BC65362C264998BE0085BC6F /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC65362B264998BE0085BC6F /* DBHelper.swift */; };
 		BCB996CE264C3A02008BFDE4 /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB996CD264C3A02008BFDE4 /* FacebookButton.swift */; };
+		BCC67349264DAA5700023E3E /* Pods_TechnologyQuizApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614D0EE76163B690BCC91036 /* Pods_TechnologyQuizApp.framework */; };
+		BCC6734A264DAA5700023E3E /* Pods_TechnologyQuizApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 614D0EE76163B690BCC91036 /* Pods_TechnologyQuizApp.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BCDD19A4264AE3730023E2C5 /* Question+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD199C264AE3730023E2C5 /* Question+CoreDataClass.swift */; };
 		BCDD19A6264AE3730023E2C5 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD199E264AE3730023E2C5 /* User+CoreDataClass.swift */; };
 		BCDD19A8264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD19A0264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift */; };
 		BCDD19AA264AE3730023E2C5 /* Quiz+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD19A2264AE3730023E2C5 /* Quiz+CoreDataClass.swift */; };
 		BCECC7EA2649BA0F00DABFE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCECC7E82649BA0F00DABFE4 /* AppDelegate.swift */; };
 		BCECC7EB2649BA0F00DABFE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCECC7E92649BA0F00DABFE4 /* SceneDelegate.swift */; };
-		D021C95B50465461647E7BFD /* Pods_TechnologyQuizApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614D0EE76163B690BCC91036 /* Pods_TechnologyQuizApp.framework */; };
 		F00FCA81814FDAC3D26BCABF /* Pods_TechnologyQuizAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938B92F7B78237FC4F1938E5 /* Pods_TechnologyQuizAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,20 @@
 			remoteInfo = TechnologyQuizApp;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BCC6734B264DAA5700023E3E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BCC6734A264DAA5700023E3E /* Pods_TechnologyQuizApp.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		099A5ACD244F39836F633437 /* Pods-TechnologyQuizAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TechnologyQuizAppTests.debug.xcconfig"; path = "Target Support Files/Pods-TechnologyQuizAppTests/Pods-TechnologyQuizAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +105,7 @@
 		BC21E02326475D4300688D90 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		BC37187A264C1DB8003B47CD /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BC37187C264C1DB8003B47CD /* DiscussionBoard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscussionBoard+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		BC50A473264D67FE00A2DCF7 /* CategoryGroup+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryGroup+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BC65362B264998BE0085BC6F /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		BCB996CD264C3A02008BFDE4 /* FacebookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookButton.swift; sourceTree = "<group>"; };
 		BCDD199C264AE3730023E2C5 /* Question+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Question+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -106,7 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D021C95B50465461647E7BFD /* Pods_TechnologyQuizApp.framework in Frameworks */,
+				BCC67349264DAA5700023E3E /* Pods_TechnologyQuizApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +259,7 @@
 		BCDE85132648C5BF009F86F8 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				BC50A473264D67FE00A2DCF7 /* CategoryGroup+CoreDataClass.swift */,
 				BC37187A264C1DB8003B47CD /* Post+CoreDataClass.swift */,
 				BC37187C264C1DB8003B47CD /* DiscussionBoard+CoreDataClass.swift */,
 				BCDD199C264AE3730023E2C5 /* Question+CoreDataClass.swift */,
@@ -277,6 +295,7 @@
 				BC21DFED26471AC000688D90 /* Frameworks */,
 				BC21DFEE26471AC000688D90 /* Resources */,
 				061F8A0999C82C4C4F592690 /* [CP] Embed Pods Frameworks */,
+				BCC6734B264DAA5700023E3E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -520,6 +539,7 @@
 				5EE60BCD264ACA7B00BC2735 /* WelcomeView.swift in Sources */,
 				BCECC7EA2649BA0F00DABFE4 /* AppDelegate.swift in Sources */,
 				BCB996CE264C3A02008BFDE4 /* FacebookButton.swift in Sources */,
+				BC50A475264D67FE00A2DCF7 /* CategoryGroup+CoreDataClass.swift in Sources */,
 				5EA643092649CEB3008519F1 /* MenuView.swift in Sources */,
 				5EFE881826477BBF00F4C387 /* UICustomElements.swift in Sources */,
 				BCECC7EB2649BA0F00DABFE4 /* SceneDelegate.swift in Sources */,

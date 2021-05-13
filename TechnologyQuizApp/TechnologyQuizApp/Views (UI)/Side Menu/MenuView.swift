@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct MenuView: View {
-    
-    
+
+    @State var user : User?
+
     func action() {}
     var body: some View {
         
