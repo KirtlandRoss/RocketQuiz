@@ -35,7 +35,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
          fatalError("Unable to read managed object context.")}
         // Create the SwiftUI view that provides the window contents.
-        let contentView = LoginView().environment(\.managedObjectContext, context)
+        let user = User()
+        let contentView = LoginView( user: user).environment(\.managedObjectContext, context)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

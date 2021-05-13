@@ -29,7 +29,7 @@ struct DiscussionBoardUI: View {
     
     var body: some View {
         
-        SideMenu(content: {
+        
             
         List {
             
@@ -37,7 +37,7 @@ struct DiscussionBoardUI: View {
                 MessageRow(message: message)
             }.frame(width: 320).disabled(true)
         }
-        })
+
     }
         
 }
