@@ -26,9 +26,14 @@ public class QuestionBank: NSManagedObject
      Kirt's suggestion: Ditch the fetch request and rework to use self.Questions - return array of Questions
      */
     
+    func addQ(newQ : Question)
+    {
+        self.addToQuestions(newQ)
+    }
+    
     func getQs() -> [Question]
     {
-        var quest = self.questions.allObjects
+        var quest = self.questions.allObjects as! [Question]
         
         var indexCap = quest.count
         
@@ -46,10 +51,13 @@ public class QuestionBank: NSManagedObject
         }
         
         return questList
-        
+    }
+    
+    func getQold()
+    {
         
         // get array of all questions and then call extension methods to add to bank
-        /*var quest = [Question]()
+        var quest = [Question]()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Question")
         
         // create context for query
@@ -93,7 +101,7 @@ public class QuestionBank: NSManagedObject
             quest.remove(at: indexUse)
         }
         
-        try! context.save()*/
+        try! context.save()
     }
     
     
