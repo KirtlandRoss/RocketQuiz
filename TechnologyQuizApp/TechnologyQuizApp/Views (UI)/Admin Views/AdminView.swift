@@ -9,10 +9,16 @@ import SwiftUI
 
 struct AdminView: View {
     @State var blockUsername: String = ""
+    @State private var selection: String? = nil
+    
     func action() {
     }
+    
     var body: some View {
+        
+        NavigationView {
         ZStack {
+            NavigationLink(destination: UserScoreAdminView(), tag: "getScores", selection: $selection){EmptyView()}
             Color.purpleGray
                 .ignoresSafeArea()
             
@@ -21,7 +27,7 @@ struct AdminView: View {
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
                 .padding(.bottom, 50)
-                .position(x: 220, y: 100)
+                .position(x: 220)
             
             VStack {
                 Text("Create Quiz")
@@ -42,7 +48,7 @@ struct AdminView: View {
             .padding(20)
             .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width: 4)
             .cornerRadius(10)
-            .offset(y: -180)
+            .offset(y: -240)
             
             // View User Scores
             VStack {
@@ -50,7 +56,9 @@ struct AdminView: View {
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                Button(action: { action() }) {
+                Button(action: {
+                    self.selection = "getScores"
+                }) {
                   Text("Get Scores")
                     .font(.headline)
                     .fontWeight(.bold)
@@ -64,6 +72,7 @@ struct AdminView: View {
             .padding(20)
             .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width: 4)
             .cornerRadius(10)
+            .offset(y: -60)
             
             // Block User
             VStack {
@@ -81,6 +90,7 @@ struct AdminView: View {
                 .background(Color.lightPurpleGray)
                 .cornerRadius(20.0)
                 .frame(width: 200, height: 100, alignment: .leading)
+                
                 Button(action: { action() }) {
                   Text("Block")
                     .font(.headline)
@@ -95,7 +105,7 @@ struct AdminView: View {
             .padding(20)
             .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ), width: 4)
             .cornerRadius(10)
-            .offset(y: 210)
+            .offset(y: 150)
             
             // Sign Out Button
             Button(action: {action()}) {
@@ -107,7 +117,8 @@ struct AdminView: View {
                 .frame(width: 250, height: 70)
                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                 .cornerRadius(15.0)
-            }.offset(x: 0, y: 390)
+            }.offset(x: 0, y: 320)
+        }
         }
     }
 }
