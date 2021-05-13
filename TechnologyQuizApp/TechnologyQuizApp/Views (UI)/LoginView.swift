@@ -24,13 +24,15 @@ struct LoginView: View {
     @State private var rememberMe = true
     @State var user : User?
     @State var loggedIn : Bool = false
+    @State var isAdmin : Bool = false
     
     @StateObject var selection : GlobalSelection // holds value for Navigation Link tags
 
     var body: some View {
         if loggedIn {
             WelcomeView(user: user, selection: GlobalSelection())
-        } else {
+        }
+        else {
             NavigationView {
                 ZStack {
                     Color.purpleGray
@@ -38,7 +40,7 @@ struct LoginView: View {
                     // Navigation links to each page -- Listens for selection variable value to match tag, then navigates to that page.
                     NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection.selection){EmptyView()}
-
+                    NavigationLink(destination: AdminView(), tag: "admin", selection: $selection.selection){EmptyView()}
                     VStack {
                         Text("Quiz App")
                             .font(.system(size: 50))
@@ -156,7 +158,8 @@ struct LoginView: View {
                 loggedIn = true
                 selection.selection = "welcome"
         }
-            else if username == "admin" && password == "pass"{
+            else if username == "Admin" && password == "Pass"{
+                selection.selection = "admin"
                 print("now this is what I call security")
                 
             }
