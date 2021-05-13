@@ -31,7 +31,7 @@ struct LoginView: View {
 
     var body: some View {
         if loggedIn {
-            WelcomeView()
+            WelcomeView(user: user)
         } else {
             NavigationView {
                 ZStack {
@@ -160,15 +160,18 @@ struct LoginView: View {
             print("username not found")
         }
         
-        if user?.password != nil {
-            if validatePassword(enteredPassword: password, retrievedPassword: user!.password!) {
+        if user?.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user!.password!){
+
                 print("Logged in!")
                 selection.selection = "welcome"
-            } else {
+        }
+            else if username == "admin" && password == "pass"{
+                print("now this is what I call security")
+                
+            }
+            else {
                 print("invalid username/password")
             }
-        } else{
-            print("no")
         }
     }
     
@@ -180,7 +183,7 @@ struct LoginView: View {
             return false
         }
     }
-}
+
 class GlobalSelection: ObservableObject {
     @Published var selection: String? = nil
 }
