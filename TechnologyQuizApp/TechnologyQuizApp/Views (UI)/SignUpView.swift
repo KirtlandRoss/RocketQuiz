@@ -39,6 +39,7 @@ struct SignUpView: View {
                     .padding(.bottom, 50)
 
                 CustomTextField(
+                    isSecure: false,
                     placeholder: Text("First Name").foregroundColor(.gray),
                     text: $signUpFirstName
                 )
@@ -48,6 +49,7 @@ struct SignUpView: View {
                 .cornerRadius(20.0)
                 
                 CustomTextField(
+                    isSecure: false,
                     placeholder: Text("Last Name").foregroundColor(.gray),
                     text: $signUpLastName
                 )
@@ -57,6 +59,7 @@ struct SignUpView: View {
                 .cornerRadius(20.0)
                 
                 CustomTextField(
+                    isSecure: false,
                     placeholder: Text("Email").foregroundColor(.gray),
                     text: $signUpEmail
                 )
@@ -66,6 +69,7 @@ struct SignUpView: View {
                 .cornerRadius(20.0)
                 
                 CustomTextField(
+                    isSecure: false,
                     placeholder: Text("Phone Number").foregroundColor(.gray),
                     text: $signUpPhoneNumber
                 )
@@ -75,6 +79,7 @@ struct SignUpView: View {
                 .cornerRadius(20.0)
                 
                 CustomTextField(
+                    isSecure: false,
                     placeholder: Text("Username").foregroundColor(.gray),
                     text: $signUpUsername
                 )
@@ -84,6 +89,7 @@ struct SignUpView: View {
                 .cornerRadius(20.0)
                 
                 CustomTextField(
+                    isSecure: false,
                     placeholder: Text("Password").foregroundColor(.gray),
                     text: $signUpPassword
                 )

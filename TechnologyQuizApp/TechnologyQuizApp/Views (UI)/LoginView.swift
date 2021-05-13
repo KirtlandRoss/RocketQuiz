@@ -24,6 +24,7 @@ struct LoginView: View {
     @State private var rememberMe = true
     @State var user : User?
     @State var loggedIn : Bool = false
+    @State private var invalidLogin = false
     
     @StateObject var selection : GlobalSelection // holds value for Navigation Link tags
 
@@ -39,7 +40,6 @@ struct LoginView: View {
                     // Navigation links to each page -- Listens for selection variable value to match tag, then navigates to that page.
                     NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection.selection){EmptyView()}
-                    //
 
                     VStack {
                         Text("Quiz App")
@@ -57,16 +57,26 @@ struct LoginView: View {
                             .padding(.bottom, 20)
 
                         VStack {
+                            if invalidLogin {
+                                withAnimation{
+                                    Text("Invalid Credentials")
+                                        .foregroundColor(.red)
+                                }
+                            } else {
+                                Text(" ")
+                            }
                             CustomTextField(
+                                isSecure: false,
                                 placeholder: Text("Username").foregroundColor(.gray),
                                 text: $username
-                            )
+                            ).animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/)
                             .padding()
                             .foregroundColor(.white)
                             .background(Color.lightPurpleGray)
                             .cornerRadius(20.0)
-
+                        
                             CustomTextField(
+                                isSecure: true,
                                 placeholder: Text("Password").foregroundColor(.gray),
                                 text: $password
                             )
@@ -129,7 +139,6 @@ struct LoginView: View {
                                     .foregroundColor(.purple)
                                     .padding()
                                     .cornerRadius(15.0)
-
                                     .offset(x: 0, y: 30)
                             }}
                     }
@@ -156,10 +165,13 @@ struct LoginView: View {
             if validatePassword(enteredPassword: password, retrievedPassword: user!.password!) {
                 print("Logged in!")
                 loggedIn = true
+                invalidLogin = false
             } else {
+                invalidLogin = true
                 print("invalid username/password")
             }
         } else{
+            invalidLogin = true
             print("no")
         }
     }

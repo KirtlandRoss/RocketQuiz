@@ -7,15 +7,39 @@
 
 import SwiftUI
 
+struct MessageInfo: Identifiable {
+    var id = UUID()
+    let username: String
+    let message: String
+}
+
+struct MessageRow: View {
+    var message : MessageInfo
+    var body: some View {
+            List {
+                HStack {
+                    Text("\(Text(message.username)): \(Text(message.message))")
+                }
+            }.frame(width: 360, height: 45).listStyle(PlainListStyle())
+    }
+}
+
 struct DiscussionBoardUI: View {
-    @State var messages: Array = ["hello", "does", "this", "work?"]
-    @State var usernames: Array = ["hello", "does", "this", "work?"]
+    @State var userInfo = [MessageInfo(username: "user1", message: "message 1"), MessageInfo(username: "user2", message: "message 2")]
     
     var body: some View {
-        List(messages, id: \.self) {
-            Text($0)
+        
+        SideMenu(content: {
+            
+        List {
+            
+            ForEach(userInfo){ message in
+                MessageRow(message: message)
+            }.frame(width: 320).disabled(true)
         }
+        })
     }
+        
 }
 
 struct DiscussionBoard_Previews: PreviewProvider {

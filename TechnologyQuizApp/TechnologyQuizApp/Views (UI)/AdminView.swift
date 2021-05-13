@@ -72,6 +72,7 @@ struct AdminView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                 CustomTextField(
+                    isSecure: false,
                     placeholder: Text("Username to block").foregroundColor(.gray),
                     text: $blockUsername
                 )
@@ -97,7 +98,7 @@ struct AdminView: View {
             .offset(y: 210)
             
             // Sign Out Button
-            Button(action: { action() }) {
+            Button(action: {action()}) {
               Text("Sign Out")
                 .font(.headline)
                 .fontWeight(.bold)

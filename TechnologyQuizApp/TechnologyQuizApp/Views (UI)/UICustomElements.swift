@@ -94,6 +94,7 @@ struct ContentView_Previews1: PreviewProvider {
 
 // Custom Text Field
 struct CustomTextField: View {
+    var isSecure : Bool
     var placeholder: Text
     @Binding var text: String
     var editingChanged: (Bool)->() = { _ in }
@@ -102,7 +103,11 @@ struct CustomTextField: View {
     var body: some View {
         ZStack(alignment: .leading) {
             if text.isEmpty { placeholder }
-            TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
+            if isSecure {
+                SecureField("", text: $text, onCommit: commit)
+            } else {
+                TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
+            }
         }
     }
 }

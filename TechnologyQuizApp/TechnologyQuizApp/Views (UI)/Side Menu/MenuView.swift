@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct MenuView: View {
+    
+    
     func action() {}
     var body: some View {
-
         
         VStack (alignment: .leading){
             HStack {
