@@ -37,7 +37,6 @@ struct LoginView: View {
                         .ignoresSafeArea()
 
                     // Navigation links to each page -- Listens for selection variable value to match tag, then navigates to that page.
-                    NavigationLink(destination: WelcomeView(selection: GlobalSelection()), tag: "welcome", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection.selection){EmptyView()}
                     //
@@ -156,7 +155,7 @@ struct LoginView: View {
         if user?.password != nil {
             if validatePassword(enteredPassword: password, retrievedPassword: user!.password!) {
                 print("Logged in!")
-                selection.selection = "welcome"
+                loggedIn = true
             } else {
                 print("invalid username/password")
             }
@@ -177,7 +176,6 @@ struct LoginView: View {
 class GlobalSelection: ObservableObject {
     @Published var selection: String? = nil
 }
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
