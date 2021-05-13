@@ -18,12 +18,13 @@ struct QuizViewContent: View {
     var questionnumber : Int = 1
     var quizName : String = "SwiftUI Fundamentals"
     @State var question : String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-    var answers = ["The answer to this question is A, because thats what I am saying.", "The answer to this question is B, because thats what I am saying.", "The answer to this question is C, because thats what I am saying.", "The answer to this question is D, because thats what I am saying."]
+    var iAnswers = ["The answer to this question is A, because thats what I am saying.", "The answer to this question is B, because thats what I am saying.", "The answer to this question is C, because thats what I am saying.", "The answer to this question is D, because thats what I am saying."]
+    var cAnswer = String()
     init(_ user : User, question : Question ){
         self.user = user
         self.question = question.question!
-        
-
+        self.iAnswers = question.incorrectAnswers!
+        self.cAnswer = question.correctAnswer!
     }
     var body: some View {
 
@@ -57,7 +58,7 @@ struct QuizViewContent: View {
                     VStack { // Answers
                         ZStack { // Top(first) answer
                             Button(action:action) {
-                                Text(answers[0])
+                                Text(iAnswers[0])
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
@@ -69,7 +70,7 @@ struct QuizViewContent: View {
                         }
                         ZStack { // Second answer
                             Button(action:action) {
-                                Text(answers[1])
+                                Text(iAnswers[1])
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
@@ -81,7 +82,7 @@ struct QuizViewContent: View {
                         }
                         ZStack { // Third answer
                             Button(action:action) {
-                                Text(answers[2])
+                                Text(iAnswers[2])
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
@@ -93,7 +94,7 @@ struct QuizViewContent: View {
                         }
                         ZStack { // Bottom(last) answer
                             Button(action:action) {
-                                Text(answers[3])
+                                Text(iAnswers[3])
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
