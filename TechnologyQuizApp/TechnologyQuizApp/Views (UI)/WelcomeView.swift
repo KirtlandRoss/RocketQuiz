@@ -9,11 +9,18 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State private var user : User?
+    @StateObject var selection : GlobalSelection
+    
     var body: some View {
-
+        
+        NavigationView {
         ZStack { // ZStack for whole view
             Color.purpleGray
                 .ignoresSafeArea()
+            
+            NavigationLink(destination: QuizView(), tag: "quiz", selection: $selection.selection){EmptyView()}
+            NavigationLink(destination: DiscussionBoardUI(), tag: "discussion", selection: $selection.selection){EmptyView()}
+            NavigationLink(destination: LoginView(selection: GlobalSelection()), tag: "login", selection: $selection.selection){EmptyView()}
             
             VStack { // Title
                 Text("Welcome")
@@ -61,7 +68,9 @@ struct WelcomeView: View {
 
                 ZStack { // Buttons to start quizzes
                     // top button
-                        NavigationLink(destination: QuizView()){
+                    Button(action: {(
+                        selection.selection = "quiz"
+                    ) }) {
                         Text("Start Quiz 1")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -71,8 +80,11 @@ struct WelcomeView: View {
                             .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                             .cornerRadius(15.0)
                         }.offset(x: 0, y: -90)
-                    
+                    }
                    // bottom button
+                Button(action: {(
+                    selection.selection = "quiz"
+                ) }) {
                         Text("Start Quiz 2")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -81,9 +93,23 @@ struct WelcomeView: View {
                             .frame(width: 350, height: 75)
                             .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                             .cornerRadius(15.0)
-
                 }
-            }
+                }.navigationBarItems(
+                    trailing:
+                        Button(action: {(
+                            selection.selection = "login"
+                        ) }) {
+                                Text("Sign Out")
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(width: 110, height: 35)
+                                    .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
+                                    .cornerRadius(15.0)
+                        }
+                )
+        }
         }
     }
 }
@@ -91,7 +117,7 @@ struct WelcomeView: View {
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            WelcomeView()
+            WelcomeView(selection: GlobalSelection())
         }
     }
 }

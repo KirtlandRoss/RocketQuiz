@@ -26,12 +26,10 @@ struct LoginView: View {
     @State var loggedIn : Bool = false
     
     @StateObject var selection : GlobalSelection // holds value for Navigation Link tags
-    
-
 
     var body: some View {
         if loggedIn {
-            WelcomeView()
+            WelcomeView(selection: GlobalSelection())
         } else {
             NavigationView {
                 ZStack {
@@ -39,12 +37,10 @@ struct LoginView: View {
                         .ignoresSafeArea()
 
                     // Navigation links to each page -- Listens for selection variable value to match tag, then navigates to that page.
-                    NavigationLink(destination: WelcomeView(), tag: "welcome", selection: $selection.selection){EmptyView()}
-                    NavigationLink(destination: QuizView(), tag: "quiz", selection: $selection.selection){EmptyView()}
-                    NavigationLink(destination: DiscussionBoardUI(), tag: "discussion", selection: $selection.selection){EmptyView()}
+                    NavigationLink(destination: WelcomeView(selection: GlobalSelection()), tag: "welcome", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection.selection){EmptyView()}
-                    //                                                                                         //
+                    //
 
                     VStack {
                         Text("Quiz App")
@@ -104,8 +100,6 @@ struct LoginView: View {
                                     .cornerRadius(15.0)
                             }.offset(x: 0, y: 50)
 
-
-
                             Button(action: {(
                                 selection.selection = "forgotPassword"
                             ) }) {
@@ -139,9 +133,7 @@ struct LoginView: View {
 
                                     .offset(x: 0, y: 30)
                             }}
-
                     }
-
                 }
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
