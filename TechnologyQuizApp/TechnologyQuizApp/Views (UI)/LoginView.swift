@@ -44,7 +44,6 @@ struct LoginView: View {
                     NavigationLink(destination: DiscussionBoardUI(), tag: "discussion", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection.selection){EmptyView()}
-                    //                                                                                         //
 
                     VStack {
                         Text("Quiz App")

@@ -27,6 +27,7 @@
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="firstName" attributeType="String"/>
         <attribute name="hasSubscription" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isAdmin" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastName" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="password" attributeType="String"/>
@@ -40,6 +41,6 @@
         <element name="Question" positionX="90.294189453125" positionY="-177.2741088867188" width="128" height="74"/>
         <element name="QuestionBank" positionX="-35.933349609375" positionY="-31.15423583984375" width="128" height="58"/>
         <element name="Quiz" positionX="-138.181640625" positionY="-257.2861328125" width="128" height="89"/>
-        <element name="User" positionX="-495.666748046875" positionY="-308.3925476074219" width="128" height="164"/>
+        <element name="User" positionX="-495.666748046875" positionY="-308.3925476074219" width="128" height="179"/>
     </elements>
 </model>
