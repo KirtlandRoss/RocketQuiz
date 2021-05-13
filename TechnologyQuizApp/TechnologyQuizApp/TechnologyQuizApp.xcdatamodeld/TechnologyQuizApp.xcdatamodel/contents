@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F5065a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="DiscussionBoard" representedClassName="DiscussionBoard" syncable="YES" codeGenerationType="category">
-        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="discussionBoard" inverseEntity="Post"/>
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Post" inverseName="discussionBoard" inverseEntity="Post"/>
     </entity>
     <entity name="Post" representedClassName="Post" syncable="YES" codeGenerationType="category">
         <attribute name="content" attributeType="String"/>
@@ -13,6 +13,7 @@
         <attribute name="answer" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="question" attributeType="String"/>
         <relationship name="questionBank" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionBank" inverseName="questions" inverseEntity="QuestionBank"/>
+        <relationship name="quiz" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quiz" inverseName="questions" inverseEntity="Quiz"/>
     </entity>
     <entity name="QuestionBank" representedClassName=".QuestionBank" syncable="YES" codeGenerationType="category">
         <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Question" inverseName="questionBank" inverseEntity="Question"/>
@@ -20,7 +21,7 @@
     <entity name="Quiz" representedClassName=".Quiz" syncable="YES" codeGenerationType="category">
         <attribute name="answers" optional="YES" attributeType="Transformable" customClassName="[Int64]"/>
         <attribute name="grade" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="questions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Question"/>
+        <relationship name="questions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Question" inverseName="quiz" inverseEntity="Question"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="quiz" inverseEntity="User"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES" codeGenerationType="category">
@@ -36,9 +37,9 @@
         <relationship name="quiz" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quiz" inverseName="user" inverseEntity="Quiz"/>
     </entity>
     <elements>
-        <element name="DiscussionBoard" positionX="-215.563232421875" positionY="164.4440307617188" width="128" height="58"/>
+        <element name="DiscussionBoard" positionX="-215.563232421875" positionY="164.4440307617188" width="128" height="44"/>
         <element name="Post" positionX="-228.632080078125" positionY="-128.7059326171875" width="128" height="89"/>
-        <element name="Question" positionX="90.294189453125" positionY="-177.2741088867188" width="128" height="74"/>
+        <element name="Question" positionX="90.294189453125" positionY="-177.2741088867188" width="128" height="89"/>
         <element name="QuestionBank" positionX="-35.933349609375" positionY="-31.15423583984375" width="128" height="58"/>
         <element name="Quiz" positionX="-138.181640625" positionY="-257.2861328125" width="128" height="89"/>
         <element name="User" positionX="-495.666748046875" positionY="-308.3925476074219" width="128" height="179"/>
