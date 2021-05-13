@@ -32,6 +32,9 @@ struct LoginView: View {
         if loggedIn {
             WelcomeView(user: user, selection: GlobalSelection())
         }
+        else if isAdmin{
+            AdminView()
+        }
         else {
             NavigationView {
                 ZStack {
@@ -40,7 +43,7 @@ struct LoginView: View {
                     // Navigation links to each page -- Listens for selection variable value to match tag, then navigates to that page.
                     NavigationLink(destination: ForgotPasswordView(), tag: "forgotPassword", selection: $selection.selection){EmptyView()}
                     NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection.selection){EmptyView()}
-                    NavigationLink(destination: AdminView(), tag: "admin", selection: $selection.selection){EmptyView()}
+
                     VStack {
                         Text("Quiz App")
                             .font(.system(size: 50))
@@ -159,7 +162,7 @@ struct LoginView: View {
                 selection.selection = "welcome"
         }
             else if username == "Admin" && password == "Pass"{
-                selection.selection = "admin"
+                isAdmin = true
                 print("now this is what I call security")
                 
             }

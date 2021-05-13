@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AdminView: View {
+   
     @State var blockUsername: String = ""
     func action() {
     }
