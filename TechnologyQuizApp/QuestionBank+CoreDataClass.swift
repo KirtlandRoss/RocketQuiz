@@ -33,11 +33,11 @@ public class QuestionBank: NSManagedObject
     
     func getQs() -> [Question]
     {
-        var quest = self.questions!.array as! [Question]
+        let quest = self.questions!.array as! [Question]
         
         let indexCap = quest.count
         
-//        var questList = [Question]()
+        var questList = [Question]()
         
         //var used = [Int]()
         
@@ -46,11 +46,11 @@ public class QuestionBank: NSManagedObject
             
             let indexUse = Int.random(in: 0..<indexCap)
             
-            quest.append(quest[indexUse])
+            questList.append(quest[indexUse])
             //used.append(indexUse)
         }
         
-        return quest
+        return questList
     }
     
     func getQold()
