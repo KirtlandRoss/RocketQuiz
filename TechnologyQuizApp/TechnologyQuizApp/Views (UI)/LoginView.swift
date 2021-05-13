@@ -24,7 +24,10 @@ struct LoginView: View {
     @State private var rememberMe = true
     @State var user : User?
     @State var loggedIn : Bool = false
+
     @State var isAdmin : Bool = false
+    @State private var invalidLogin = false
+
     
     @State var selection : String? // holds value for Navigation Link tags
 
@@ -60,16 +63,26 @@ struct LoginView: View {
                             .padding(.bottom, 20)
 
                         VStack {
+                            if invalidLogin {
+                                withAnimation{
+                                    Text("Invalid Credentials")
+                                        .foregroundColor(.red)
+                                }
+                            } else {
+                                Text(" ")
+                            }
                             CustomTextField(
+                                isSecure: false,
                                 placeholder: Text("Username").foregroundColor(.gray),
                                 text: $username
-                            )
+                            ).animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/)
                             .padding()
                             .foregroundColor(.white)
                             .background(Color.lightPurpleGray)
                             .cornerRadius(20.0)
-
+                        
                             CustomTextField(
+                                isSecure: true,
                                 placeholder: Text("Password").foregroundColor(.gray),
                                 text: $password
                             )
@@ -132,7 +145,6 @@ struct LoginView: View {
                                     .foregroundColor(.purple)
                                     .padding()
                                     .cornerRadius(15.0)
-
                                     .offset(x: 0, y: 30)
                             }}
                     }
@@ -159,14 +171,16 @@ struct LoginView: View {
 
                 print("Logged in!")
                 loggedIn = true
+                invalidLogin = false
                 selection = "welcome"
         }
             else if username == "Admin" && password == "Pass"{
                 isAdmin = true
                 print("now this is what I call security")
-                
+                invalidLogin = false
             }
             else {
+                invalidLogin = true
                 print("invalid username/password")
             }
         }

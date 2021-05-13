@@ -29,6 +29,7 @@ struct ForgotPasswordView: View {
                     .padding(.bottom, 50)
 
                 CustomTextField(
+                    isSecure: false,
                     placeholder: Text("Username").foregroundColor(.gray),
                     text: $forgotUsername
                 )
@@ -38,6 +39,7 @@ struct ForgotPasswordView: View {
                   .cornerRadius(20.0)
                 
                 CustomTextField(
+                    isSecure: true,
                     placeholder: Text("New Password").foregroundColor(.gray),
                     text: $forgotPassword
                 )

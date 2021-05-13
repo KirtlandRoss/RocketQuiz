@@ -28,6 +28,7 @@ struct QuizViewContent: View {
     }
     var body: some View {
 
+
             ZStack { // ZStack for whole view
                 Color.purpleGray
                     .ignoresSafeArea()
@@ -49,6 +50,7 @@ struct QuizViewContent: View {
                         Card(shape: "rectangle", width: 350, height: 200, cornerRadius: 30, padding: 40, color: .lightPurpleGray)
                         Text(question)
                             .font(.system(size: 22))
+
                             .fontWeight(.bold)
                             .frame(width: 325, height: 175, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                             .foregroundColor(Color.white)
@@ -148,8 +150,9 @@ struct QuizView: View{
                     })
         }
         }
+        }
     }
-}
+
     func setQBank(){
         self.qBank = qb.first!
     }
