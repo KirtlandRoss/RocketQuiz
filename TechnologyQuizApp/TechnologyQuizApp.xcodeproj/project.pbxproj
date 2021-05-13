@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E18CA142648889500AF1F15 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CA132648889500AF1F15 /* SignUpView.swift */; };
 		5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */; };
+		5E1E4C20264C764900B5E9D7 /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1E4C1F264C764900B5E9D7 /* AdminView.swift */; };
 		5EA643072649CD4E008519F1 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA643062649CD4E008519F1 /* SideMenu.swift */; };
 		5EA643092649CEB3008519F1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA643082649CEB3008519F1 /* MenuView.swift */; };
 		5EE60BCD264ACA7B00BC2735 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */; };
@@ -61,6 +62,7 @@
 		3D995C547BBAB3481CB08038 /* Pods-TechnologyQuizApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TechnologyQuizApp.release.xcconfig"; path = "Target Support Files/Pods-TechnologyQuizApp/Pods-TechnologyQuizApp.release.xcconfig"; sourceTree = "<group>"; };
 		5E18CA132648889500AF1F15 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		5E1E4C1F264C764900B5E9D7 /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
 		5EA643062649CD4E008519F1 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		5EA643082649CEB3008519F1 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				5EE60BCE264ADBEC00BC2735 /* QuizView.swift */,
 				5E18CA132648889500AF1F15 /* SignUpView.swift */,
 				5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */,
+				5E1E4C1F264C764900B5E9D7 /* AdminView.swift */,
 				5EEBBBB0264B344900E1C736 /* DiscussionBoardUI.swift */,
 				5EFE881726477BBF00F4C387 /* UICustomElements.swift */,
 				BCB996CD264C3A02008BFDE4 /* FacebookButton.swift */,
@@ -490,6 +493,7 @@
 			files = (
 				BC371880264C1DB8003B47CD /* DiscussionBoard+CoreDataClass.swift in Sources */,
 				BC21E02426475D4300688D90 /* Protocols.swift in Sources */,
+				5E1E4C20264C764900B5E9D7 /* AdminView.swift in Sources */,
 				BC21E00026471AC100688D90 /* TechnologyQuizApp.xcdatamodeld in Sources */,
 				BC65362C264998BE0085BC6F /* DBHelper.swift in Sources */,
 				5EEBBBB1264B344900E1C736 /* DiscussionBoardUI.swift in Sources */,

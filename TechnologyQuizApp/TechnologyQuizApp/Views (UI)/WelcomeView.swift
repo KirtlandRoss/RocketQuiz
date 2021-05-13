@@ -8,17 +8,40 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @State var user : User?
-    var body: some View {
-            SideMenu(){
-                ZStack { // ZStack for whole view
-                    Color.purpleGray
-                        .ignoresSafeArea()
 
-                    VStack { // Title
-                        Text("Welcome")
-                            .font(.system(size: 50))
-                            .fontWeight(.heavy)
+    @State var user : User?
+    @StateObject var selection : GlobalSelection
+
+    var body: some View {
+        SideMenu(){
+        ZStack { // ZStack for whole view
+            Color.purpleGray
+                .ignoresSafeArea()
+            
+            VStack { // Title
+                Text("Welcome")
+                    .font(.system(size: 50))
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color.white)
+                    .padding(.bottom, 20)
+                    .padding(.top, 70)
+                
+                ZStack{ // Large info card
+                    Card(shape: "rectangle", width: 350, height: 300, cornerRadius: 30, padding: 0, color: .lightPurpleGray)
+                        .padding(.leading, 40)
+                    Text("information")
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 20))
+                }
+
+                HStack { // for 3 horizontal cards.
+                    ZStack { // left-most
+                        Card(shape: "rectangle", width: 110, height: 150, cornerRadius: 30, padding: 0)
+                            .position(x: 60, y: 160)
+                        Text("info")
+                            .position(x: 55, y: 50)
+
                             .foregroundColor(Color.white)
                             .padding(.bottom, 20)
                             .padding(.top, 70)
@@ -89,13 +112,16 @@ struct WelcomeView: View {
 
         }.navigationBarTitle("")
         .navigationBarHidden(true)
-    }
-}
 
+    }
+        }
+
+        }
+}
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            WelcomeView()
-        }
+
+            WelcomeView(selection: GlobalSelection())
+
     }
 }

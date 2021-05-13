@@ -120,7 +120,7 @@ struct SignUpView: View {
             user.firstName = signUpFirstName
             user.lastName = signUpLastName
             user.hasSubscription = false
-            user.isAdmin = false
+           
 
             do{
                 try context.save()
