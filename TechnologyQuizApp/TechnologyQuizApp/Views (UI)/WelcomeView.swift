@@ -83,7 +83,7 @@ struct WelcomeView: View {
 
                         ZStack { // Buttons to start quizzes
                             // top button
-                            NavigationLink(destination: QuizView()){
+                            NavigationLink(destination: QuizView(user: user!)){
                                 Text("Start Quiz 1")
                                     .font(.headline)
                                     .fontWeight(.bold)
