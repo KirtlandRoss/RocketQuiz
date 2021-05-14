@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
+    @Environment(\.managedObjectContext) var context
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @State var forgotUsername: String = ""
     @State var forgotPassword: String = ""
-    
-    func action () {
-        print("hello")
-    }
     
     var body: some View {
         ZStack {
@@ -48,7 +47,9 @@ struct ForgotPasswordView: View {
                   .background(Color.lightPurpleGray)
                   .cornerRadius(20.0)
                 
-                Button(action: { action() }) {
+                Button(action: {
+                    forgotPasswordSubmit()
+                }) {
                   Text("Submit")
                     .font(.headline)
                     .fontWeight(.bold)
@@ -62,6 +63,34 @@ struct ForgotPasswordView: View {
             }.padding([.leading, .trailing], 27.5)
         }
     }
+    
+    func forgotPasswordSubmit() {
+        let enteredData = [
+            "name": forgotUsername,
+            "password": forgotPassword
+        ]
+        
+        if validateEntry() {
+            DBHelper.inst.updateUserPassword(object: enteredData)
+            self.presentationMode.wrappedValue.dismiss()
+        }
+        else {
+            print("Invalid password entry")
+        }
+
+    }
+    
+    func validateEntry() -> Bool {
+        if forgotPassword.count < 3 {
+            print("Password too short")
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    
+    
 }
 
 struct ForgotPasswordView_Previews: PreviewProvider {

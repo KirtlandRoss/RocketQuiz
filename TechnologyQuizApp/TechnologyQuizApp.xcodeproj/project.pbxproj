@@ -11,6 +11,7 @@
 		5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */; };
 		5E1E4C20264C764900B5E9D7 /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1E4C1F264C764900B5E9D7 /* AdminView.swift */; };
 		5E371AF1264D80DC00CDCF54 /* UserScoreAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E371AF0264D80DC00CDCF54 /* UserScoreAdminView.swift */; };
+		5E371AF4264DC14B00CDCF54 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E371AF3264DC14B00CDCF54 /* RankingView.swift */; };
 		5EA643072649CD4E008519F1 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA643062649CD4E008519F1 /* SideMenu.swift */; };
 		5EA643092649CEB3008519F1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA643082649CEB3008519F1 /* MenuView.swift */; };
 		5EE60BCD264ACA7B00BC2735 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */; };
@@ -81,6 +82,7 @@
 		5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		5E1E4C1F264C764900B5E9D7 /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
 		5E371AF0264D80DC00CDCF54 /* UserScoreAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScoreAdminView.swift; sourceTree = "<group>"; };
+		5E371AF3264DC14B00CDCF54 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		5EA643062649CD4E008519F1 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		5EA643082649CEB3008519F1 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				5EFE881526477B4900F4C387 /* LoginView.swift */,
 				5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */,
 				5EE60BCE264ADBEC00BC2735 /* QuizView.swift */,
+				5E371AF3264DC14B00CDCF54 /* RankingView.swift */,
 				5E18CA132648889500AF1F15 /* SignUpView.swift */,
 				5E18CA152648988900AF1F15 /* ForgotPasswordView.swift */,
 				5E371AF2264D815D00CDCF54 /* Admin Views */,
@@ -533,6 +536,7 @@
 				BCDD19A8264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift in Sources */,
 				BCDD19AA264AE3730023E2C5 /* Quiz+CoreDataClass.swift in Sources */,
 				BCDD19A6264AE3730023E2C5 /* User+CoreDataClass.swift in Sources */,
+				5E371AF4264DC14B00CDCF54 /* RankingView.swift in Sources */,
 				5EE60BCF264ADBEC00BC2735 /* QuizView.swift in Sources */,
 				5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */,
 				5EA643072649CD4E008519F1 /* SideMenu.swift in Sources */,
