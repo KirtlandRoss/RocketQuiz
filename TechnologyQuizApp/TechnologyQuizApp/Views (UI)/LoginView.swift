@@ -22,13 +22,10 @@ struct LoginView: View {
         entity: QuestionBank.entity(),
         sortDescriptors: []
     ) var fetchedQBank : FetchedResults<QuestionBank>
-    //    private var dbHelper = DBHelper()
     @State var username: String = ""
     @State var password: String = ""
     @State private var rememberMe = true
-
-    @State private var user = User(context: SceneDelegate().context!)
-//    @State var loggedIn : Bool = false
+    @State private var user : User?
     @State var selector = ""
 
     @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
@@ -43,12 +40,12 @@ struct LoginView: View {
     }
     var body: some View {
         if selector == "LI" {
-            SideMenu(user: $user){
-                WelcomeView(user: $user, selection: $selector)
+            SideMenu(){
+                WelcomeView(selection: $selector)
             }
         }
         else if selector == "QZ"{
-            QuizView(user: $user, qBank: $questionBank)
+            QuizView()
         }
 
         else if selector == "AD"{
@@ -184,11 +181,11 @@ struct LoginView: View {
 
         } else {
             user = User(context: context)
-            user.setupInvalidUser()
+            user!.setupInvalidUser()
             print("username not found")
         }
         
-        if user.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user.password!) && !adminCheck(){
+        if user!.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user!.password!) && !adminCheck(){
 
             print("Logged in!")
 

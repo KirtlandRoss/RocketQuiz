@@ -6,21 +6,20 @@
 //
 
 import SwiftUI
-
+import CoreData
 struct SideMenu<Content: View> : View {
-    @Binding var user : User
+   
     @State private var showMenu = false // holds state for menu toggle
 
     @ViewBuilder let content : Content
-//    init(_ user: User,@ViewBuilder content: () -> Content) {
-//            self.content = content()
-//        }
-//    init( _ user : Binding<User>, @ViewBuilder content: () -> Content) {
-//            self.init()
-//
-//
-//        }
-    
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true),
+        ]
+    ) var users : FetchedResults<User>
+    @State private var user : User?
     var body: some View {
         // allows Drag Gesture to close the side menu.
         let drag = DragGesture()
@@ -87,6 +86,6 @@ struct SideMenu_Previews: PreviewProvider {
     @State static var selector = ""
     static var previews: some View {
        // SideMenu(user: $user){SignUpView()}
-        SideMenu(user: $user){WelcomeView(user: $user, selection: $selector)}
+        SideMenu(){WelcomeView(selection: $selector)}
     }
 }

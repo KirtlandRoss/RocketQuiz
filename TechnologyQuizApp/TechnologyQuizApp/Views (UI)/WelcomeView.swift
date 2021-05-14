@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct WelcomeView: View {
-
-    @Binding var user : User
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true),
+        ]
+    ) var users : FetchedResults<User>
     @Binding var selection : String
 //    @ObservedObject var selector : GlobalSelector
 
@@ -124,7 +129,7 @@ struct WelcomeView_Previews: PreviewProvider {
     @State static var st = ""
     static var previews: some View {
 
-        WelcomeView(user: $user, selection: $st)
+        WelcomeView( selection: $st)
 
     }
 }

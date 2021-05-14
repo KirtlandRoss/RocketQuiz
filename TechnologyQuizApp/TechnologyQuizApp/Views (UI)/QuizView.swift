@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 struct QuizViewContent: View {
 
+
     func action() {
         print("hello")
     }
@@ -118,17 +119,25 @@ struct QuizViewContent: View {
 }
 
 struct QuizView: View{
-    @Binding var user : User
-    @Environment(\.managedObjectContext) var context
 
-    @Binding var qBank : QuestionBank 
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true),
+        ]
+    ) var users : FetchedResults<User>
+    @FetchRequest(
+        entity: QuestionBank.entity(),
+        sortDescriptors: []
+    ) var fetchedQBank : FetchedResults<QuestionBank>
     
 
     var body: some View{
 
         NavigationView{
             Form{
-                ForEach(qBank.questions!.array as! [Question]){ q in
+                ForEach(fetchedQBank.first?.questions?.array as! [Question]){ q in
                     NavigationLink(
                         destination: QuizViewContent( question: q),
                         label: {
@@ -139,11 +148,7 @@ struct QuizView: View{
         }
     }
 
-    func setQBank(){
-        qBank.addQ()
-      
 
-    }
 }
 
 struct QuizView_Previews: PreviewProvider {
@@ -151,6 +156,6 @@ struct QuizView_Previews: PreviewProvider {
     @State static var qb = QuestionBank()
     static var previews: some View {
         let user = User()
-        QuizView(user: $user, qBank: $qb)
+        QuizView()
     }
 }
