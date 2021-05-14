@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct SideMenu<Content: View> : View {
+    @Binding var user : User
     @State private var showMenu = false // holds state for menu toggle
-    @State var user : User?
-    let content : Content
-    init(_ user: User,@ViewBuilder content: () -> Content) {
-            self.content = content()
-            self.user = user
-        }
-    init(@ViewBuilder content: () -> Content) {
-            self.content = content()
-        }
+
+    @ViewBuilder let content : Content
+//    init(_ user: User,@ViewBuilder content: () -> Content) {
+//            self.content = content()
+//        }
+//    init( _ user : Binding<User>, @ViewBuilder content: () -> Content) {
+//            self.init()
+//
+//
+//        }
+    
     var body: some View {
         // allows Drag Gesture to close the side menu.
         let drag = DragGesture()
@@ -80,8 +83,9 @@ struct MainView: View {
 }
 
 struct SideMenu_Previews: PreviewProvider {
-    @State static var boo : Bool = false
+    @State static var user = User()
     static var previews: some View {
-        SideMenu(content: {WelcomeView()})
+       // SideMenu(user: $user){SignUpView()}
+        SideMenu(user: $user){WelcomeView(user: $user)}
     }
 }

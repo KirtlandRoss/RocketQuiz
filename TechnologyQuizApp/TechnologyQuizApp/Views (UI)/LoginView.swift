@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct LoginView: View {
-    @Environment(\.managedObjectContext) var context
+    
 
     //fetch users
     @FetchRequest(
@@ -22,7 +22,7 @@ struct LoginView: View {
     @State var username: String = ""
     @State var password: String = ""
     @State private var rememberMe = true
-    @State var user : User?
+    @State var user : User
     @State var loggedIn : Bool = false
 
     @State var isAdmin : Bool = false
@@ -33,7 +33,10 @@ struct LoginView: View {
 
     var body: some View {
         if loggedIn {
-            WelcomeView(user!)
+
+            SideMenu(user: $user){
+                WelcomeView(user: $user)
+            }
         }
         else if isAdmin{
             AdminView()
@@ -163,13 +166,15 @@ struct LoginView: View {
                 user.name == username
             })! as User
 
+
         } else {
             print("username not found")
         }
         
-        if user?.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user!.password!){
+        if user.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user.password!){
 
                 print("Logged in!")
+
                 loggedIn = true
                 invalidLogin = false
                 selection = "welcome"
@@ -196,7 +201,8 @@ struct LoginView: View {
     }
 
 struct LoginView_Previews: PreviewProvider {
+    @State static var user = User()
     static var previews: some View {
-        LoginView()
+        LoginView(user : user)
     }
 }
