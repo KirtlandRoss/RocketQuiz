@@ -111,8 +111,7 @@ struct WelcomeView: View {
                 }
 
 
-        }.navigationBarTitle("")
-        .navigationBarHidden(true)
+        }
 
     }
         }
