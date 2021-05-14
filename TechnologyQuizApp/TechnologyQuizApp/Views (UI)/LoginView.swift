@@ -28,6 +28,7 @@ struct LoginView: View {
     @State private var user : User?
     @State var selector = ""
 
+
     @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
     //    @State var isAdmin : Bool = false
     @State private var invalidLogin = false
@@ -40,8 +41,8 @@ struct LoginView: View {
     }
     var body: some View {
         if selector == "LI" {
-            SideMenu(){
-                WelcomeView(selection: $selector)
+            SideMenu(username: $username){
+                WelcomeView(selection: $selector, username: $username)
             }
         }
         else if selector == "QZ"{

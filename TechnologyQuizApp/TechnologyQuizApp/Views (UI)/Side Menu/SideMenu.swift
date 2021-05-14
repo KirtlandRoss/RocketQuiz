@@ -10,7 +10,7 @@ import CoreData
 struct SideMenu<Content: View> : View {
    
     @State private var showMenu = false // holds state for menu toggle
-
+    @Binding var username : String
     @ViewBuilder let content : Content
     @Environment(\.managedObjectContext) var context
     @FetchRequest(
@@ -86,6 +86,6 @@ struct SideMenu_Previews: PreviewProvider {
     @State static var selector = ""
     static var previews: some View {
        // SideMenu(user: $user){SignUpView()}
-        SideMenu(){WelcomeView(selection: $selector)}
+        SideMenu(username: $selector){WelcomeView(selection: $selector, username: $selector)}
     }
 }

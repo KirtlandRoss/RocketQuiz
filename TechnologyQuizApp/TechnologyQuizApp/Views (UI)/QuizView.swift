@@ -17,13 +17,13 @@ struct QuizViewContent: View {
     
     var questionnumber : Int = 1
     var quizName : String = "SwiftUI Fundamentals"
-    @State var question : String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+    var question : Question?
+   // @State var question : String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
     var iAnswers = ["The answer to this question is A, because thats what I am saying.", "The answer to this question is B, because thats what I am saying.", "The answer to this question is C, because thats what I am saying.", "The answer to this question is D, because thats what I am saying."]
     var cAnswer = String()
     init(question : Question ){
-        self.question = question.question!
-        self.iAnswers = question.incorrectAnswers!
-        self.cAnswer = question.correctAnswer!
+        self.question = question
+        print(self.question!.incorrectAnswers![0])
     }
     var body: some View {
 
@@ -33,33 +33,31 @@ struct QuizViewContent: View {
                 .ignoresSafeArea()
             VStack { // Title and question Number
                 //vTitle
-                Text(quizName) // title
+                Text("Title") // title
                     .font(.system(size: 28))
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
-                    .offset(x: 0, y: 150)
                 // Question Number
                 Text("Question: \(questionnumber)")
                     .font(.system(size: 20))
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
-                    .offset(x: 0, y: 170)
 
                 ZStack { // Question text
                     Card(shape: "rectangle", width: 350, height: 200, cornerRadius: 30, padding: 40, color: .lightPurpleGray)
-                    Text(question)
+                    Text((self.question?.question)!)
                         .font(.system(size: 22))
 
                         .fontWeight(.bold)
                         .frame(width: 325, height: 175, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .foregroundColor(Color.white)
                         .position(x: 215, y: 135)
-                }.offset(x: 0, y: 140)
+                }
 
                 VStack { // Answers
                     ZStack { // Top(first) answer
                         Button(action:action) {
-                            Text(iAnswers[0])
+                            Text((self.question?.incorrectAnswers![0])!)
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -71,7 +69,7 @@ struct QuizViewContent: View {
                     }
                     ZStack { // Second answer
                         Button(action:action) {
-                            Text(iAnswers[1])
+                            Text((self.question?.incorrectAnswers![1])!)
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -83,7 +81,7 @@ struct QuizViewContent: View {
                     }
                     ZStack { // Third answer
                         Button(action:action) {
-                            Text(iAnswers[2])
+                            Text((self.question?.incorrectAnswers![2])!)
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -95,7 +93,7 @@ struct QuizViewContent: View {
                     }
                     ZStack { // Bottom(last) answer
                         Button(action:action) {
-                            Text(iAnswers[3])
+                            Text((self.question?.correctAnswer!)!)
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -111,11 +109,9 @@ struct QuizViewContent: View {
                     .offset(x: 10, y: 10)
                     .foregroundColor(.white)
                     .font(.system(size: 23))
-            }.offset(y: -60)
+            }
         }
     }
-
-
 }
 
 struct QuizView: View{
@@ -131,7 +127,6 @@ struct QuizView: View{
         entity: QuestionBank.entity(),
         sortDescriptors: []
     ) var fetchedQBank : FetchedResults<QuestionBank>
-    
 
     var body: some View{
 
@@ -147,8 +142,6 @@ struct QuizView: View{
             }
         }
     }
-
-
 }
 
 struct QuizView_Previews: PreviewProvider {

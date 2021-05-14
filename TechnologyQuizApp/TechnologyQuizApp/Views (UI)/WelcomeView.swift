@@ -16,6 +16,7 @@ struct WelcomeView: View {
         ]
     ) var users : FetchedResults<User>
     @Binding var selection : String
+    @Binding var username : String
 //    @ObservedObject var selector : GlobalSelector
 
     var body: some View {
@@ -129,7 +130,7 @@ struct WelcomeView_Previews: PreviewProvider {
     @State static var st = ""
     static var previews: some View {
 
-        WelcomeView( selection: $st)
+        WelcomeView( selection: $st, username: $st)
 
     }
 }
