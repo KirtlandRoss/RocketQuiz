@@ -94,6 +94,9 @@ struct WelcomeView: View {
                                     .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                     .cornerRadius(15.0)
                             }.offset(x: 0, y: -90)
+                            .navigationBarTitle("")
+                            .navigationBarHidden(true)
+
 
                             // bottom button
                             Text("Start Quiz 2")
