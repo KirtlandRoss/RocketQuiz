@@ -12,20 +12,7 @@ import CoreData
 
 public class QuestionBank: NSManagedObject
 {
-    /*
-     Jared's to-do list:
-     - make method(s) to get questions and store in data structure
-        PROGRESS SO FAR
-     - randomization
-     
-     we only want 25 questions in the array per gameplay session. yes there will be more than 25 total in coredata
-     
-     Kirt said there should be a fetch method in property file extensions (Apres fait: C'est vrai)
-     Don't mess w/ property files and settings
-     
-     Kirt's suggestion: Ditch the fetch request and rework to use self.Questions - return array of Questions
-     */
-	
+
 	func addQ()
 	{
 		// Hard code the questions from the spreadsheet into the bank
@@ -96,17 +83,20 @@ public class QuestionBank: NSManagedObject
 		Qlist[23].correctAnswer = "Central Processing Unit"
 		Qlist[24].correctAnswer = "Tower case"
 		
-		for item in Qlist
-		{
-			self.addToQuestions(item)
-		}
-		
+		// Shove em into the bank
+		addQ(newQs: Qlist)
 	}
     
     func addQ(newQ : Question)
     {
         self.addToQuestions(newQ)
     }
+	
+	func addQ(newQs : [Question])
+	{
+		let insertSet = NSOrderedSet(array: newQs)
+		self.addToQuestions(insertSet)
+	}
     
     func getQs() -> [Question]
     {
@@ -115,16 +105,6 @@ public class QuestionBank: NSManagedObject
 		
 		// track how many we have for each category
 		var cat = [0, 0, 0, 0, 0]
-
-		
-		/*
-		Jared's notes
-		- pop questions out of quest when chosen
-		- check categories. we want 5 per.
-		- make it efficient
-		- maybe do it all out and then streamline
-		*/
-		
 		
 		repeat
 		{
