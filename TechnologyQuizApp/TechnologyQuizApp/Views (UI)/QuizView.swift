@@ -142,7 +142,7 @@ struct QuizView: View{
 
         NavigationView{
             Form{
-                ForEach(qBank.getQs()){ q in
+                ForEach(qBank.questions!.array as! [Question]){ q in
                 NavigationLink(
                     destination: QuizViewContent(user, question: q),
                     label: {
