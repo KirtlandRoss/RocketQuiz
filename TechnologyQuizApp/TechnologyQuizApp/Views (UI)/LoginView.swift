@@ -18,27 +18,40 @@ struct LoginView: View {
             NSSortDescriptor(keyPath: \User.name, ascending: true),
         ]
     ) var users : FetchedResults<User>
+    @FetchRequest(
+        entity: QuestionBank.entity(),
+        sortDescriptors: []
+    ) var fetchedQBank : FetchedResults<QuestionBank>
     //    private var dbHelper = DBHelper()
     @State var username: String = ""
     @State var password: String = ""
     @State private var rememberMe = true
-    @State var user : User
-    @State var loggedIn : Bool = false
+    @Environment(\.managedObjectContext) var context
+    @State private var user = User(context: SceneDelegate().context!)
+//    @State var loggedIn : Bool = false
+    @State var selector = ""
 
-    @State var isAdmin : Bool = false
+    @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
+//    @State var isAdmin : Bool = false
     @State private var invalidLogin = false
 
     
     @State var selection : String? // holds value for Navigation Link tags
 
+    init(){
+        questionBank.addQ()
+    }
     var body: some View {
-        if loggedIn {
-
+        if selector == "LI" {
             SideMenu(user: $user){
-                WelcomeView(user: $user)
+                WelcomeView(user: $user, selection: $selector)
             }
         }
-        else if isAdmin{
+        else if selector == "QZ"{
+            QuizView(user: $user, qBank: $questionBank)
+        }
+
+        else if selector == "AD"{
             AdminView()
         }
         else {
@@ -165,6 +178,7 @@ struct LoginView: View {
             user = users.first(where: { user in
                 user.name == username
             })! as User
+            questionBank = fetchedQBank.first!
 
 
         } else {
@@ -175,12 +189,11 @@ struct LoginView: View {
 
                 print("Logged in!")
 
-                loggedIn = true
                 invalidLogin = false
-                selection = "welcome"
+                selector = "LI"
         }
             else if username == "Admin" && password == "Pass"{
-                isAdmin = true
+                selector = "AD"
                 print("now this is what I call security")
                 invalidLogin = false
             }
@@ -198,11 +211,15 @@ struct LoginView: View {
         else {
             return false
         }
+
     }
+class GlobalSelector : ObservableObject{
+    @Published var selector : String = ""
+}
 
 struct LoginView_Previews: PreviewProvider {
     @State static var user = User()
     static var previews: some View {
-        LoginView(user : user)
+        LoginView()
     }
 }

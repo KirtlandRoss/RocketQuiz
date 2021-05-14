@@ -10,8 +10,8 @@ import SwiftUI
 struct WelcomeView: View {
 
     @Binding var user : User
-    @State var selection : String = "welcome"
-
+    @Binding var selection : String
+//    @ObservedObject var selector : GlobalSelector
 
     var body: some View {
 
@@ -84,18 +84,22 @@ struct WelcomeView: View {
 
                         ZStack { // Buttons to start quizzes
                             // top button
-                            NavigationLink(destination: QuizView( user)){
-                                Text("Start Quiz 1")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .frame(width: 350, height: 75)
-                                    .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
-                                    .cornerRadius(15.0)
-                            }.offset(x: 0, y: -90)
-                            .navigationBarTitle("")
-                            .navigationBarHidden(true)
+                            VStack{
+                            
+                            Button(action: {setSelector("QZ")}) {
+                                    Text("Start Quiz 1")
+                                        .font(.headline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(width: 350, height: 75)
+                                        .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
+                                        .cornerRadius(15.0)
+
+                            }
+
+
+                            
 
 
                             // bottom button
@@ -107,25 +111,26 @@ struct WelcomeView: View {
                                 .frame(width: 350, height: 75)
                                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                 .cornerRadius(15.0)
-
+                            }
                         }
 
                     }
                 }
-
+            }
 
         }
-
     }
-        }
+    func setSelector(_ st : String){
+        self.selection = st
+    }
 
-        
 }
 struct WelcomeView_Previews: PreviewProvider {
     @State static var user = User()
+    @State static var st = ""
     static var previews: some View {
 
-            WelcomeView(user: $user)
+        WelcomeView(user: $user, selection: $st)
 
     }
 }

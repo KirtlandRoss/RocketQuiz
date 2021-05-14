@@ -84,8 +84,9 @@ struct MainView: View {
 
 struct SideMenu_Previews: PreviewProvider {
     @State static var user = User()
+    @State static var selector = ""
     static var previews: some View {
        // SideMenu(user: $user){SignUpView()}
-        SideMenu(user: $user){WelcomeView(user: $user)}
+        SideMenu(user: $user){WelcomeView(user: $user, selection: $selector)}
     }
 }
