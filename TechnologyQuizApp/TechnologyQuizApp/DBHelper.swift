@@ -13,7 +13,6 @@ class DBHelper{
     static var inst = DBHelper()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-
     func fetchUser(name : String) throws -> User {
         var st : User?
         let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
@@ -122,6 +121,27 @@ class DBHelper{
 
         }
     }
+    
+    func updateUserPassword (object: [String : String]) {
+        var user = User()
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        fetchReq.returnsObjectsAsFaults = false
+        fetchReq.predicate = NSPredicate(format: "name == %@", object["name"]!)
+        
+        do {
+            let userFetch = try context.fetch(fetchReq)
+            
+            if (userFetch.count != 0) {
+                user = userFetch.first as! User
+                user.password = object["password"]
+                try context.save()
+                print("User info updated")
+            }
+        } catch {
+            print("Error while trying to update user info")
+        }
+    }
+    
 }
 
 enum NilError : Error{
