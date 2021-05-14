@@ -35,6 +35,11 @@ public class QuestionBank: NSManagedObject
 		Qlist[3].correctAnswer = "Chris Lattner"
 		Qlist[4].correctAnswer = "2014"
 		
+		for i in 0..<5
+		{
+			Qlist[i].category = 1
+		}
+		
 		Qlist[5].question = "What is Github?"
 		Qlist[6].question = "What is open-source software?"
 		Qlist[7].question = "What method is used to create a separate copy of a repository?"
@@ -46,6 +51,11 @@ public class QuestionBank: NSManagedObject
 		Qlist[7].correctAnswer = "Fork"
 		Qlist[8].correctAnswer = "README"
 		Qlist[9].correctAnswer = "Pull request"
+		
+		for i in 5..<10
+		{
+			Qlist[i].category = 2
+		}
 		
 		Qlist[10].question = "Who invented C++?"
 		Qlist[11].question = "What two statements are used in error handling with C++?"
@@ -59,6 +69,11 @@ public class QuestionBank: NSManagedObject
 		Qlist[13].correctAnswer = "iostream"
 		Qlist[14].correctAnswer = "1985"
 		
+		for i in 10..<15
+		{
+			Qlist[i].category = 3
+		}
+		
 		Qlist[15].question = "What paradigm does Java use?"
 		Qlist[16].question = "What company owns and develops Java?"
 		Qlist[17].question = "What keywords are used for access control?"
@@ -71,6 +86,11 @@ public class QuestionBank: NSManagedObject
 		Qlist[18].correctAnswer = "James Gosling"
 		Qlist[19].correctAnswer = "Android"
 		
+		for i in 15..<20
+		{
+			Qlist[i].category = 4
+		}
+		
 		Qlist[20].question = "What is a GPU?"
 		Qlist[21].question = "What part do all others connect to?"
 		Qlist[22].question = "What type of cable is used to connect storage devices?"
@@ -82,6 +102,11 @@ public class QuestionBank: NSManagedObject
 		Qlist[22].correctAnswer = "SATA"
 		Qlist[23].correctAnswer = "Central Processing Unit"
 		Qlist[24].correctAnswer = "Tower case"
+		
+		for i in 20..<25
+		{
+			Qlist[i].category = 5
+		}
 		
 		// Shove em into the bank
 		addQ(newQs: Qlist)
