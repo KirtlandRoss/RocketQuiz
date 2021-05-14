@@ -110,22 +110,49 @@ public class QuestionBank: NSManagedObject
     
     func getQs() -> [Question]
     {
-        let quest = self.questions!.array as! [Question]
-        
-        let indexCap = quest.count
-        
+        var quest = self.questions!.array as! [Question]
         var questList = [Question]()
+		
+		// track how many we have for each category
+		var cat = [0, 0, 0, 0, 0]
+
+		
+		/*
+		Jared's notes
+		- pop questions out of quest when chosen
+		- check categories. we want 5 per.
+		- make it efficient
+		- maybe do it all out and then streamline
+		*/
+		
+		
+		repeat
+		{
+			let indexCap = quest.count
+			let indexUse = Int.random(in: 0..<indexCap)
+			
+			let catCase = quest[indexUse].category - 1
+			
+			if cat[Int(catCase)] < 5
+			{
+				questList.append(quest[indexUse])
+				quest.remove(at: indexUse)
+				cat[Int(catCase)] += 1
+			}
+			else
+			{
+				continue
+			}
+		}
+		while questList.count < 25
         
-        //var used = [Int]()
-        
-        for _ in 0..<25
+        /*for _ in 0..<25
         {
             
             let indexUse = Int.random(in: 0..<indexCap)
             
             questList.append(quest[indexUse])
-            //used.append(indexUse)
-        }
+        }*/
         
         return questList
     }
