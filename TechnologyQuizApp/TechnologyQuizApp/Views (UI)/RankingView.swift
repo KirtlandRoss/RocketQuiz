@@ -63,7 +63,6 @@ struct RankingView: View {
                         .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width:7)
                         .cornerRadius(10)
                         .offset(x: -20)
-                        
                 }
                 .listStyle(InsetGroupedListStyle())
                 .frame(width: 470)

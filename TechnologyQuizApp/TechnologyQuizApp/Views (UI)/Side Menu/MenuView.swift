@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct MenuView: View {
+
     @Binding var selector : String
     func action() {}
     func quiz() {
         selector = "QZ"
     }
     var body: some View {
-        
         VStack (alignment: .leading){
             Button(action:  {
                 action()
@@ -41,6 +41,7 @@ struct MenuView: View {
                         .foregroundColor(.white)
                         .font(.headline)
                 }
+
                 .padding(.top, 30)
             }
             Button(action:  {
@@ -67,7 +68,7 @@ struct MenuView: View {
                     .foregroundColor(.white)
                     .font(.headline)
             }
-            .padding(.top, 30)
+            .padding(.top, 20)
             }
             Spacer()
             

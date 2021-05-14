@@ -125,7 +125,9 @@ class DBHelper{
     func updateUserPassword (object: [String : String]) {
         var user = User()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+
         fetchReq.returnsObjectsAsFaults = false
+
         fetchReq.predicate = NSPredicate(format: "name == %@", object["name"]!)
         
         do {
@@ -142,6 +144,51 @@ class DBHelper{
         }
     }
     
+
+    func addDiscussionPost(_ name: String, _ message: String){
+        var user = User()
+        var posts : Array<Any>
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        fetchReq.predicate = NSPredicate(format: "name == %@", name)
+        
+        let date = Date()
+        
+        do {
+            let userFetch = try context.fetch(fetchReq)
+            print(userFetch)
+            
+            if (userFetch.count != 0) {
+                user = userFetch.first as! User
+                if user.posts?.allObjects as? [Post] != nil {
+                    posts = user.posts?.allObjects as! [Post]
+                    posts.append([message, date])
+                    try context.save()
+                    print(posts)
+                    print("Messages Updated")
+                } else {
+                    print("something went wrong")
+                }
+            } else {
+                print("count not find user")
+            }
+        } catch {
+            print("Error while trying to update user info")
+        }
+    }
+    
+    func getAllDiscussionPosts () {
+        var posts = [Post]()
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
+
+        do {
+            posts = try context.fetch(fetchReq) as! [Post]
+            print(posts)
+        } catch {
+            print("Error fetching user data")
+        }
+    }
+    
+
 }
 
 enum NilError : Error{

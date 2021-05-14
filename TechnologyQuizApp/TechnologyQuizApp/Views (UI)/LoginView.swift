@@ -214,6 +214,7 @@ struct LoginView: View {
         }
     }
 
+
 func adminCheck() -> Bool{
     let pass = "Pass"
     if username == "Admin" && password == pass{
