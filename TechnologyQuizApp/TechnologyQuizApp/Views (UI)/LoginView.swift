@@ -10,7 +10,7 @@ import CoreData
 
 struct LoginView: View {
     
-
+    @Environment(\.managedObjectContext) var context
     //fetch users
     @FetchRequest(
         entity: User.entity(),
@@ -26,13 +26,13 @@ struct LoginView: View {
     @State var username: String = ""
     @State var password: String = ""
     @State private var rememberMe = true
-    @Environment(\.managedObjectContext) var context
+
     @State private var user = User(context: SceneDelegate().context!)
 //    @State var loggedIn : Bool = false
     @State var selector = ""
 
     @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
-//    @State var isAdmin : Bool = false
+    //    @State var isAdmin : Bool = false
     @State private var invalidLogin = false
 
     
@@ -96,9 +96,9 @@ struct LoginView: View {
                             .foregroundColor(.white)
                             .background(Color.lightPurpleGray)
                             .cornerRadius(20.0)
-                        
+
                             CustomTextField(
-                                isSecure: true,
+                                isSecure: false,
                                 placeholder: Text("Password").foregroundColor(.gray),
                                 text: $password
                             )
@@ -181,38 +181,60 @@ struct LoginView: View {
             questionBank = fetchedQBank.first!
 
 
+
         } else {
+            user = User(context: context)
+            user.setupInvalidUser()
             print("username not found")
         }
         
-        if user.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user.password!){
+        if user.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user.password!) && !adminCheck(){
 
-                print("Logged in!")
+            print("Logged in!")
 
-                invalidLogin = false
-                selector = "LI"
+            invalidLogin = false
+            selector = "LI"
         }
-            else if username == "Admin" && password == "Pass"{
-                selector = "AD"
-                print("now this is what I call security")
-                invalidLogin = false
-            }
-            else {
-                invalidLogin = true
-                print("invalid username/password")
-            }
-        }
-    }
-    
-    func validatePassword(enteredPassword: String, retrievedPassword: String) -> Bool {
-        if retrievedPassword == enteredPassword {
-            return true
+        else if adminCheck(){
+            selector = "AD"
+            print("now this is what I call security")
+            let adminUser = User(context: context)
+            adminUser.firstName = "admin"
+            adminUser.lastName = "admin"
+            adminUser.password = "admin"
+            adminUser.name = "admin"
+            adminUser.hasSubscription = false
+            self.user = adminUser
+            print(user)
+
+            
+            invalidLogin = false
         }
         else {
-            return false
+            invalidLogin = true
+            print("invalid username/password")
         }
-
     }
+
+func adminCheck() -> Bool{
+    let pass = "Pass"
+    if username == "Admin" && password == pass{
+
+        return true
+    }
+    return false
+
+}
+func validatePassword(enteredPassword: String, retrievedPassword: String) -> Bool {
+    if retrievedPassword == enteredPassword {
+        return true
+    }
+    else {
+        return false
+    }
+
+}
+}
 class GlobalSelector : ObservableObject{
     @Published var selector : String = ""
 }

@@ -13,7 +13,7 @@ struct QuizViewContent: View {
         print("hello")
     }
     var time : String = "2:00"
-
+    
     var questionnumber : Int = 1
     var quizName : String = "SwiftUI Fundamentals"
     @State var question : String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
@@ -119,7 +119,7 @@ struct QuizViewContent: View {
 
 struct QuizView: View{
     @Binding var user : User
-
+    @Environment(\.managedObjectContext) var context
 
     @Binding var qBank : QuestionBank 
     
@@ -141,6 +141,8 @@ struct QuizView: View{
 
     func setQBank(){
         qBank.addQ()
+      
+
     }
 }
 

@@ -29,9 +29,20 @@ public class QuestionBank: NSManagedObject
 	
 	func addQ()
 	{
+
+//    let user = User(context: context)
+//        for _ in 0...4{
+//
+//            user.addToResults(Results(context: context))
+//            (user.results?.lastObject as! Results).questions = Questions(context: context)
+//            (user.results?.lastObject as! Results).catagory = 5
+//            (user.results?.lastObject as! Results).completed = false
+//
+//        }
+
 		// Hard code the questions from the spreadsheet into the bank
 		var Qlist = [Question]()
-        let context = ((UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext)!
+        let context = SceneDelegate().context!
 		for _ in 0..<25
 		{
             let quest = Question(context: context)
@@ -103,9 +114,12 @@ public class QuestionBank: NSManagedObject
 		
 		for item in Qlist
 		{
+            item.questionBank = self
+            print(item)
+
 			self.addToQuestions(item)
 		}
-		
+        print(self)
 	}
     
     func addQ(newQ : Question)

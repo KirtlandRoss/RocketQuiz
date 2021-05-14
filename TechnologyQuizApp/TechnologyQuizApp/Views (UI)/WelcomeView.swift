@@ -95,13 +95,7 @@ struct WelcomeView: View {
                                         .frame(width: 350, height: 75)
                                         .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                         .cornerRadius(15.0)
-
                             }
-
-
-                            
-
-
                             // bottom button
                             Text("Start Quiz 2")
                                 .font(.headline)
