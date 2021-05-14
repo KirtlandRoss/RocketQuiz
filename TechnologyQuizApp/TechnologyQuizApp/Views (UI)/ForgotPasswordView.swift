@@ -77,7 +77,6 @@ struct ForgotPasswordView: View {
         else {
             print("Invalid password entry")
         }
-
     }
     
     func validateEntry() -> Bool {
@@ -89,8 +88,6 @@ struct ForgotPasswordView: View {
             return true
         }
     }
-    
-    
 }
 
 struct ForgotPasswordView_Previews: PreviewProvider {

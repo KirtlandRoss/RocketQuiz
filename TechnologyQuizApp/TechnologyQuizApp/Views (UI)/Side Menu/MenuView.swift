@@ -12,6 +12,11 @@ struct MenuView: View {
     var body: some View {
         
         VStack (alignment: .leading){
+            Image("rocket")
+                .resizable()
+                .frame(width: 75, height: 75)
+                .offset(x: /*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/, y: 75)
+            
             Button(action:  {
                 action()
             }){
