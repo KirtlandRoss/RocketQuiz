@@ -17,10 +17,10 @@ struct WelcomeView: View {
     ) var users : FetchedResults<User>
     @Binding var selection : String
     @Binding var username : String
-//    @ObservedObject var selector : GlobalSelector
-
+    //    @ObservedObject var selector : GlobalSelector
+    
     var body: some View {
-
+        
         ZStack { // ZStack for whole view
             Color.purpleGray
                 .ignoresSafeArea()
@@ -30,8 +30,7 @@ struct WelcomeView: View {
                     .font(.system(size: 50))
                     .fontWeight(.heavy)
                     .foregroundColor(Color.white)
-                    .padding(.bottom, 20)
-                    .padding(.top, 70)
+                
                 
                 ZStack{ // Large info card
                     Card(shape: "rectangle", width: 350, height: 300, cornerRadius: 30, padding: 0, color: .lightPurpleGray)
@@ -41,96 +40,50 @@ struct WelcomeView: View {
                         .foregroundColor(Color.white)
                         .font(.system(size: 20))
                 }
-
-                HStack { // for 3 horizontal cards.
-                    ZStack { // left-most
-                        Card(shape: "rectangle", width: 110, height: 150, cornerRadius: 30, padding: 0)
-                            .position(x: 60, y: 160)
-                        Text("info")
-                            .position(x: 55, y: 50)
-
-                            .foregroundColor(Color.white)
-                            .padding(.bottom, 20)
-                            .padding(.top, 70)
-
-                        ZStack{ // Large info card
-                            Card(shape: "rectangle", width: 350, height: 300, cornerRadius: 30, padding: 0, color: .lightPurpleGray)
-                                .padding(.leading, 40)
-                            Text("information")
-                                .fontWeight(.heavy)
+                
+                Spacer()
+                ZStack { // left-most
+                    HStack { // for 3 horizontal cards.
+                        ZStack { // left-most
+                            Card(shape: "rectangle", width: 110, height: 150, cornerRadius: 30, padding: 0)
+                            //                                    .position(x: 60, y: 160)
+                            Text("info")
+                                .position(x: 55, y: 50)
                                 .foregroundColor(Color.white)
-                                .font(.system(size: 20))
                         }
-                        HStack { // for 3 horizontal cards.
-                            ZStack { // left-most
-                                Card(shape: "rectangle", width: 110, height: 150, cornerRadius: 30, padding: 0)
-                                    .position(x: 60, y: 160)
-                                Text("info")
-                                    .position(x: 55, y: 50)
-                                    .foregroundColor(Color.white)
-
-                            }
-                            ZStack { // middle
-                                Card(shape: "rectangle", width: 110, height: 150, cornerRadius: 30, padding: 0)
-                                    .position(x: 50, y: 160)
-                                Text("info")
-                                    .position(x: 45, y: 50)
-                                    .foregroundColor(Color.white)
-                            }
-
-                            ZStack { // right
-                                Card(shape: "rectangle", width: 110, height: 150, cornerRadius: 30, padding: 0)
-                                    .position(x: 40, y: 160)
-                                Text("info")
-                                    .position(x: 35, y: 50)
-                                    .foregroundColor(Color.white)
-                            }
-
-                        }.padding(.leading, 40)
-
-                        ZStack { // Buttons to start quizzes
-                            // top button
-                            VStack{
-                            
-                            Button(action: {setSelector("QZ")}) {
-                                    Text("Start Quiz 1")
-                                        .font(.headline)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .frame(width: 350, height: 75)
-                                        .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
-                                        .cornerRadius(15.0)
-                            }
-                            // bottom button
-                            Text("Start Quiz 2")
-                                .font(.headline)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(width: 350, height: 75)
-                                .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
-                                .cornerRadius(15.0)
-                            }
+                        ZStack { // middle
+                            Card(shape: "rectangle", width: 110, height: 150, cornerRadius: 30, padding: 0)
+                            //                                    .position(x: 50, y: 160)
+                            Text("info")
+                                .position(x: 45, y: 50)
+                                .foregroundColor(Color.white)
                         }
-
-                    }
+                        
+                        ZStack { // right
+                            Card(shape: "rectangle", width: 110, height: 150, cornerRadius: 30, padding: 0)
+                            //                                    .position(x: 40, y: 160)
+                            Text("info")
+                                .position(x: 35, y: 50)
+                                .foregroundColor(Color.white)
+                        }
+                        
+                    }.padding(.leading, 40)
                 }
             }
-
+            
         }
     }
     func setSelector(_ st : String){
         self.selection = st
     }
-
+    
 }
 struct WelcomeView_Previews: PreviewProvider {
     @State static var user = User()
     @State static var st = ""
     static var previews: some View {
-
+        
         WelcomeView( selection: $st, username: $st)
-
+        
     }
 }

@@ -18,8 +18,6 @@ struct QuizViewContent: View {
     var questionnumber : Int = 1
     var quizName : String = "SwiftUI Fundamentals"
     var question : Question?
-   // @State var question : String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-    var iAnswers = ["The answer to this question is A, because thats what I am saying.", "The answer to this question is B, because thats what I am saying.", "The answer to this question is C, because thats what I am saying.", "The answer to this question is D, because thats what I am saying."]
     var cAnswer = String()
     init(question : Question ){
         self.question = question

@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct MenuView: View {
+    @Binding var selector : String
     func action() {}
+    func quiz() {
+        selector = "QZ"
+    }
     var body: some View {
         
         VStack (alignment: .leading){
@@ -52,6 +56,19 @@ struct MenuView: View {
             }
             .padding(.top, 30)
             }
+            Button(action:  {
+                quiz()
+            }){
+            HStack {
+                Image(systemName: "questionmark")
+                    .foregroundColor(.white)
+                    .imageScale(.large)
+                Text("Quiz")
+                    .foregroundColor(.white)
+                    .font(.headline)
+            }
+            .padding(.top, 30)
+            }
             Spacer()
             
             Button(action: {(
@@ -76,7 +93,8 @@ struct MenuView: View {
 }
 
 struct MenuView_Previews: PreviewProvider {
+    @State static var selector =  ""
     static var previews: some View {
-        MenuView()
+        MenuView(selector: $selector)
     }
 }

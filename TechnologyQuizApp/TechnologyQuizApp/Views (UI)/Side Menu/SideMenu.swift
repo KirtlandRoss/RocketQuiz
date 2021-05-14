@@ -11,6 +11,7 @@ struct SideMenu<Content: View> : View {
    
     @State private var showMenu = false // holds state for menu toggle
     @Binding var username : String
+    @Binding var selector : String
     @ViewBuilder let content : Content
     @Environment(\.managedObjectContext) var context
     @FetchRequest(
@@ -20,6 +21,7 @@ struct SideMenu<Content: View> : View {
         ]
     ) var users : FetchedResults<User>
     @State private var user : User?
+
     var body: some View {
         // allows Drag Gesture to close the side menu.
         let drag = DragGesture()
@@ -41,7 +43,7 @@ struct SideMenu<Content: View> : View {
                         // Disable main view if side menu is open.
                         .disabled(self.showMenu ? true : false)
                     if self.showMenu {
-                        MenuView()
+                        MenuView(selector: $selector)
                             .frame(width: geometry.size.width / 2)
                             // Transition modifier for the menu to move in from the left.
                             .transition(.move(edge: .leading))
@@ -86,6 +88,6 @@ struct SideMenu_Previews: PreviewProvider {
     @State static var selector = ""
     static var previews: some View {
        // SideMenu(user: $user){SignUpView()}
-        SideMenu(username: $selector){WelcomeView(selection: $selector, username: $selector)}
+        SideMenu(username: $selector, selector: $selector){WelcomeView(selection: $selector, username: $selector)}
     }
 }

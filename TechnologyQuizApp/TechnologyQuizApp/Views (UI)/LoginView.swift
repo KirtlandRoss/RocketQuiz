@@ -41,7 +41,7 @@ struct LoginView: View {
     }
     var body: some View {
         if selector == "LI" {
-            SideMenu(username: $username){
+            SideMenu(username: $username, selector: $selector){
                 WelcomeView(selection: $selector, username: $username)
             }
         }
