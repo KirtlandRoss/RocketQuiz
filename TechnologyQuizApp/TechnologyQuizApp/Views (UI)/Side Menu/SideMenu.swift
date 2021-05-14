@@ -6,21 +6,22 @@
 //
 
 import SwiftUI
-
+import CoreData
 struct SideMenu<Content: View> : View {
-    @Binding var user : User
+   
     @State private var showMenu = false // holds state for menu toggle
-
+    @Binding var username : String
+    @Binding var selector : String
     @ViewBuilder let content : Content
-//    init(_ user: User,@ViewBuilder content: () -> Content) {
-//            self.content = content()
-//        }
-//    init( _ user : Binding<User>, @ViewBuilder content: () -> Content) {
-//            self.init()
-//
-//
-//        }
-    
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true),
+        ]
+    ) var users : FetchedResults<User>
+    @State private var user : User?
+
     var body: some View {
         // allows Drag Gesture to close the side menu.
         let drag = DragGesture()
@@ -42,7 +43,7 @@ struct SideMenu<Content: View> : View {
                         // Disable main view if side menu is open.
                         .disabled(self.showMenu ? true : false)
                     if self.showMenu {
-                        MenuView()
+                        MenuView(selector: $selector)
                             .frame(width: geometry.size.width / 2)
                             // Transition modifier for the menu to move in from the left.
                             .transition(.move(edge: .leading))
@@ -84,8 +85,9 @@ struct MainView: View {
 
 struct SideMenu_Previews: PreviewProvider {
     @State static var user = User()
+    @State static var selector = ""
     static var previews: some View {
        // SideMenu(user: $user){SignUpView()}
-        SideMenu(user: $user){WelcomeView(user: $user)}
+        SideMenu(username: $selector, selector: $selector){WelcomeView(selection: $selector, username: $selector)}
     }
 }

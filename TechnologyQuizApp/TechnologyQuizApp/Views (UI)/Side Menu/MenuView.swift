@@ -8,25 +8,14 @@
 import SwiftUI
 
 struct MenuView: View {
-    @State private var profileImage = "profileImage"
-    @State private var username = "user2123"
-    func action() {}
-    
-    var body: some View {
-        
-        VStack (alignment: .leading){
-            Image(profileImage)
-                .resizable()
-                .frame(width: 75, height: 75, alignment: .center)
-                .cornerRadius(50)
-                .offset(y: 50)
-            Text(username)
-                .font(.system(size: 20))
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .frame(width: 125, height: 130, alignment: .leading)
-                .padding(.top, 10)
 
+    @Binding var selector : String
+    func action() {}
+    func quiz() {
+        selector = "QZ"
+    }
+    var body: some View {
+        VStack (alignment: .leading){
             Button(action:  {
                 action()
             }){
@@ -38,6 +27,7 @@ struct MenuView: View {
                         .foregroundColor(.white)
                         .font(.headline)
                 }
+                .padding(.top, 100)
             }
                 
                 Button(action:  {
@@ -51,7 +41,8 @@ struct MenuView: View {
                         .foregroundColor(.white)
                         .font(.headline)
                 }
-                .padding(.top, 20)
+
+                .padding(.top, 30)
             }
             Button(action:  {
                 action()
@@ -61,6 +52,19 @@ struct MenuView: View {
                     .foregroundColor(.white)
                     .imageScale(.large)
                 Text("Settings")
+                    .foregroundColor(.white)
+                    .font(.headline)
+            }
+            .padding(.top, 30)
+            }
+            Button(action:  {
+                quiz()
+            }){
+            HStack {
+                Image(systemName: "questionmark")
+                    .foregroundColor(.white)
+                    .imageScale(.large)
+                Text("Quiz")
                     .foregroundColor(.white)
                     .font(.headline)
             }
@@ -90,7 +94,8 @@ struct MenuView: View {
 }
 
 struct MenuView_Previews: PreviewProvider {
+    @State static var selector =  ""
     static var previews: some View {
-        MenuView()
+        MenuView(selector: $selector)
     }
 }

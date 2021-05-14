@@ -125,6 +125,9 @@ class DBHelper{
     func updateUserPassword (object: [String : String]) {
         var user = User()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+
+        fetchReq.returnsObjectsAsFaults = false
+
         fetchReq.predicate = NSPredicate(format: "name == %@", object["name"]!)
         
         do {
@@ -141,6 +144,7 @@ class DBHelper{
         }
     }
     
+
     func addDiscussionPost(_ name: String, _ message: String){
         var user = User()
         var posts : Array<Any>
@@ -184,6 +188,7 @@ class DBHelper{
         }
     }
     
+
 }
 
 enum NilError : Error{

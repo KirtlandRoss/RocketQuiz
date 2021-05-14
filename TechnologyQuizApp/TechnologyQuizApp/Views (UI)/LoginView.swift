@@ -10,7 +10,7 @@ import CoreData
 
 struct LoginView: View {
     
-
+    @Environment(\.managedObjectContext) var context
     //fetch users
     @FetchRequest(
         entity: User.entity(),
@@ -18,27 +18,38 @@ struct LoginView: View {
             NSSortDescriptor(keyPath: \User.name, ascending: true),
         ]
     ) var users : FetchedResults<User>
-    //    private var dbHelper = DBHelper()
+    @FetchRequest(
+        entity: QuestionBank.entity(),
+        sortDescriptors: []
+    ) var fetchedQBank : FetchedResults<QuestionBank>
     @State var username: String = ""
     @State var password: String = ""
     @State private var rememberMe = true
-    @State var user : User
-    @State var loggedIn : Bool = false
+    @State private var user : User?
+    @State var selector = ""
 
-    @State var isAdmin : Bool = false
+
+    @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
+    //    @State var isAdmin : Bool = false
     @State private var invalidLogin = false
 
     
     @State var selection : String? // holds value for Navigation Link tags
 
+    init(){
+        questionBank.addQ()
+    }
     var body: some View {
-        if loggedIn {
-
-            SideMenu(user: $user){
-                WelcomeView(user: $user)
+        if selector == "LI" {
+            SideMenu(username: $username, selector: $selector){
+                WelcomeView(selection: $selector, username: $username)
             }
         }
-        else if isAdmin{
+        else if selector == "QZ"{
+            QuizView()
+        }
+
+        else if selector == "AD"{
             AdminView()
         }
         else {
@@ -83,9 +94,9 @@ struct LoginView: View {
                             .foregroundColor(.white)
                             .background(Color.lightPurpleGray)
                             .cornerRadius(20.0)
-                        
+
                             CustomTextField(
-                                isSecure: true,
+                                isSecure: false,
                                 placeholder: Text("Password").foregroundColor(.gray),
                                 text: $password
                             )
@@ -165,44 +176,71 @@ struct LoginView: View {
             user = users.first(where: { user in
                 user.name == username
             })! as User
+            questionBank = fetchedQBank.first!
+
 
 
         } else {
+            user = User(context: context)
+            user!.setupInvalidUser()
             print("username not found")
         }
         
-        if user.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user.password!){
+        if user!.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user!.password!) && !adminCheck(){
 
-                print("Logged in!")
+            print("Logged in!")
 
-                loggedIn = true
-                invalidLogin = false
-                selection = "welcome"
+            invalidLogin = false
+            selector = "LI"
         }
-            else if username == "Admin" && password == "Pass"{
-                isAdmin = true
-                print("now this is what I call security")
-                invalidLogin = false
-            }
-            else {
-                invalidLogin = true
-                print("invalid username/password")
-            }
-        }
-    }
-    
-    func validatePassword(enteredPassword: String, retrievedPassword: String) -> Bool {
-        if retrievedPassword == enteredPassword {
-            return true
+        else if adminCheck(){
+            selector = "AD"
+            print("now this is what I call security")
+            let adminUser = User(context: context)
+            adminUser.firstName = "admin"
+            adminUser.lastName = "admin"
+            adminUser.password = "admin"
+            adminUser.name = "admin"
+            adminUser.hasSubscription = false
+            self.user = adminUser
+            print(user)
+
+            
+            invalidLogin = false
         }
         else {
-            return false
+            invalidLogin = true
+            print("invalid username/password")
         }
     }
+
+
+func adminCheck() -> Bool{
+    let pass = "Pass"
+    if username == "Admin" && password == pass{
+
+        return true
+    }
+    return false
+
+}
+func validatePassword(enteredPassword: String, retrievedPassword: String) -> Bool {
+    if retrievedPassword == enteredPassword {
+        return true
+    }
+    else {
+        return false
+    }
+
+}
+}
+class GlobalSelector : ObservableObject{
+    @Published var selector : String = ""
+}
 
 struct LoginView_Previews: PreviewProvider {
     @State static var user = User()
     static var previews: some View {
-        LoginView(user : user)
+        LoginView()
     }
 }

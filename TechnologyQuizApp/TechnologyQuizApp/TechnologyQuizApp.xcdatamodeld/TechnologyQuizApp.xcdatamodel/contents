@@ -36,7 +36,7 @@
     <entity name="User" representedClassName=".User" syncable="YES" codeGenerationType="category">
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="firstName" attributeType="String"/>
-        <attribute name="hasSubscription" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hasSubscription" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastName" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="password" attributeType="String"/>
@@ -49,7 +49,7 @@
         <element name="DiscussionBoard" positionX="29.843994140625" positionY="-456.9780273437499" width="128" height="58"/>
         <element name="Post" positionX="-218.427001953125" positionY="-497.8623352050781" width="128" height="89"/>
         <element name="Question" positionX="361.9814453125" positionY="-269.9114990234376" width="128" height="119"/>
-        <element name="QuestionBank" positionX="93.81982421875" positionY="6.472564697265625" width="128" height="73"/>
+        <element name="QuestionBank" positionX="93.81982421875" positionY="6.472564697265625" width="128" height="59"/>
         <element name="Quiz" positionX="-160.1611328125" positionY="-238.367431640625" width="128" height="118"/>
         <element name="User" positionX="-541.1171875" positionY="-408.2961120605469" width="128" height="164"/>
     </elements>

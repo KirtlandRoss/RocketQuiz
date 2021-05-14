@@ -11,5 +11,10 @@ import CoreData
 
 
 public class User: NSManagedObject{
-
+    func setupInvalidUser(){
+        self.name = "invalid"
+        self.firstName = "invalid"
+        self.lastName = "invald"
+        self.password = "invalid"
+    }
 }
