@@ -9,31 +9,40 @@ import SwiftUI
 
 struct MenuView: View {
     
-    
     func action() {}
     var body: some View {
         
         VStack (alignment: .leading){
-            HStack {
-                Image(systemName: "person")
-                    .foregroundColor(.white)
-                    .imageScale(.large)
-                Text("Profile")
-                    .foregroundColor(.white)
-                    .font(.headline)
+            Button(action:  {
+                action()
+            }){
+                HStack {
+                    Image(systemName: "person")
+                        .foregroundColor(.white)
+                        .imageScale(.large)
+                    Text("Profile")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                }
+                .padding(.top, 100)
             }
-            .padding(.top, 100)
-            
-            HStack {
-                Image(systemName: "envelope")
-                    .foregroundColor(.white)
-                    .imageScale(.large)
-                Text("Messages")
-                    .foregroundColor(.white)
-                    .font(.headline)
+                
+                Button(action:  {
+                action()
+            }){
+                HStack {
+                    Image(systemName: "star")
+                        .foregroundColor(.white)
+                        .imageScale(.large)
+                    Text("Rankings")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                }
+                .padding(.top, 30)
             }
-            .padding(.top, 30)
-            
+            Button(action:  {
+                action()
+            }){
             HStack {
                 Image(systemName: "gear")
                     .foregroundColor(.white)
@@ -43,7 +52,7 @@ struct MenuView: View {
                     .font(.headline)
             }
             .padding(.top, 30)
-            
+            }
             Spacer()
             
             Button(action: {(
