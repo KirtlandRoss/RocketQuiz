@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import CoreData
 struct QuizViewContent: View {
 
     var user : User
@@ -128,14 +128,14 @@ struct QuizView: View{
         ]
     ) var qb : FetchedResults<QuestionBank>
 
-   @State var qBank : QuestionBank = QuestionBank()
+    @State var qBank : QuestionBank = QuestionBank(context: SceneDelegate().context!)
     init(_ user : User){
         self.user = user
         setQBank()
     }
     init(_ user : User, qBank : QuestionBank){
         self.user = user
-        self.qBank = qBank
+        setQBank()
     }
 
     var body: some View{
@@ -154,7 +154,10 @@ struct QuizView: View{
     }
 
     func setQBank(){
-        self.qBank = qb.first!
+        
+
+        qBank.addQ()
+
     }
 }
 

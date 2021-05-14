@@ -12,7 +12,7 @@ import UIKit
 import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     var window: UIWindow?
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -32,11 +32,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
-         fatalError("Unable to read managed object context.")}
+
         // Create the SwiftUI view that provides the window contents.
         let user = User()
-        let contentView = LoginView( user: user).environment(\.managedObjectContext, context)
+        let contentView = LoginView( user: user).environment(\.managedObjectContext, context!)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

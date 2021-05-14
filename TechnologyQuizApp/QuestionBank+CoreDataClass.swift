@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 public class QuestionBank: NSManagedObject
@@ -30,10 +31,14 @@ public class QuestionBank: NSManagedObject
 	{
 		// Hard code the questions from the spreadsheet into the bank
 		var Qlist = [Question]()
-		
+        let context = ((UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext)!
 		for _ in 0..<25
 		{
-			Qlist.append(Question())
+            let quest = Question(context: context)
+            quest.question = ""
+            quest.correctAnswer = ""
+            quest.incorrectAnswers = ["","",""]
+			Qlist.append(quest)
 		}
 		
 		Qlist[0].question = "What company developed Swift?"
