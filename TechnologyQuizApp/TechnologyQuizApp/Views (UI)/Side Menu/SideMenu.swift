@@ -9,7 +9,12 @@ import SwiftUI
 
 struct SideMenu<Content: View> : View {
     @State private var showMenu = false // holds state for menu toggle
+    @State var user : User?
     let content : Content
+    init(_ user: User,@ViewBuilder content: () -> Content) {
+            self.content = content()
+            self.user = user
+        }
     init(@ViewBuilder content: () -> Content) {
             self.content = content()
         }
@@ -34,7 +39,7 @@ struct SideMenu<Content: View> : View {
                         // Disable main view if side menu is open.
                         .disabled(self.showMenu ? true : false)
                     if self.showMenu {
-                        MenuView()
+                        MenuView(user: user)
                             .frame(width: geometry.size.width / 2)
                             // Transition modifier for the menu to move in from the left.
                             .transition(.move(edge: .leading))
@@ -77,6 +82,6 @@ struct MainView: View {
 struct SideMenu_Previews: PreviewProvider {
     @State static var boo : Bool = false
     static var previews: some View {
-        SideMenu(content: {SignUpView()})
+        SideMenu(content: {WelcomeView()})
     }
 }
