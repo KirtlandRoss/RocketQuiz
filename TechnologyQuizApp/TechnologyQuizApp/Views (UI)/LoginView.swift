@@ -27,6 +27,7 @@ struct LoginView: View {
     @State var password: String = ""
     @State private var rememberMe = true
     @State private var user : User?
+
     @State var selector = ""
 
     @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
@@ -61,7 +62,7 @@ struct LoginView: View {
         }
         else if selector == "DS"{
             SideMenu(username: $username, selector: $selector){
-                DiscussionBoardUI()
+                DiscussionBoardUI(user: $username)
             }
         }
         else {

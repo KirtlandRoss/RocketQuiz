@@ -27,8 +27,8 @@ struct MessageRow: View {
 }
 
 struct DiscussionBoardUI: View {
-    @State var user : String = "Scott"
-    @State var newMessage: String = ""
+    @Binding var user : String
+    @State private var newMessage: String = ""
     let message = [MessageInfo]()
     let messages = DBHelper.inst.getAllDiscussionPosts()
 
@@ -108,11 +108,13 @@ struct DiscussionBoardUI: View {
     }
     func submit(name: String, message: String) {
         DBHelper().addDiscussionPost(name, message)
+        
     }
 }
 
 struct DiscussionBoard_Previews: PreviewProvider {
+    @State static var st = ""
     static var previews: some View {
-        DiscussionBoardUI()
+        DiscussionBoardUI(user: $st)
     }
 }
