@@ -24,16 +24,12 @@ struct LoginView: View {
     @State private var rememberMe = true
     @State var user : User
     @State var loggedIn : Bool = false
-
     @State var isAdmin : Bool = false
     @State private var invalidLogin = false
-
-    
     @State var selection : String? // holds value for Navigation Link tags
 
     var body: some View {
         if loggedIn {
-
             SideMenu(user: $user){
                 WelcomeView(user: $user)
             }
