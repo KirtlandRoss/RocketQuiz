@@ -96,7 +96,7 @@ struct LoginView: View {
                             .cornerRadius(20.0)
 
                             CustomTextField(
-                                isSecure: false,
+                                isSecure: true,
                                 placeholder: Text("Password").foregroundColor(.gray),
                                 text: $password
                             )
