@@ -40,7 +40,7 @@ public class QuestionBank: NSManagedObject
             let quest = Question(context: context)
             quest.question = ""
             quest.correctAnswer = ""
-            quest.incorrectAnswers = ["","",""]
+            quest.incorrectAnswers = ["wrongA","wrongB","wrongC"]
 			qList.append(quest)
 		}
 
@@ -55,6 +55,7 @@ public class QuestionBank: NSManagedObject
 		qList[2].correctAnswer = "Objective-C"
 		qList[3].correctAnswer = "Chris Lattner"
 		qList[4].correctAnswer = "2014"
+
 
 		qList[5].question = "What is Github?"
 		qList[6].question = "What is open-source software?"
@@ -122,24 +123,12 @@ public class QuestionBank: NSManagedObject
 
     func getQs() -> [Question]
     {
-        let quest = self.questions!.array as! [Question]
+        var quest = self.questions!.array as! [Question]
 
-        let indexCap = quest.count
 
-        var questList = [Question]()
+        quest.shuffle()
 
-        //var used = [Int]()
-
-        for _ in 0..<25
-        {
-
-            let indexUse = Int.random(in: 0..<indexCap)
-
-            questList.append(quest[indexUse])
-            //used.append(indexUse)
-        }
-
-        return questList
+        return quest
     }
 
     func getQold()

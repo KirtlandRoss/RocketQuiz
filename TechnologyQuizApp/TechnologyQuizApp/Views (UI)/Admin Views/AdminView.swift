@@ -12,7 +12,7 @@ struct AdminView: View {
     @State var blockUsername: String = ""
     @State private var selection: String? = nil
     
-
+    @Binding var selector : String
 
     
     
@@ -33,6 +33,7 @@ struct AdminView: View {
     func action(){
 
     }
+
     
     var body: some View {
         
@@ -128,7 +129,7 @@ struct AdminView: View {
                 .offset(y: 150)
 
                 // Sign Out Button
-                Button(action: {action()}) {
+                Button(action: {selector = ""}) {
                     Text("Sign Out")
                         .font(.headline)
                         .fontWeight(.bold)
@@ -144,7 +145,8 @@ struct AdminView: View {
 }
 
 struct AdminView_Previews: PreviewProvider {
+    @State static var st = ""
     static var previews: some View {
-        AdminView()
+        AdminView(selector: $st)
     }
 }

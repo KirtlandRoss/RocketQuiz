@@ -12,7 +12,10 @@ struct MenuView: View {
     @Binding var selector : String
     func action() {}
     func quiz() {
+    
+
         selector = "QZ"
+        
     }
     var body: some View {
         VStack (alignment: .leading){

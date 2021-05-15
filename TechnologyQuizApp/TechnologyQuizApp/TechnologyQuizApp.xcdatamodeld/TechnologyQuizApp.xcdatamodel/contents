@@ -16,9 +16,10 @@
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="posts" inverseEntity="User"/>
     </entity>
     <entity name="Question" representedClassName=".Question" syncable="YES" codeGenerationType="category">
-        <attribute name="category" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="category" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="correctAnswer" attributeType="String"/>
         <attribute name="incorrectAnswers" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="number" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="question" attributeType="String"/>
         <relationship name="questionBank" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionBank" inverseName="questions" inverseEntity="QuestionBank"/>
         <relationship name="quiz" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quiz" inverseName="questions" inverseEntity="Quiz"/>
@@ -48,7 +49,7 @@
         <element name="CategoryGroup" positionX="94.697021484375" positionY="-238.5132446289062" width="128" height="14"/>
         <element name="DiscussionBoard" positionX="29.843994140625" positionY="-456.9780273437499" width="128" height="58"/>
         <element name="Post" positionX="-218.427001953125" positionY="-497.8623352050781" width="128" height="89"/>
-        <element name="Question" positionX="361.9814453125" positionY="-269.9114990234376" width="128" height="14"/>
+        <element name="Question" positionX="361.9814453125" positionY="-269.9114990234376" width="128" height="134"/>
         <element name="QuestionBank" positionX="93.81982421875" positionY="6.472564697265625" width="128" height="14"/>
         <element name="Quiz" positionX="-160.1611328125" positionY="-238.367431640625" width="128" height="14"/>
         <element name="User" positionX="-541.1171875" positionY="-408.2961120605469" width="128" height="164"/>

@@ -50,7 +50,7 @@ struct LoginView: View {
         }
 
         else if selector == "AD"{
-            AdminView()
+            AdminView(selector: $selector)
         }
         else {
             NavigationView {
