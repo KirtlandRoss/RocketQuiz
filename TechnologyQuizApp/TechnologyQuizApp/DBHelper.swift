@@ -187,14 +187,17 @@ class DBHelper{
     func getAllDiscussionPosts () -> [Dictionary<String, String>] {
         var users = [User]()
         var posts : [Post] = []
-        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-        fetchReq.returnsObjectsAsFaults = false
+
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
+            let sort = NSSortDescriptor(key: "date", ascending: false)
+            request.sortDescriptors = [sort]
+
+
+//        fetchReq.returnsObjectsAsFaults = false
         
         do {
-            users = try context!.fetch(fetchReq) as! [User]
-            for post in users {
-                posts = post.posts?.allObjects as! [Post]
-            }
+            posts = try context!.fetch(request) as! [Post]
+
         } catch {
             print("Error fetching user data")
         }
