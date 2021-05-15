@@ -18,6 +18,7 @@ struct LoginView: View {
             NSSortDescriptor(keyPath: \User.name, ascending: true),
         ]
     ) var users : FetchedResults<User>
+    
     @FetchRequest(
         entity: QuestionBank.entity(),
         sortDescriptors: []
@@ -28,18 +29,17 @@ struct LoginView: View {
     @State private var user : User?
     @State var selector = ""
 
-
     @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
     //    @State var isAdmin : Bool = false
-    @State private var invalidLogin = false
 
-    
+    @State private var invalidLogin = false
     @State var selection : String? // holds value for Navigation Link tags
 
     init(){
         questionBank.addQ()
     }
     var body: some View {
+
         if selector == "LI" {
             SideMenu(username: $username, selector: $selector){
                 WelcomeView(selection: $selector, username: $username)
@@ -48,9 +48,21 @@ struct LoginView: View {
         else if selector == "QZ"{
             QuizView(mode: $selector)
         }
-
         else if selector == "AD"{
             AdminView(selector: $selector)
+        }
+        else if selector == "LV"{
+            LoginView()
+        }
+        else if selector == "RK"{
+            SideMenu(username: $username, selector: $selector){
+                RankingView()
+            }
+        }
+        else if selector == "DS"{
+            SideMenu(username: $username, selector: $selector){
+                DiscussionBoardUI()
+            }
         }
         else {
             NavigationView {
@@ -96,7 +108,7 @@ struct LoginView: View {
                             .cornerRadius(20.0)
 
                             CustomTextField(
-                                isSecure: false,
+                                isSecure: true,
                                 placeholder: Text("Password").foregroundColor(.gray),
                                 text: $password
                             )
@@ -132,7 +144,6 @@ struct LoginView: View {
                             Button(action: {(
                                 selection = "forgotPassword"
                             ) }) {
-
                                 Text("Forgot Password")
                                     .font(.headline)
                                     .fontWeight(.bold)
@@ -168,6 +179,7 @@ struct LoginView: View {
             }
         }
     }
+    
     func submit(){
         //        checks if data is valid and if database contains a user with the same username
         if users.first(where: { user in
@@ -177,8 +189,6 @@ struct LoginView: View {
                 user.name == username
             })! as User
             questionBank = fetchedQBank.first!
-
-
 
         } else {
             user = User(context: context)
@@ -204,7 +214,6 @@ struct LoginView: View {
             adminUser.hasSubscription = false
             self.user = adminUser
             print(user)
-
             invalidLogin = false
         }
         else {
@@ -213,26 +222,25 @@ struct LoginView: View {
         }
     }
 
-
-func adminCheck() -> Bool{
-    let pass = "Pass"
-    if username == "Admin" && password == pass{
-
-        return true
-    }
-    return false
-
-}
-func validatePassword(enteredPassword: String, retrievedPassword: String) -> Bool {
-    if retrievedPassword == enteredPassword {
-        return true
-    }
-    else {
+    func adminCheck() -> Bool{
+        let pass = "Pass"
+        if username == "Admin" && password == pass {
+            return true
+        }
         return false
     }
+    
+    func validatePassword(enteredPassword: String, retrievedPassword: String) -> Bool {
+        if retrievedPassword == enteredPassword {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+}
 
-}
-}
 class GlobalSelector : ObservableObject{
     @Published var selector : String = ""
 }
