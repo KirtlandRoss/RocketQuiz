@@ -72,9 +72,8 @@ struct MenuView: View {
             }
             Spacer()
             
-            Button(action: {(
-                action()
-            )}) {
+            Button(action: { self.selector = ""
+            }) {
                 Text("Sign Out")
                     .font(.headline)
                     .fontWeight(.bold)

@@ -113,7 +113,7 @@ struct QuizViewContent: View {
 }
 
 struct QuizView: View{
-
+    @Binding var mode : String
     @Environment(\.managedObjectContext) var context
     @FetchRequest(
         entity: User.entity(),
@@ -136,17 +136,21 @@ struct QuizView: View{
                         label: {
                             Text("Question " + String(q.question!))
                         })
+
                 }
+                Button(action: { self.mode = "LI" }){
+                    Text("Exit Quiz")
+                }
+
             }
         }
     }
 }
 
 struct QuizView_Previews: PreviewProvider {
-    @State static var user = User()
     @State static var qb = QuestionBank()
+    @State static var selector = ""
     static var previews: some View {
-        let user = User()
-        QuizView()
+        QuizView(mode: $selector)
     }
 }

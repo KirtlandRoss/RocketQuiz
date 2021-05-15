@@ -46,7 +46,7 @@ struct LoginView: View {
             }
         }
         else if selector == "QZ"{
-            QuizView()
+            QuizView(mode: $selector)
         }
 
         else if selector == "AD"{
@@ -205,7 +205,6 @@ struct LoginView: View {
             self.user = adminUser
             print(user)
 
-            
             invalidLogin = false
         }
         else {
