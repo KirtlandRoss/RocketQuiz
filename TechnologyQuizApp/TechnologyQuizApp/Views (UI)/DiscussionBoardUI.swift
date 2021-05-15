@@ -45,7 +45,8 @@ struct DiscussionBoardUI: View {
                 .foregroundColor(.white)
                 .font(.system(size: 40))
                 .fontWeight(.bold)
-                .padding(.top, 50)
+                .padding(.top, 110)
+                .frame(height: 150)
             
             HStack{
                 List(userData){ data in
@@ -62,7 +63,7 @@ struct DiscussionBoardUI: View {
                         .offset(x: -20)
                 }
                 .listStyle(InsetGroupedListStyle())
-                .frame(width: 470, height: 560)
+                .frame(width: 470, height: 450)
                 
             }.border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .trailing), width:7)
             VStack {
@@ -88,7 +89,7 @@ struct DiscussionBoardUI: View {
                 .frame(width: 350)
                 .padding(.top, 30)
                 
-                Button(action: { (
+                Button(action: {(
                     submit(name: user, message: newMessage),
                     newMessage = ""
                 ) }) {

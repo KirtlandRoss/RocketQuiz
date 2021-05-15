@@ -45,11 +45,11 @@ struct RankingView: View {
             Color.lightPurpleGray
                 .ignoresSafeArea()
             Text("Ranking")
-                .font(.system(size: 50))
                 .foregroundColor(.white)
+                .font(.system(size: 40))
                 .fontWeight(.bold)
-                .position(x: 210, y: 55)
-                .offset(y: 0)
+                .padding(.top, 180)
+                .frame(height: 0)
             
             HStack{
                 List(userData){ data in

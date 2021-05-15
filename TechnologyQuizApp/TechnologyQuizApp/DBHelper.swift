@@ -71,7 +71,6 @@ class DBHelper{
             if (req.count != 0 ){
                 st = req.first as! User
                 st = user
-                
             }
             try! context!.save()
             print("Data Saved")
@@ -86,7 +85,6 @@ class DBHelper{
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         do{
             stu=try context!.fetch(fetchReq) as! [User]
-
         }
         catch{
             print("cannot get data")
