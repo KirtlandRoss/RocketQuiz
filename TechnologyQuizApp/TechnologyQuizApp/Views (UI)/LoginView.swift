@@ -31,15 +31,15 @@ struct LoginView: View {
 
     @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
     //    @State var isAdmin : Bool = false
-    @State private var invalidLogin = false
 
-    
+    @State private var invalidLogin = false
     @State var selection : String? // holds value for Navigation Link tags
 
     init(){
         questionBank.addQ()
     }
     var body: some View {
+
         if selector == "LI" {
             SideMenu(username: $username, selector: $selector){
                 WelcomeView(selection: $selector, username: $username)

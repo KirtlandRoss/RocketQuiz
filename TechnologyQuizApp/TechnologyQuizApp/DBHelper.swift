@@ -176,16 +176,21 @@ class DBHelper{
         }
     }
     
-    func getAllDiscussionPosts () {
-        var posts = [Post]()
-        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
-
+    func getAllDiscussionPosts () -> [Any] {
+        var users = [User]()
+        var posts : [Post] = []
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        fetchReq.returnsObjectsAsFaults = false
+        
         do {
-            posts = try context.fetch(fetchReq) as! [Post]
-            print(posts)
+            users = try context.fetch(fetchReq) as! [User]
+            for post in users {
+                posts = post.posts?.allObjects as! [Post]
+            }
         } catch {
             print("Error fetching user data")
         }
+        return posts
     }
     
 

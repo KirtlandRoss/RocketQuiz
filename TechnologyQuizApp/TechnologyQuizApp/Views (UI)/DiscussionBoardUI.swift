@@ -34,7 +34,7 @@ struct MessageRow: View {
 }
 
 struct DiscussionBoardUI: View {
-    @State var user : String = "Steve"
+    @State var user : String = "Scott"
     @State var newMessage: String = ""
     let message = [MessageInfo]()
     
@@ -47,7 +47,7 @@ struct DiscussionBoardUI: View {
             }
             VStack {
                 Button(action: {
-                    DBHelper.inst.getAllDiscussionPosts()
+                    print(DBHelper.inst.getAllDiscussionPosts())
                 }) {
                     Text("Get Posts")
                 }
