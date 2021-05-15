@@ -12,12 +12,26 @@ import CoreData
 @objc(CategoryGroup)
 public class CategoryGroup: NSManagedObject {
 
+    func randomize(){
+        var quest  = self.questions?.allObjects as! [Question]
+        let indexCap = quest.count
+
+        // random index get
+        let indexUse = Int.random(in: 0..<indexCap)
+
+        // Add to the bank
+        self.addToQuestions(quest[indexUse])
+
+        // don't want repeats
+        quest.remove(at: indexUse)
+    }
+
 }
 
 enum category : Int64{
     case swift = 1
-    case xcode = 2
-    case coredata = 3
+    case github = 2
+    case c = 3
     case java = 4
-    case c = 5
+    case hardware = 5
 }

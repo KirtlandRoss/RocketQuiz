@@ -18,10 +18,13 @@ struct QuizViewContent: View {
     var questionnumber : Int = 1
     var quizName : String = "SwiftUI Fundamentals"
     var question : Question?
-    var cAnswer = String()
+  var cAnswer = String()
+    var ans : [String]
     init(question : Question ){
+        self.ans = [question.correctAnswer!] + question.incorrectAnswers!
+        ans.shuffle()
         self.question = question
-        print(self.question!.incorrectAnswers![0])
+
     }
     var body: some View {
 
@@ -36,7 +39,7 @@ struct QuizViewContent: View {
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
                 // Question Number
-                Text("Question: \(questionnumber)")
+                Text("Question: \(question!.number)")
                     .font(.system(size: 20))
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
@@ -55,7 +58,7 @@ struct QuizViewContent: View {
                 VStack { // Answers
                     ZStack { // Top(first) answer
                         Button(action:action) {
-                            Text((self.question?.incorrectAnswers![0])!)
+                            Text(ans[0])
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -67,7 +70,7 @@ struct QuizViewContent: View {
                     }
                     ZStack { // Second answer
                         Button(action:action) {
-                            Text((self.question?.incorrectAnswers![1])!)
+                            Text(ans[1])
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -79,7 +82,7 @@ struct QuizViewContent: View {
                     }
                     ZStack { // Third answer
                         Button(action:action) {
-                            Text((self.question?.incorrectAnswers![2])!)
+                            Text(ans[2])
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -91,7 +94,7 @@ struct QuizViewContent: View {
                     }
                     ZStack { // Bottom(last) answer
                         Button(action:action) {
-                            Text((self.question?.correctAnswer!)!)
+                            Text(ans[3])
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -113,7 +116,7 @@ struct QuizViewContent: View {
 }
 
 struct QuizView: View{
-
+    @Binding var mode : String
     @Environment(\.managedObjectContext) var context
     @FetchRequest(
         entity: User.entity(),
@@ -130,23 +133,30 @@ struct QuizView: View{
 
         NavigationView{
             Form{
-                ForEach(fetchedQBank.first?.questions?.array as! [Question]){ q in
+                ForEach(fetchedQBank.first!.getQs()){ q in
                     NavigationLink(
                         destination: QuizViewContent( question: q),
                         label: {
                             Text("Question " + String(q.question!))
                         })
+
                 }
+                Button(action: { self.mode = "LI" }){
+                    Text("Exit Quiz")
+                }
+
             }
         }
+    }
+    func test(){
+
     }
 }
 
 struct QuizView_Previews: PreviewProvider {
-    @State static var user = User()
     @State static var qb = QuestionBank()
+    @State static var selector = ""
     static var previews: some View {
-        let user = User()
-        QuizView()
+        QuizView(mode: $selector)
     }
 }

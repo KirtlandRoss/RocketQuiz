@@ -13,7 +13,10 @@ struct MenuView: View {
     func action() {}
     
     func quiz() {
+    
+
         selector = "QZ"
+        
     }
     
     func ranking() {
@@ -85,7 +88,6 @@ struct MenuView: View {
             .padding(.top, 30)
             }
             Spacer()
-            
             Button(action: {
                 logout()
             }){
