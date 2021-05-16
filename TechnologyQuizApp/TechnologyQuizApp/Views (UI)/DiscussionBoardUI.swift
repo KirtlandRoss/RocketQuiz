@@ -27,6 +27,8 @@ struct MessageRow: View {
 }
 
 struct DiscussionBoardUI: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     @Binding var user : String
     @State private var newMessage: String = ""
     let message = [MessageInfo]()
@@ -49,7 +51,9 @@ struct DiscussionBoardUI: View {
                 .frame(height: 150)
             
             HStack{
+                
                 List(userData){ data in
+                    
                     Text("\(data.name): \(data.message)")
                         .foregroundColor(.white)
                         .font(.system(size: 20))
@@ -66,12 +70,15 @@ struct DiscussionBoardUI: View {
                 .frame(width: 470, height: 450)
                 
             }.border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .trailing), width:7)
+//            .colorScheme(.dark)
+            
             VStack {
-//                Button(action: {
-//                    print(messages)
-//                }) {
-//                    Text("Get Posts")
-//                }
+                
+                Button(action: {
+                    print(colorScheme)
+                }) {
+                    Text("Get Posts")
+                }
                 Text("Enter message below to add to the discussion.")
                     .foregroundColor(.white)
                     .font(.system(size: 15))
@@ -105,6 +112,7 @@ struct DiscussionBoardUI: View {
                 }
             }.frame(height: 260)
         }.background(Color.purpleGray)
+        .colorScheme(.dark)
     }
     func submit(name: String, message: String) {
         DBHelper().addDiscussionPost(name, message)
