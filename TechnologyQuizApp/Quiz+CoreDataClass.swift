@@ -17,6 +17,8 @@ public class Quiz: NSManagedObject {
         var arr = bankQuests
         arr.shuffle()
         for (n, v) in arr.enumerated(){
+            print("setQuizQuestions:")
+            print(n, v)
             let quizQuestion = QuizQuestion(context: self.managedObjectContext!)
             quizQuestion.createQuizQuestion(n,v)
             quizQuestion.quiz = self

@@ -21,12 +21,12 @@ struct QuizView: View{
     ) var users : FetchedResults<User>
     @FetchRequest(
         entity: QuestionBank.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \QuestionBank.objectID, ascending: true), ]
+        sortDescriptors: [ ]
     ) var fetchedQBank : FetchedResults<QuestionBank>
 
     @FetchRequest(
         entity: Quiz.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Quiz.user!.name, ascending: true)]
+        sortDescriptors: []
 
     ) var fetchedQuizes : FetchedResults<Quiz>
 
@@ -37,10 +37,10 @@ struct QuizView: View{
     init (mode: Binding<String>,username : String) {
         self._mode = mode
         self.username = username
-        print(fetchedQuizes)
+        
 
         UITableView.appearance().backgroundColor = .clear
-        print(fetchedQuizes.first(where: {$0.user!.name == username})!)
+
 
 
     }

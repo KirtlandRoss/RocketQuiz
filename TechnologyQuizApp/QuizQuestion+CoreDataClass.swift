@@ -12,12 +12,12 @@ import CoreData
 @objc(QuizQuestion)
 public class QuizQuestion: NSManagedObject {
 
-    func createQuizQuestion (_ num : Int,_ bankedQuest: BankedQuestion){
-        correctAnswer = bankQuestion!.correctAnswer
-        incorrectAnswers = bankQuestion!.incorrectAnswers
-        question = bankQuestion!.question
+    func createQuizQuestion (_ num : Int,_ bq: BankedQuestion){
+        correctAnswer = bq.correctAnswer
+        incorrectAnswers = bq.incorrectAnswers
+        question = bq.question
         number = Int64(num)
         
-        self.bankQuestion = bankedQuest
+        self.bankQuestion = bq
     }
 }
