@@ -33,11 +33,11 @@ public class QuestionBank: NSManagedObject
 
 
 		// Hard code the questions from the spreadsheet into the bank
-		var qList = [Question]()
+		var qList = [BankedQuestion]()
         let context = SceneDelegate().context!
 		for _ in 0..<25
 		{
-            let quest = Question(context: context)
+            let quest = BankedQuestion(context: context)
             quest.question = ""
             quest.correctAnswer = ""
             quest.incorrectAnswers = ["wrongA","wrongB","wrongC"]
@@ -116,21 +116,19 @@ public class QuestionBank: NSManagedObject
         print(self)
 	}
 
-    func addQ(newQ : Question)
+    func addQ(newQ : BankedQuestion)
     {
         self.addToQuestions(newQ)
     }
 
-    func getQs() -> [Question]
+    func getQs() -> [BankedQuestion]
     {
         
-        var quest = self.questions!.array as! [Question]
+        var quest = self.questions!.array as! [BankedQuestion]
 
 
         quest.shuffle()
-        for i in 0...24{
-            quest[i].number = Int64(i+1)
-        }
+        
 
         return quest
     }
@@ -139,7 +137,7 @@ public class QuestionBank: NSManagedObject
     {
 
         // get array of all questions and then call extension methods to add to bank
-        var quest = [Question]()
+        var quest = [BankedQuestion]()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Question")
 
         // create context for query
@@ -147,7 +145,7 @@ public class QuestionBank: NSManagedObject
 
         do
         {
-            quest = try context.fetch(fetchReq) as! [Question]
+            quest = try context.fetch(fetchReq) as! [BankedQuestion]
         }
         catch
         {

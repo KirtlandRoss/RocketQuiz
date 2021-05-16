@@ -28,11 +28,7 @@ struct MenuView: View {
         
         let quiz = Quiz(context: context)
         quiz.user = users.first(where: {$0.name == username})!
-        let questArr = fetchedQBank.first!.getQs()
-        for item in questArr{
-            item.quiz = quiz
-            quiz.addToQuestions(item)
-        }
+        quiz.setQuizQuestions(fetchedQBank.first!.getQs())
         try! context.save()
 
         selector = "QZ"

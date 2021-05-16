@@ -36,7 +36,7 @@ struct QuizView: View{
     init (mode: Binding<String>,username : String) {
         self._mode = mode
         self.username = username
-       UITableView.appearance().backgroundColor = .clear
+        UITableView.appearance().backgroundColor = .clear
         print(fetchedQuizes.first(where: {$0.user?.name == username})!)
 
 
@@ -46,21 +46,18 @@ struct QuizView: View{
         NavigationView{
             Form{
                 //get questions out of quiz for correct user
-                ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [Question]){ q in
+                ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [BankedQuestion]){ q in
                     NavigationLink(
                         destination: QuizViewContent( question: q, username: username),
                         label: {
                             Text("Question " + String(q.number) + ": " + String(q.question!))
                         })
                 }
-
                 Button(action: { submitQuiz() }){
                     Text("Submit Quiz")
                 }
-            } .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top , endPoint: .bottom ))
+            }
         }
-
-
     }
     func submitQuiz(){
         self.mode = "LI"
@@ -73,11 +70,11 @@ struct QuizView: View{
 struct QuizViewContent: View {
     @Environment(\.managedObjectContext) var context
     @FetchRequest(
-        entity: Question.entity(),
+        entity: QuizQuestion.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \Question.quiz?.user, ascending: true),
+            NSSortDescriptor(keyPath: \QuizQuestion.quiz?.user, ascending: true),
         ]
-    ) var users : FetchedResults<Question>
+    ) var users : FetchedResults<QuizQuestion>
 
     func action() {
         print("hello")
@@ -85,11 +82,11 @@ struct QuizViewContent: View {
     var time : String = "2:00"
     var username : String
     var questionnumber : Int = 1
-    var question : Question
+    var question : QuizQuestion
     var cAnswer : Int?
     @State private var selected = 5
     var ans = [String]()
-    init(question : Question, username: String ){
+    init(question : QuizQuestion, username: String ){
 
 
         self.username = username

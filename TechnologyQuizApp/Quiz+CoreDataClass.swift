@@ -13,6 +13,14 @@ import CoreData
 public class Quiz: NSManagedObject {
 
 
-    func getQuestions(){
+    func setQuizQuestions (_ bankQuests : [BankedQuestion]){
+        for question in bankQuests.enumerated(){
+            let quizQuestion = QuizQuestion(context: self.managedObjectContext!)
+            quizQuestion.createQuizQuestion(question.1)
+            self.addToQuestions(quizQuestion)
+
+        }
+
     }
+
 }

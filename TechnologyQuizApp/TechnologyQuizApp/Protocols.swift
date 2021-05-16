@@ -15,16 +15,16 @@ protocol UserDelegate{
 }
 //stores and randomizes the questions
 protocol QuestionBankDelegate{
-    var questions : [Question] { get set }
+    var questions : [BankedQuestion] { get set }
 
     //function will create a random set of questions for the quiz
-    func randomQuestions() -> [Question]
+    func randomQuestions() -> [BankedQuestion]
 
 
 }
 //stores a collection of questions, stores users answers, checks if they are correct
 protocol QuizDelegate{
-    var questions : [Question] { get set }
+    var questions : [BankedQuestion] { get set }
     var answers : [Answer?] { get set }
     var grade : Double? { get }
 
