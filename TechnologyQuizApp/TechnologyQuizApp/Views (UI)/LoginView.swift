@@ -23,11 +23,12 @@ struct LoginView: View {
         entity: QuestionBank.entity(),
         sortDescriptors: []
     ) var fetchedQBank : FetchedResults<QuestionBank>
-    @State var username: String = ""
-    @State var password: String = ""
-    @State private var rememberMe = true
+    @State private var username: String = UserDefaults.standard.string(forKey: "rememberedUsername") ?? ""
+    @State private var password: String = UserDefaults.standard.string(forKey: "rememberedPassword") ?? ""
+    @State private var rememberMe = UserDefaults.standard.bool(forKey: "switchBool")
     @State private var user : User?
-
+    let userDef = UserDefaults.standard
+    
     @State var selector = ""
 
     @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
@@ -50,7 +51,7 @@ struct LoginView: View {
             QuizView(mode: $selector)
         }
         else if selector == "AD"{
-            AdminView(selector: $selector)
+//            AdminView(selector: $selector)
         }
         else if selector == "LV"{
             LoginView()
@@ -154,7 +155,7 @@ struct LoginView: View {
                                     .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                     .cornerRadius(15.0)
                             }.offset(x: 0, y: 50)
-
+                            
                             Text("Dont have an account?")
                                 .font(.system(size: 20))
                                 .foregroundColor(.white)
@@ -197,12 +198,13 @@ struct LoginView: View {
             print("username not found")
         }
         
-        if user!.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user!.password!) && !adminCheck(){
-
-            print("Logged in!")
-
+        if user!.password != nil && validatePassword(enteredPassword: password, retrievedPassword: user!.password!) && !adminCheck() {
             invalidLogin = false
             selector = "LI"
+            rememberMeSubmit(&username, &password, rememberMe)
+            
+            print("Logged in!")
+
         }
         else if adminCheck(){
             selector = "AD"
@@ -240,13 +242,34 @@ struct LoginView: View {
         }
     }
     
+    func rememberMeSubmit(_ enteredUsername: inout String, _ enteredPassword: inout String, _ EnteredRememberMe: Bool){
+        let userDef = UserDefaults.standard
+        
+            if rememberMe {
+                userDef.set(enteredUsername, forKey: "rememberedUsername")
+                userDef.set(enteredPassword, forKey: "rememberedPassword")
+            } else {
+                userDef.removeObject(forKey: "rememberedUsername")
+                userDef.removeObject(forKey: "rememberedPassword")
+            }
+            userDef.set(EnteredRememberMe, forKey: "switchBool")
+        
+        username = userDef.string(forKey: "rememberedUsername") ?? ""
+        password = userDef.string(forKey: "rememberedPassword") ?? ""
+        rememberMe = userDef.bool(forKey: "switchBool")
+        
+    }
+    
 }
+
+
 
 class GlobalSelector : ObservableObject{
     @Published var selector : String = ""
 }
 
 struct LoginView_Previews: PreviewProvider {
+
     @State static var user = User()
     static var previews: some View {
         LoginView()
