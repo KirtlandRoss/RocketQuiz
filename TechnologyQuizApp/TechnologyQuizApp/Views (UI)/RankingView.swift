@@ -57,7 +57,7 @@ struct RankingView: View {
                         .foregroundColor(.white)
                         .font(.system(size: 20))
                         .fontWeight(.bold)
-                        .frame(width: 430, height: 135, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: 430, height: 85, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .background(Color.lightPurpleGray)
                         .cornerRadius(10)
                         .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width:7)
@@ -67,13 +67,12 @@ struct RankingView: View {
                 .listStyle(InsetGroupedListStyle())
                 .frame(width: 470)
                 .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .trailing), width:7)
-                
             }
             .position(x: 225, y: 500)
             .frame(width: 450, height: 775, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         }
         .background(Color.lightPurpleGray)
-        
+        .colorScheme(.dark)
     }
 }
 
