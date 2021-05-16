@@ -19,16 +19,20 @@ struct MenuView: View {
     ) var users : FetchedResults<User>
     @FetchRequest(
         entity: QuestionBank.entity(),
-        sortDescriptors: []
+        sortDescriptors:[ NSSortDescriptor(keyPath: \QuestionBank.objectID, ascending: true),]
     ) var fetchedQBank : FetchedResults<QuestionBank>
     @State var username : String
     func action() {}
 
     func quiz() {
-        
-        let quiz = Quiz(context: context)
+        print("QBANK HERE")
+        print(fetchedQBank.first!.questions!)
+        let questions = fetchedQBank.first!.questions?.array as! [BankedQuestion]
+
+        var quiz = Quiz(context: context)
         quiz.user = users.first(where: {$0.name == username})!
-        quiz.setQuizQuestions(fetchedQBank.first!.getQs())
+        quiz.setQuizQuestions(questions)
+        print(quiz)
         try! context.save()
 
         selector = "QZ"

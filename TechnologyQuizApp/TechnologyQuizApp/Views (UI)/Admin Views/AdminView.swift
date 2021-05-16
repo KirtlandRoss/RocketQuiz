@@ -13,12 +13,17 @@ struct AdminView: View {
     @State private var selection: String? = nil
     
     @Binding var selector : String
-
+    @FetchRequest(
+        entity: QuestionBank.entity(),
+        sortDescriptors:[ NSSortDescriptor(keyPath: \QuestionBank.objectID, ascending: true),]
+    ) var fetchedQBank : FetchedResults<QuestionBank>
     
     
     func createQuiz() {
         let qbank = QuestionBank(context: context)
         qbank.addQ()
+        print("QBank 1")
+        print(qbank)
         do{
             try context.save()
             print("question bank created")
@@ -28,7 +33,7 @@ struct AdminView: View {
             print("conflicts found, attempting overwrite")
             try! context.save()
         }
-
+        print(fetchedQBank.first!.questions!.firstObject)
     }
     func action(){
 

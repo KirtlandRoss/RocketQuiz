@@ -21,12 +21,13 @@ struct QuizView: View{
     ) var users : FetchedResults<User>
     @FetchRequest(
         entity: QuestionBank.entity(),
-        sortDescriptors: []
+        sortDescriptors: [NSSortDescriptor(keyPath: \QuestionBank.objectID, ascending: true), ]
     ) var fetchedQBank : FetchedResults<QuestionBank>
 
     @FetchRequest(
         entity: Quiz.entity(),
-        sortDescriptors: []
+        sortDescriptors: [NSSortDescriptor(keyPath: \Quiz.user!.name, ascending: true)]
+
     ) var fetchedQuizes : FetchedResults<Quiz>
 
     @Binding var mode : String
@@ -36,8 +37,10 @@ struct QuizView: View{
     init (mode: Binding<String>,username : String) {
         self._mode = mode
         self.username = username
+        print(fetchedQuizes)
+
         UITableView.appearance().backgroundColor = .clear
-        print(fetchedQuizes.first(where: {$0.user?.name == username})!)
+        print(fetchedQuizes.first(where: {$0.user!.name == username})!)
 
 
     }
@@ -46,7 +49,7 @@ struct QuizView: View{
         NavigationView{
             Form{
                 //get questions out of quiz for correct user
-                ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [BankedQuestion]){ q in
+                ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [QuizQuestion]){ q in
                     NavigationLink(
                         destination: QuizViewContent( question: q, username: username),
                         label: {
@@ -56,7 +59,7 @@ struct QuizView: View{
                 Button(action: { submitQuiz() }){
                     Text("Submit Quiz")
                 }
-            }
+            } .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top , endPoint: .bottom ))
         }
     }
     func submitQuiz(){

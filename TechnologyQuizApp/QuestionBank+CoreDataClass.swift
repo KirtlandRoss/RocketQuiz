@@ -41,7 +41,9 @@ public class QuestionBank: NSManagedObject
             quest.question = ""
             quest.correctAnswer = ""
             quest.incorrectAnswers = ["wrongA","wrongB","wrongC"]
+            quest.questionBank = self
 			qList.append(quest)
+
 		}
 
 		qList[0].question = "What company developed Swift?"
@@ -107,13 +109,12 @@ public class QuestionBank: NSManagedObject
 
 		for item in qList
 		{
-            item.questionBank = self
             print(item)
 
             self.addToQuestions(item)
         }
 
-        print(self)
+     
 	}
 
     func addQ(newQ : BankedQuestion)

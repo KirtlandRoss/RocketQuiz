@@ -14,9 +14,12 @@ public class Quiz: NSManagedObject {
 
 
     func setQuizQuestions (_ bankQuests : [BankedQuestion]){
-        for question in bankQuests.enumerated(){
+        var arr = bankQuests
+        arr.shuffle()
+        for (n, v) in arr.enumerated(){
             let quizQuestion = QuizQuestion(context: self.managedObjectContext!)
-            quizQuestion.createQuizQuestion(question.1)
+            quizQuestion.createQuizQuestion(n,v)
+            quizQuestion.quiz = self
             self.addToQuestions(quizQuestion)
 
         }

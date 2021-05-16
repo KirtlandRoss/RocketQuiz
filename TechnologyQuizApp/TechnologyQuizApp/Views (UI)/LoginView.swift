@@ -37,9 +37,7 @@ struct LoginView: View {
     @State private var invalidLogin = false
     @State var selection : String? // holds value for Navigation Link tags
 
-    init(){
-        questionBank.addQ()
-    }
+  
     var body: some View {
 
         if selector == "LI" {
@@ -51,7 +49,7 @@ struct LoginView: View {
             QuizView(mode: $selector, username: username)
         }
         else if selector == "AD"{
-//            AdminView(selector: $selector)
+         AdminView(selector: $selector)
         }
         else if selector == "LV"{
             LoginView()
