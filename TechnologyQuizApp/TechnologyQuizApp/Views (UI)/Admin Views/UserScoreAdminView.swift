@@ -38,7 +38,7 @@ struct UserScoreAdminView: View {
 
     var body: some View {
         let userData = users.map({ (users) -> UserScores in
-            return UserScores(name: users.name!, score: String(users.quiz?.grade ?? 0.0))
+            return UserScores(name: users.name!, score: String(users.quizScore ?? 0.0))
         })
         VStack {
             Text("User Scores")

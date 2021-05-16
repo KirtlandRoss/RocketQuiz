@@ -7,24 +7,89 @@
 
 import SwiftUI
 import CoreData
-struct QuizViewContent: View {
 
+
+struct QuizView: View{
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true),
+        ]
+    ) var users : FetchedResults<User>
+    @FetchRequest(
+        entity: QuestionBank.entity(),
+        sortDescriptors: []
+    ) var fetchedQBank : FetchedResults<QuestionBank>
+    @Binding var mode : String
+
+    var username : String
+
+    init (mode: Binding<String>,username : String) {
+        self._mode = mode
+        self.username = username
+
+
+    }
+
+
+    var body: some View{
+        NavigationView{
+            Form{
+                ForEach(fetchedQBank.first!.getQs()){ q in
+                    NavigationLink(
+                        destination: QuizViewContent( question: q, username: username),
+                        label: {
+                            Text("Question " + String(q.number) + String(q.question!))
+                        })
+
+                }
+                Button(action: { self.mode = "LI" }){
+                    Text("Exit Quiz")
+                }
+
+            }
+        }
+    }
+}
+
+//MARK: QuizContent
+struct QuizViewContent: View {
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: Question.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Question.quiz?.user, ascending: true),
+        ]
+    ) var users : FetchedResults<Question>
 
     func action() {
         print("hello")
     }
     var time : String = "2:00"
-    
+    var username : String
     var questionnumber : Int = 1
-    var quizName : String = "SwiftUI Fundamentals"
-    var question : Question?
-  var cAnswer = String()
-    var ans : [String]
-    init(question : Question ){
-        self.ans = [question.correctAnswer!] + question.incorrectAnswers!
-        ans.shuffle()
-        self.question = question
+  
+    var question : Question
+    var cAnswer : Int?
+    var ans = [String]()
+    init(question : Question, username: String ){
 
+
+        self.username = username
+        self.question = question
+        print(question.number)
+        //put all answers in an array
+        self.ans = [question.correctAnswer!] + question.incorrectAnswers!
+        //shuffle
+        ans.shuffle()
+
+        //find correct answer in shuffled answers
+        for i in 0...3{
+            if ans[i] == question.correctAnswer{
+                cAnswer = i
+            }
+        }
     }
     var body: some View {
 
@@ -39,14 +104,14 @@ struct QuizViewContent: View {
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
                 // Question Number
-                Text("Question: \(question!.number)")
+                Text("Question: \(question.number)")
                     .font(.system(size: 20))
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
 
                 ZStack { // Question text
                     Card(shape: "rectangle", width: 350, height: 200, cornerRadius: 30, padding: 40, color: .lightPurpleGray)
-                    Text((self.question?.question)!)
+                    Text((self.question.question)!)
                         .font(.system(size: 22))
 
                         .fontWeight(.bold)
@@ -57,7 +122,7 @@ struct QuizViewContent: View {
 
                 VStack { // Answers
                     ZStack { // Top(first) answer
-                        Button(action:action) {
+                        Button(action:{checkAnswer(0)}) {
                             Text(ans[0])
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -69,7 +134,7 @@ struct QuizViewContent: View {
                         }
                     }
                     ZStack { // Second answer
-                        Button(action:action) {
+                        Button(action:{checkAnswer(1)}) {
                             Text(ans[1])
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -81,7 +146,7 @@ struct QuizViewContent: View {
                         }
                     }
                     ZStack { // Third answer
-                        Button(action:action) {
+                        Button(action:{checkAnswer(2)}) {
                             Text(ans[2])
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -93,7 +158,7 @@ struct QuizViewContent: View {
                         }
                     }
                     ZStack { // Bottom(last) answer
-                        Button(action:action) {
+                        Button(action:{checkAnswer(3)}) {
                             Text(ans[3])
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -113,50 +178,18 @@ struct QuizViewContent: View {
             }
         }
     }
-}
-
-struct QuizView: View{
-    @Binding var mode : String
-    @Environment(\.managedObjectContext) var context
-    @FetchRequest(
-        entity: User.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \User.name, ascending: true),
-        ]
-    ) var users : FetchedResults<User>
-    @FetchRequest(
-        entity: QuestionBank.entity(),
-        sortDescriptors: []
-    ) var fetchedQBank : FetchedResults<QuestionBank>
-
-    var body: some View{
-
-        NavigationView{
-            Form{
-                ForEach(fetchedQBank.first!.getQs()){ q in
-                    NavigationLink(
-                        destination: QuizViewContent( question: q),
-                        label: {
-                            Text("Question " + String(q.question!))
-                        })
-
-                }
-                Button(action: { self.mode = "LI" }){
-                    Text("Exit Quiz")
-                }
-
-            }
+    func checkAnswer(_ a : Int){
+        if a == cAnswer{
+            question.answeredCorrect = true
         }
     }
-    func test(){
-
-    }
 }
+
 
 struct QuizView_Previews: PreviewProvider {
     @State static var qb = QuestionBank()
     @State static var selector = ""
     static var previews: some View {
-        QuizView(mode: $selector)
+        QuizView(mode: $selector, username: selector)
     }
 }

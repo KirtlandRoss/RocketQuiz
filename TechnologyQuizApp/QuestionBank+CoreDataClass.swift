@@ -127,6 +127,9 @@ public class QuestionBank: NSManagedObject
 
 
         quest.shuffle()
+        for i in 0...24{
+            quest[i].number = Int64(i+1)
+        }
 
         return quest
     }

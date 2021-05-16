@@ -43,7 +43,7 @@ struct SideMenu<Content: View> : View {
                         // Disable main view if side menu is open.
                         .disabled(self.showMenu ? true : false)
                     if self.showMenu {
-                        MenuView(selector: $selector)
+                        MenuView(selector: $selector, username: username)
                             .frame(width: geometry.size.width / 2)
                             // Transition modifier for the menu to move in from the left.
                             .transition(.move(edge: .leading))

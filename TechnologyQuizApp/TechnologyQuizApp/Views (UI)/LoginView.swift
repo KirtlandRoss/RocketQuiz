@@ -47,7 +47,7 @@ struct LoginView: View {
             }
         }
         else if selector == "QZ"{
-            QuizView(mode: $selector)
+            QuizView(mode: $selector, username: username)
         }
         else if selector == "AD"{
             AdminView(selector: $selector)
@@ -180,6 +180,7 @@ struct LoginView: View {
             }
         }
     }
+
     
     func submit(){
         //        checks if data is valid and if database contains a user with the same username
@@ -224,8 +225,8 @@ struct LoginView: View {
     }
 
     func adminCheck() -> Bool{
-        let pass = "Pass"
-        if username == "Admin" && password == pass {
+
+        if username == "Admin" && password == user!.password {
             return true
         }
         return false

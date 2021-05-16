@@ -8,12 +8,32 @@
 import SwiftUI
 
 struct MenuView: View {
-
+    @Environment(\.managedObjectContext) var context
     @Binding var selector : String
+
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true),
+        ]
+    ) var users : FetchedResults<User>
+    @FetchRequest(
+        entity: QuestionBank.entity(),
+        sortDescriptors: []
+    ) var fetchedQBank : FetchedResults<QuestionBank>
+    @State var username : String
     func action() {}
-    
+
     func quiz() {
-    
+        
+        let quiz = Quiz(context: context)
+        quiz.user = users.first(where: {$0.name == username})!
+        let questArr = fetchedQBank.first!.getQs()
+        for item in questArr{
+            item.quiz = quiz
+        }
+        quiz.questions = NSOrderedSet(array: questArr)
+        try! context.save()
 
         selector = "QZ"
         
@@ -108,11 +128,12 @@ struct MenuView: View {
         .background(Color.lightPurpleGray)
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
+
 }
 
 struct MenuView_Previews: PreviewProvider {
     @State static var selector =  ""
     static var previews: some View {
-        MenuView(selector: $selector)
+        MenuView(selector: $selector, username: selector)
     }
 }
