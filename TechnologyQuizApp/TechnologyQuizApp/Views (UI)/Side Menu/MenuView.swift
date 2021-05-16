@@ -31,8 +31,8 @@ struct MenuView: View {
         let questArr = fetchedQBank.first!.getQs()
         for item in questArr{
             item.quiz = quiz
+            quiz.addToQuestions(item)
         }
-        quiz.questions = NSOrderedSet(array: questArr)
         try! context.save()
 
         selector = "QZ"

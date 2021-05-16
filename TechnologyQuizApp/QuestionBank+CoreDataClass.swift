@@ -123,6 +123,7 @@ public class QuestionBank: NSManagedObject
 
     func getQs() -> [Question]
     {
+        
         var quest = self.questions!.array as! [Question]
 
 

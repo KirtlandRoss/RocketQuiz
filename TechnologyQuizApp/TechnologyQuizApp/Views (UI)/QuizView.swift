@@ -7,8 +7,10 @@
 
 import SwiftUI
 import CoreData
+import UIKit
 
 
+//need to figure out a way to save all questions and then submit
 struct QuizView: View{
     @Environment(\.managedObjectContext) var context
     @FetchRequest(
@@ -21,6 +23,12 @@ struct QuizView: View{
         entity: QuestionBank.entity(),
         sortDescriptors: []
     ) var fetchedQBank : FetchedResults<QuestionBank>
+
+    @FetchRequest(
+        entity: Quiz.entity(),
+        sortDescriptors: []
+    ) var fetchedQuizes : FetchedResults<Quiz>
+
     @Binding var mode : String
 
     var username : String
@@ -28,28 +36,36 @@ struct QuizView: View{
     init (mode: Binding<String>,username : String) {
         self._mode = mode
         self.username = username
+       UITableView.appearance().backgroundColor = .clear
+        print(fetchedQuizes.first(where: {$0.user?.name == username})!)
 
 
     }
 
-
     var body: some View{
         NavigationView{
             Form{
-                ForEach(fetchedQBank.first!.getQs()){ q in
+                //get questions out of quiz for correct user
+                ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [Question]){ q in
                     NavigationLink(
                         destination: QuizViewContent( question: q, username: username),
                         label: {
-                            Text("Question " + String(q.number) + String(q.question!))
+                            Text("Question " + String(q.number) + ": " + String(q.question!))
                         })
-
-                }
-                Button(action: { self.mode = "LI" }){
-                    Text("Exit Quiz")
                 }
 
-            }
+                Button(action: { submitQuiz() }){
+                    Text("Submit Quiz")
+                }
+            } .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top , endPoint: .bottom ))
         }
+
+
+    }
+    func submitQuiz(){
+        self.mode = "LI"
+        //Submit all questions
+
     }
 }
 
@@ -69,9 +85,9 @@ struct QuizViewContent: View {
     var time : String = "2:00"
     var username : String
     var questionnumber : Int = 1
-  
     var question : Question
     var cAnswer : Int?
+    @State private var selected = 5
     var ans = [String]()
     init(question : Question, username: String ){
 
@@ -92,8 +108,6 @@ struct QuizViewContent: View {
         }
     }
     var body: some View {
-
-
         ZStack { // ZStack for whole view
             Color.purpleGray
                 .ignoresSafeArea()
@@ -131,6 +145,7 @@ struct QuizViewContent: View {
                                 .frame(width: 300, height: 75)
                                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                 .cornerRadius(15.0)
+                                .colorMultiply(Color(white: 1, opacity: (selected == 0 ? 0.4 : 1)))
                         }
                     }
                     ZStack { // Second answer
@@ -143,6 +158,7 @@ struct QuizViewContent: View {
                                 .frame(width: 300, height: 75)
                                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                 .cornerRadius(15.0)
+                                .colorMultiply(Color(white: 1, opacity: (selected == 1 ? 0.4 : 1)))
                         }
                     }
                     ZStack { // Third answer
@@ -155,6 +171,7 @@ struct QuizViewContent: View {
                                 .frame(width: 300, height: 75)
                                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                 .cornerRadius(15.0)
+                                .colorMultiply(Color(white: 1, opacity: (selected == 2 ? 0.4 : 1)))
                         }
                     }
                     ZStack { // Bottom(last) answer
@@ -167,6 +184,7 @@ struct QuizViewContent: View {
                                 .frame(width: 300, height: 75)
                                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                 .cornerRadius(15.0)
+                                .colorMultiply(Color(white: 1, opacity: (selected == 3 ? 0.4 : 1)))
                         }
                     }
                 }.offset(x: 0, y: -10)
@@ -179,8 +197,12 @@ struct QuizViewContent: View {
         }
     }
     func checkAnswer(_ a : Int){
+        selected = a
         if a == cAnswer{
             question.answeredCorrect = true
+        }
+        else {
+            question.answeredCorrect = false
         }
     }
 }
