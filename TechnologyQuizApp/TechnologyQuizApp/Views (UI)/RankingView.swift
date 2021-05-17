@@ -70,7 +70,7 @@ struct RankingView: View {
                         .frame(width: 430, height: 85, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .background(Color.lightPurpleGray)
                         .cornerRadius(10)
-                        .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width:7)
+                        .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width:4)
                         .cornerRadius(10)
                         .offset(x: -20)
                 }

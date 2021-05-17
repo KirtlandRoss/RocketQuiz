@@ -62,14 +62,14 @@ struct DiscussionBoardUI: View {
                         .padding(.leading, 10)
                         .background(Color.lightPurpleGray)
                         .cornerRadius(10)
-                        .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width:7)
+                        .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width:4)
                         .cornerRadius(10)
                         .offset(x: -20)
                 }
                 .listStyle(InsetGroupedListStyle())
                 .frame(width: 470, height: 450)
                 
-            }.border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .trailing), width:7)
+            }.border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .trailing), width:4)
 //            .colorScheme(.dark)
             
             VStack {

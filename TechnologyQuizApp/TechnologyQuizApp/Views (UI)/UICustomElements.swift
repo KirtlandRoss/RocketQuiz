@@ -99,6 +99,7 @@ struct CustomTextField: View {
     @Binding var text: String
     var editingChanged: (Bool)->() = { _ in }
     var commit: ()->() = { }
+    
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -129,16 +130,15 @@ struct AppImage: View {
     }
 }
 
-class TextBindingManager: ObservableObject {
-    @Published var text = "" {
+class TextFieldManager: ObservableObject {
+    var characterLimit : Int = 4
+    @Published var userInput = "" {
         didSet {
-            if text.count > characterLimit && oldValue.count <= characterLimit {
-                text = oldValue
+            if userInput.count > characterLimit {
+                userInput = String(userInput.prefix(characterLimit))
             }
         }
     }
-    let characterLimit: Int
-
     init(limit: Int = 5){
         characterLimit = limit
     }
