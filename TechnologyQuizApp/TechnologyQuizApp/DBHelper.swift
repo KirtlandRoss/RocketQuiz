@@ -85,7 +85,7 @@ class DBHelper{
         var user = User()
         let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
         fetchReq.returnsObjectsAsFaults = false
-        fetchReq.predicate = NSPredicate(format: "username == %@", username)
+        fetchReq.predicate = NSPredicate(format: "name == %@", username)
         
         fetchReq.fetchLimit = 1
         do {
@@ -110,6 +110,10 @@ class DBHelper{
             context!.delete(st.first as! User)
             try context!.save()
             print("data deleted")
+        } catch {
+            print("error")
+        }
+    }
 
 
     func updateUserPassword (object: [String : String]) {

@@ -15,7 +15,7 @@ struct SubscriptionView: View {
     @State private var cvvNumber : String = ""
     @State private var warningText: String = ""
     @State private var validFields : Bool = false
-    var username: String = "scott"
+    var username: String = "Scott"
     
     var body: some View {
         

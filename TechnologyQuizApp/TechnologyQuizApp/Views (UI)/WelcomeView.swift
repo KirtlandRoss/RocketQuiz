@@ -21,11 +21,10 @@ struct WelcomeView: View {
     @State var subscribed : String = "Subscribed"
     @State var notSubscribed : String = "Not subscribed"
     
-    
+
     var body: some View {
         
-//        let paidSubscription = DBHelper.inst.getSubscriptionData(username: "Scott")
-        let paidSubscription = true
+        let paidSubscription = DBHelper.inst.getSubscriptionData(username: "Scott")
         
         ZStack { // ZStack for whole view
             Color.purpleGray
