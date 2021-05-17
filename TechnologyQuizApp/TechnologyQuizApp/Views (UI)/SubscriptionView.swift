@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct SubscriptionView: View {
-    @State private var firstName : String = ""
-    @State private var lastName : String = ""
+    @State private var fullname : String = ""
     @State private var cardNumber : String = ""
     @State private var expiration : String = ""
     @State private var cvvNumber : String = ""
@@ -18,14 +17,66 @@ struct SubscriptionView: View {
     @Binding var username : String
     
     var body: some View {
-        
+
         VStack{
-            Spacer()
-            Text("Subscribe")
-                .foregroundColor(.white)
-                .font(.system(size: 40))
-                .fontWeight(.bold)
-                .padding(.top, 110)
+            VStack {
+    
+                ZStack {
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 25.0)
+
+                        .fill(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple, Color.red, Color.purple, Color.blue, Color.red, Color.purple]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                        
+                        .frame(width: 400, height: 250)
+                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10) // positive numbers, down and right
+                        .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                        .blur(radius: 0.1)
+                        .cornerRadius(25)
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .fill(Color.white)
+                        .frame(width: 400, height: 250)
+                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10) // positive numbers, down and right
+                        .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                        .blur(radius: 0.1)
+                        .opacity(0.7)
+                        .cornerRadius(25)
+                    Text("Mastercard")
+                        .foregroundColor(.white)
+                        .font(.system(size: 35))
+                        .fontWeight(.heavy)
+                        .offset(x: -85, y: -80)
+                    Text(cardNumber)
+                        .foregroundColor(.white)
+                        .font(.system(size: 35))
+                    Text("Expiration")
+                        .foregroundColor(.white)
+                        .font(.system(size: 10))
+                        .fontWeight(.black)
+                        .offset(x: -150, y: 70)
+                    Text(expiration)
+                        .foregroundColor(.white)
+                        .font(.system(size: 10))
+                        .fontWeight(.black)
+                        .offset(x: -150, y: 90)
+                    Text(fullname)
+                        .foregroundColor(.white)
+                        .font(.system(size: 20))
+                        .fontWeight(.black)
+                        .offset(x: 60, y: 80)
+                    Text("CVV")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20))
+                        .fontWeight(.black)
+                        .offset(x: 120, y: -80)
+                    Text(cvvNumber)
+                        .foregroundColor(.white)
+                        .font(.system(size: 20))
+                        .fontWeight(.black)
+                        .offset(x: 120, y: -50)
+
+                }
+                .offset(y: 120)
+            }
             VStack {
                 Spacer()
                 Text("Enter payment information below")
@@ -33,13 +84,7 @@ struct SubscriptionView: View {
                     .font(.system(size: 20))
                     .fontWeight(.bold)
                     .padding()
-                Spacer()
-                CustomTextField(isSecure: false, placeholder: Text("First Name (Character limit: 20)").foregroundColor(.gray), text: $firstName)
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.lightPurpleGray)
-                    .cornerRadius(20.0)
-                CustomTextField(isSecure: false, placeholder: Text("Last Name (Character limit: 20)").foregroundColor(.gray), text: $lastName)
+                CustomTextField(isSecure: false, placeholder: Text("Name (Character limit: 20)").foregroundColor(.gray), text: $fullname)
                     .padding()
                     .foregroundColor(.white)
                     .background(Color.lightPurpleGray)
@@ -62,15 +107,12 @@ struct SubscriptionView: View {
                     .foregroundColor(.white)
                     .background(Color.lightPurpleGray)
                     .cornerRadius(20.0)
-                Spacer()
                 
             }.padding()
             VStack {
                 Text(warningText)
                     .padding()
                     .foregroundColor(validFields ? .green : .red)
-                
-                Spacer()
                 
                 Button(action: {(
                     submit()
@@ -85,6 +127,7 @@ struct SubscriptionView: View {
                         .padding(.top, 10)
                         .padding(.bottom, 60)
                 }
+                
             }
         }.background(Color.purpleGray)
         .ignoresSafeArea()
@@ -96,8 +139,7 @@ struct SubscriptionView: View {
             validFields = true
             warningText = "Submitted"
             DBHelper.inst.updateSubscriptionStatus(name: username, subscriptionStatus: true)
-            firstName = ""
-            lastName = ""
+            fullname = ""
             cardNumber = ""
             expiration = ""
             cvvNumber = ""
@@ -109,12 +151,8 @@ struct SubscriptionView: View {
     
     func validateData() -> Bool {
 
-        if firstName.count < 1 || firstName.count > 20 {
+        if fullname.count < 1 || fullname.count > 30 {
             print("first name invalid")
-            return false
-        }
-        else if lastName.count < 1 || lastName.count > 20 {
-            print("Last Name  invalid")
             return false
         }
         else if cardNumber.count != 16 {
