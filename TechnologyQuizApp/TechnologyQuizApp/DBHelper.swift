@@ -14,7 +14,31 @@ class DBHelper{
 
     let context = SceneDelegate().context
 
-
+	func avrgScore() -> [User]
+	{
+		var usrL = [User]()
+		let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+		fetchReq.predicate = NSPredicate(format: "name != %@", "Admin") // use predicate to reject the admin from the fetch
+		
+		do
+		{
+			usrL = try context!.fetch(fetchReq) as! [User]
+			
+			for plyr in usrL
+			{
+				plyr.averageScore = plyr.calculateScore()
+			}
+			
+			usrL.sort()
+		}
+		catch
+		{
+			print("Fetch attempt in DBHelper.avrgScore failed. error: \(error)")
+		}
+		
+		return usrL
+	}
+	
     func updateQuizQuestions(_ username : String, _ qArray : [Bool]){
         let quizFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
         quizFetchReq.predicate = NSPredicate(format: "user.name == %@", username)

@@ -10,15 +10,28 @@ import Foundation
 import CoreData
 
 
-public class User: NSManagedObject{
+// Conforms User to Comparable so we can use .sort() for average scores
+// Source: https://developer.apple.com/documentation/swift/comparable 
+extension User: Comparable
+{
+	public static func < (lhs: User, rhs: User) -> Bool
+	{
+		return lhs.averageScore < rhs.averageScore
+	}
+}
 
-    func calculateScore() -> Double{
+public class User: NSManagedObject
+{
+
+    func calculateScore() -> Double
+	{
         let quizFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
         quizFetchReq.predicate = NSPredicate(format: "user.name == %@", self.name!)
         let quizes = try! self.managedObjectContext!.fetch(quizFetchReq) as! [Quiz]
 
         var scoreCounter = 0.0
-        for item in quizes {
+        for item in quizes
+		{
             print(quizes.count)
             print(item.grade)
             scoreCounter += item.grade
@@ -28,6 +41,7 @@ public class User: NSManagedObject{
         self.averageScore = Double(scoreCounter) / (25*Double(quizes.count))
         return averageScore
     }
+	
     func setupInvalidUser(){
         self.name = "invalid"
         self.firstName = "invalid"
