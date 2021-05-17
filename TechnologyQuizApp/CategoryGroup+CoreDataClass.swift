@@ -13,7 +13,7 @@ import CoreData
 public class CategoryGroup: NSManagedObject {
 
     func randomize(){
-        var quest  = self.questions?.allObjects as! [Question]
+        var quest  = self.questions?.allObjects as! [BankedQuestion]
         let indexCap = quest.count
 
         // random index get

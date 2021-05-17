@@ -31,14 +31,14 @@ struct RankingView: View {
     @FetchRequest(
         entity: User.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \User.quiz?.grade, ascending: true),
+            NSSortDescriptor(keyPath: \User.averageScore, ascending: true),
         ]
     ) var users : FetchedResults<User>
-
+    
     var body: some View {
 
         let userData = users.map({ (users) -> UserScores in
-            return UserScores(name: users.name!, score: String(users.quiz?.grade ?? 0.0))
+            return UserScores(name: users.name!, score: String(users.calculateScore()))
         })
         
         VStack {

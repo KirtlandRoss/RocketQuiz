@@ -9,11 +9,25 @@ import SwiftUI
 import FBSDKLoginKit
 
 struct MenuView: View {
-
+    @Environment(\.managedObjectContext) var context
     @Binding var selector : String
+
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true),
+        ]
+    ) var users : FetchedResults<User>
+    @FetchRequest(
+        entity: QuestionBank.entity(),
+        sortDescriptors:[]
+    ) var fetchedQBank : FetchedResults<QuestionBank>
+    @State var username : String
     func action() {}
-    
+
     func quiz() {
+       let dbhelp = DBHelper()
+        dbhelp.createQuiz(username)
         selector = "QZ"
     }
     
@@ -123,11 +137,12 @@ struct MenuView: View {
         .background(Color.lightPurpleGray)
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
+
 }
 
 struct MenuView_Previews: PreviewProvider {
     @State static var selector =  ""
     static var previews: some View {
-        MenuView(selector: $selector)
+        MenuView(selector: $selector, username: selector)
     }
 }

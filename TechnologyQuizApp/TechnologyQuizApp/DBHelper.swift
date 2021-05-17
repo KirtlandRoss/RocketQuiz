@@ -11,74 +11,40 @@ import SwiftUI
 
 class DBHelper{
     static var inst = DBHelper()
-//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     let context = SceneDelegate().context
 
-    func fetchUser(name : String) throws -> User {
-        var st : User?
-        let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
-        fetchReq.predicate = NSPredicate(format: "name == %@", name)
-        do{
-            let req = try context!.fetch(fetchReq) as? [User]
-            if (req!.count != 0  ){
-                st = req!.first! as User
-                return st!
-            }
+
+    func updateQuizQuestions(_ username : String, _ qArray : [Bool]){
+        let quizFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
+        quizFetchReq.predicate = NSPredicate(format: "user.name == %@", username)
+        let quiz = try! context?.fetch(quizFetchReq).first as! Quiz
+
+        for (n, _) in qArray.enumerated(){
+           let quest = quiz.questions![n] as! QuizQuestion
+            quest.answeredCorrect = qArray[n]
+            print(qArray.count)
         }
-        catch{
-            print("no data returned")
-        }
-        if st == nil{
-            throw NilError.nilErr
-        }
-        return st!
+        quiz.calculateGrade()
+        try! context?.save()
     }
 
-    func userExists(name : String) -> Bool{
+    func createQuiz(_ username : String){
+        let qbFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "QuestionBank")
+        qbFetchReq.returnsObjectsAsFaults = false
+        let qbFetch = try! context?.fetch(qbFetchReq).first as! QuestionBank
 
-        let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
-        fetchReq.predicate = NSPredicate(format: "name == %@", name)
+        let userFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        userFetchReq.predicate = NSPredicate(format: "name == %@", username)
+        let user = try! context?.fetch(userFetchReq).first as! User
 
-        let req = try? context!.fetch(fetchReq) as? [User]
-        if req!.count != 0{
-            return true
-        }
-        else {
-            return false
-        }
+        var quiz = Quiz(context: context!)
+        quiz.setQuizQuestions(qbFetch.getQs())
+        quiz.user = user
+        try! context?.save()
+
     }
 
-    func updateResultsData(user: User){
-
-        print(user.managedObjectContext as Any)
-
-        do{
-            try context!.save()
-            print("Data Saved")
-        }
-        catch{
-            print("data not saved")
-        }
-    }
-
-    func updateData(_ user : User){
-        var st = User()
-        let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
-        fetchReq.predicate = NSPredicate(format: "name == %@", user.name!)
-        fetchReq.fetchLimit = 1
-        do{
-            let req = try context!.fetch(fetchReq)
-            if (req.count != 0 ){
-                st = req.first as! User
-                st = user
-            }
-            try! context!.save()
-            print("Data Saved")
-        }
-        catch{
-            print("data not saved")
-        }
-    }
     
     func updateSubscriptionStatus(name: String, subscriptionStatus: Bool) {
         var user = User()
@@ -145,28 +111,7 @@ class DBHelper{
             try context!.save()
             print("data deleted")
 
-        }
-        catch{
-            print("data not deleted")
-        }
-    }
-    
-    func updateUserMetadata(_ object: [String: String]){
-        var st = User()
-        let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
-        fetchReq.predicate = NSPredicate(format: "name == %@", object["name"]!)
-        do{
-            let req = try context!.fetch(fetchReq)
-            if (req.count != 0 ){
-                st = req.first as! User
-                st.name = object["name"]
-            }
-        }
-        catch{
 
-        }
-    }
-    
     func updateUserPassword (object: [String : String]) {
         var user = User()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
@@ -174,10 +119,10 @@ class DBHelper{
         fetchReq.returnsObjectsAsFaults = false
 
         fetchReq.predicate = NSPredicate(format: "name == %@", object["name"]!)
-        
+
         do {
             let userFetch = try context!.fetch(fetchReq)
-            
+
             if (userFetch.count != 0) {
                 user = userFetch.first as! User
                 user.password = object["password"]
@@ -232,12 +177,12 @@ class DBHelper{
         var users = [User]()
         var posts : [Post] = []
 
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
-            let sort = NSSortDescriptor(key: "date", ascending: false)
-            request.sortDescriptors = [sort]
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
+        let sort = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [sort]
 
 
-//        fetchReq.returnsObjectsAsFaults = false
+        //        fetchReq.returnsObjectsAsFaults = false
         
         do {
             posts = try context!.fetch(request) as! [Post]

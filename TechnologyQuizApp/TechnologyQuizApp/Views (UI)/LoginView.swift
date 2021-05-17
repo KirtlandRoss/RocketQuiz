@@ -19,10 +19,7 @@ struct LoginView: View {
         ]
     ) var users : FetchedResults<User>
     
-    @FetchRequest(
-        entity: QuestionBank.entity(),
-        sortDescriptors: []
-    ) var fetchedQBank : FetchedResults<QuestionBank>
+
     @State private var username: String = UserDefaults.standard.string(forKey: "rememberedUsername") ?? ""
     @State private var password: String = UserDefaults.standard.string(forKey: "rememberedPassword") ?? ""
     @State private var rememberMe = UserDefaults.standard.bool(forKey: "switchBool")
@@ -31,15 +28,13 @@ struct LoginView: View {
     
     @State var selector = ""
 
-    @State private var questionBank = QuestionBank(context: SceneDelegate().context!)
+    
     //    @State var isAdmin : Bool = false
 
     @State private var invalidLogin = false
     @State var selection : String? // holds value for Navigation Link tags
 
-    init(){
-        questionBank.addQ()
-    }
+  
     var body: some View {
 
         if selector == "LI" {
@@ -48,13 +43,10 @@ struct LoginView: View {
             }
         }
         else if selector == "QZ"{
-            QuizView(mode: $selector)
+            QuizView(mode: $selector, username: username)
         }
         else if selector == "AD"{
-            AdminView(selector: $selector)
-        }
-        else if selector == "LV"{
-            LoginView()
+         AdminView(selector: $selector)
         }
         else if selector == "RK"{
             SideMenu(username: $username, selector: $selector){
@@ -186,16 +178,16 @@ struct LoginView: View {
             }
         }
     }
+
     
     func submit(){
         //        checks if data is valid and if database contains a user with the same username
         if users.first(where: { user in
-            user.name == username
-        }) != nil {
+            user.name == username}) != nil {
             user = users.first(where: { user in
                 user.name == username
             })! as User
-            questionBank = fetchedQBank.first!
+
 
         } else {
             user = User(context: context)
@@ -231,8 +223,8 @@ struct LoginView: View {
     }
 
     func adminCheck() -> Bool{
-        let pass = "Pass"
-        if username == "Admin" && password == pass {
+
+        if username == "Admin" && password == user!.password {
             return true
         }
         return false

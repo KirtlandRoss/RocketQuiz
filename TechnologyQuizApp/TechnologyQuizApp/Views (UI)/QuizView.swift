@@ -7,28 +7,110 @@
 
 import SwiftUI
 import CoreData
-struct QuizViewContent: View {
+import UIKit
 
+
+//need to figure out a way to save all questions and then submit
+struct QuizView: View{
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.name, ascending: true),
+        ]
+    ) var users : FetchedResults<User>
+    @FetchRequest(
+        entity: QuestionBank.entity(),
+        sortDescriptors: [ ]
+    ) var fetchedQBank : FetchedResults<QuestionBank>
+
+    @FetchRequest(
+        entity: Quiz.entity(),
+        sortDescriptors: []
+
+    ) var fetchedQuizes : FetchedResults<Quiz>
+    private var dbHelp = DBHelper()
+    @Binding var mode : String
+    @State private var quizHandler = QuizHandler()
+    
+    var username : String
+
+    init (mode: Binding<String>,username : String) {
+        self._mode = mode
+        self.username = username
+        UITableView.appearance().backgroundColor = .clear
+
+
+    }
+
+    var body: some View{
+        NavigationView{
+            Form{
+                //get questions out of quiz for correct user
+                ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [QuizQuestion]){ q in
+                    NavigationLink(
+                        destination: QuizViewContent( question: q, username: username, $quizHandler),
+                        label: {
+                            Text("Question " + String(q.number + 1) + ": " + String(q.question!))
+                        })
+                }
+                Button(action: { submitQuiz() }){
+                    Text("Submit Quiz")
+                }
+            } .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top , endPoint: .bottom ))
+            .ignoresSafeArea()
+
+        }
+    }
+    func submitQuiz(){
+        self.mode = "LI"
+        dbHelp.updateQuizQuestions(username, quizHandler.correctAnswers)
+        
+        //Submit all questions
+
+    }
+}
+
+//MARK: QuizContent
+struct QuizViewContent: View {
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: QuizQuestion.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \QuizQuestion.quiz?.user, ascending: true),
+        ]
+    ) var users : FetchedResults<QuizQuestion>
 
     func action() {
         print("hello")
     }
     var time : String = "2:00"
-    
+    var username : String
     var questionnumber : Int = 1
-    var quizName : String = "SwiftUI Fundamentals"
-    var question : Question?
-  var cAnswer = String()
-    var ans : [String]
-    init(question : Question ){
-        self.ans = [question.correctAnswer!] + question.incorrectAnswers!
-        ans.shuffle()
+    var question : QuizQuestion
+    var cAnswer : Int?
+    @Binding var qHandler : QuizHandler
+    @State private var selected = 5
+    var ans = [String]()
+    init(question : QuizQuestion, username: String, _ corAnsArray : Binding<QuizHandler> ){
+        _qHandler = corAnsArray
+
+        self.username = username
         self.question = question
 
+        //put all answers in an array
+        self.ans = [question.correctAnswer!] + question.incorrectAnswers!
+        //shuffle
+        ans.shuffle()
+
+        //find correct answer in shuffled answers
+        for i in 0...3{
+            if ans[i] == question.correctAnswer{
+                cAnswer = i
+            }
+        }
     }
     var body: some View {
-
-
         ZStack { // ZStack for whole view
             Color.purpleGray
                 .ignoresSafeArea()
@@ -39,14 +121,14 @@ struct QuizViewContent: View {
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
                 // Question Number
-                Text("Question: \(question!.number)")
+                Text("Question: \(question.number)")
                     .font(.system(size: 20))
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
 
                 ZStack { // Question text
                     Card(shape: "rectangle", width: 350, height: 200, cornerRadius: 30, padding: 40, color: .lightPurpleGray)
-                    Text((self.question?.question)!)
+                    Text((self.question.question)!)
                         .font(.system(size: 22))
 
                         .fontWeight(.bold)
@@ -57,7 +139,7 @@ struct QuizViewContent: View {
 
                 VStack { // Answers
                     ZStack { // Top(first) answer
-                        Button(action:action) {
+                        Button(action:{checkAnswer(0)}) {
                             Text(ans[0])
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -66,10 +148,11 @@ struct QuizViewContent: View {
                                 .frame(width: 300, height: 75)
                                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                 .cornerRadius(15.0)
+                                .colorMultiply(Color(white: 1, opacity: (selected == 0 ? 0.4 : 1)))
                         }
                     }
                     ZStack { // Second answer
-                        Button(action:action) {
+                        Button(action:{checkAnswer(1)}) {
                             Text(ans[1])
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -78,10 +161,11 @@ struct QuizViewContent: View {
                                 .frame(width: 300, height: 75)
                                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                 .cornerRadius(15.0)
+                                .colorMultiply(Color(white: 1, opacity: (selected == 1 ? 0.4 : 1)))
                         }
                     }
                     ZStack { // Third answer
-                        Button(action:action) {
+                        Button(action:{checkAnswer(2)}) {
                             Text(ans[2])
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -90,10 +174,11 @@ struct QuizViewContent: View {
                                 .frame(width: 300, height: 75)
                                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                 .cornerRadius(15.0)
+                                .colorMultiply(Color(white: 1, opacity: (selected == 2 ? 0.4 : 1)))
                         }
                     }
                     ZStack { // Bottom(last) answer
-                        Button(action:action) {
+                        Button(action:{checkAnswer(3)}) {
                             Text(ans[3])
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -102,6 +187,7 @@ struct QuizViewContent: View {
                                 .frame(width: 300, height: 75)
                                 .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                                 .cornerRadius(15.0)
+                                .colorMultiply(Color(white: 1, opacity: (selected == 3 ? 0.4 : 1)))
                         }
                     }
                 }.offset(x: 0, y: -10)
@@ -113,50 +199,19 @@ struct QuizViewContent: View {
             }
         }
     }
-}
-
-struct QuizView: View{
-    @Binding var mode : String
-    @Environment(\.managedObjectContext) var context
-    @FetchRequest(
-        entity: User.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \User.name, ascending: true),
-        ]
-    ) var users : FetchedResults<User>
-    @FetchRequest(
-        entity: QuestionBank.entity(),
-        sortDescriptors: []
-    ) var fetchedQBank : FetchedResults<QuestionBank>
-
-    var body: some View{
-
-        NavigationView{
-            Form{
-                ForEach(fetchedQBank.first!.getQs()){ q in
-                    NavigationLink(
-                        destination: QuizViewContent( question: q),
-                        label: {
-                            Text("Question " + String(q.question!))
-                        })
-
-                }
-                Button(action: { self.mode = "LI" }){
-                    Text("Exit Quiz")
-                }
-
-            }
+    func checkAnswer(_ a : Int){
+        selected = a
+        if a == cAnswer{
+            qHandler.updateScore(a)
         }
     }
-    func test(){
-
-    }
 }
+
 
 struct QuizView_Previews: PreviewProvider {
     @State static var qb = QuestionBank()
     @State static var selector = ""
     static var previews: some View {
-        QuizView(mode: $selector)
+        QuizView(mode: $selector, username: selector)
     }
 }

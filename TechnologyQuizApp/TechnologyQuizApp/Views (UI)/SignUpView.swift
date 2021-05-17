@@ -126,7 +126,16 @@ struct SignUpView: View {
             user.firstName = signUpFirstName
             user.lastName = signUpLastName
             user.hasSubscription = false
-           
+
+            //creates admin account if doesn't already exist
+            if !users.contains(where: {user in
+                user.name == "Admin"
+            }){
+            let admin = User(context: context)
+            admin.name = "Admin"
+            admin.firstName = "admin"
+            admin.lastName = "admin"
+                admin.password = "Pass"}
 
             do{
                 try context.save()
