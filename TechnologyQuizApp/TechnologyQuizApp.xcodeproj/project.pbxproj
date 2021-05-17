@@ -36,6 +36,7 @@
 		BCB996CE264C3A02008BFDE4 /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB996CD264C3A02008BFDE4 /* FacebookButton.swift */; };
 		BCC67349264DAA5700023E3E /* Pods_TechnologyQuizApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614D0EE76163B690BCC91036 /* Pods_TechnologyQuizApp.framework */; };
 		BCC6734A264DAA5700023E3E /* Pods_TechnologyQuizApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 614D0EE76163B690BCC91036 /* Pods_TechnologyQuizApp.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BCCB3BA52652CCEF00FE05B7 /* AmendQuestionBankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCB3BA42652CCEF00FE05B7 /* AmendQuestionBankView.swift */; };
 		BCDD19A4264AE3730023E2C5 /* BankedQuestion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD199C264AE3730023E2C5 /* BankedQuestion+CoreDataClass.swift */; };
 		BCDD19A6264AE3730023E2C5 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD199E264AE3730023E2C5 /* User+CoreDataClass.swift */; };
 		BCDD19A8264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD19A0264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift */; };
@@ -116,6 +117,7 @@
 		BCB124762651656100C1011C /* QuizQuestion+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuizQuestion+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BCB504A92651D8600059A1D8 /* QuizHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHandler.swift; sourceTree = "<group>"; };
 		BCB996CD264C3A02008BFDE4 /* FacebookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookButton.swift; sourceTree = "<group>"; };
+		BCCB3BA42652CCEF00FE05B7 /* AmendQuestionBankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmendQuestionBankView.swift; sourceTree = "<group>"; };
 		BCDD199C264AE3730023E2C5 /* BankedQuestion+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankedQuestion+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BCDD199E264AE3730023E2C5 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		BCDD19A0264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionBank+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -159,6 +161,7 @@
 			children = (
 				5E1E4C1F264C764900B5E9D7 /* AdminView.swift */,
 				5E371AF0264D80DC00CDCF54 /* UserScoreAdminView.swift */,
+				BCCB3BA42652CCEF00FE05B7 /* AmendQuestionBankView.swift */,
 			);
 			path = "Admin Views";
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				5EE60BCF264ADBEC00BC2735 /* QuizView.swift in Sources */,
 				BCB504AA2651D8600059A1D8 /* QuizHandler.swift in Sources */,
 				5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */,
+				BCCB3BA52652CCEF00FE05B7 /* AmendQuestionBankView.swift in Sources */,
 				5EA643072649CD4E008519F1 /* SideMenu.swift in Sources */,
 				5EE60BCD264ACA7B00BC2735 /* WelcomeView.swift in Sources */,
 				BCECC7EA2649BA0F00DABFE4 /* AppDelegate.swift in Sources */,
