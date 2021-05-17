@@ -26,14 +26,14 @@ public class Quiz: NSManagedObject {
 
 
     }
-    func calculateGrade(){
+    func calculateGrade(_ correctArr : [Bool]){
         var numCorrect = 0
-        for item in questions?.array as! [QuizQuestion]{
-            if item.answeredCorrect{
+        for item in correctArr{
+            if item{
                 numCorrect += 1
             }
         }
-        grade = Double(numCorrect / 25)
+        grade = (Double(numCorrect) / 25.0) * 100.0
     }
 
 }

@@ -25,22 +25,38 @@ class DBHelper{
             quest.answeredCorrect = qArray[n]
             print(qArray.count)
         }
-        quiz.calculateGrade()
+        quiz.calculateGrade(qArray)
         try! context?.save()
     }
 
     func createQuiz(_ username : String){
         let qbFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "QuestionBank")
         qbFetchReq.returnsObjectsAsFaults = false
-        let qbFetch = try! context?.fetch(qbFetchReq).first as! QuestionBank
-
         let userFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         userFetchReq.predicate = NSPredicate(format: "name == %@", username)
         let user = try! context?.fetch(userFetchReq).first as! User
 
-        var quiz = Quiz(context: context!)
-        quiz.setQuizQuestions(qbFetch.getQs())
-        quiz.user = user
+        if let qbFetch = try? context?.fetch(qbFetchReq).first as? QuestionBank{
+
+               let quiz = Quiz(context: context!)
+               quiz.setQuizQuestions(qbFetch.getQs())
+                quiz.user = user
+
+        }
+        else{
+            let qbank = QuestionBank(context: context!)
+            qbank.addQ()
+            let quiz = Quiz(context: context!)
+            quiz.setQuizQuestions(qbank.getQs())
+            quiz.user = user
+        }
+
+
+
+
+
+
+
         try! context?.save()
 
     }
@@ -110,7 +126,11 @@ class DBHelper{
             context!.delete(st.first as! User)
             try context!.save()
             print("data deleted")
-
+        }
+        catch{
+            print("DBhelper.deleteUserData err")
+        }
+    }
 
     func updateUserPassword (object: [String : String]) {
         var user = User()

@@ -32,7 +32,14 @@ struct MenuView: View {
     }
     
     func ranking() {
+
+        for user in users{
+            user.calculateScore()
+        }
+        try! context.save()
         selector = "RK"
+
+
     }
     
     func logout () {

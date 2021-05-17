@@ -38,7 +38,7 @@ struct UserScoreAdminView: View {
 
     var body: some View {
         let userData = users.map({ (users) -> UserScores in
-            return UserScores(name: users.name!, score: String(users.calculateScore()))
+            return UserScores(name: users.name!, score: String(users.averageScore))
         })
         VStack {
             Text("User Scores")

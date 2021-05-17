@@ -31,15 +31,25 @@ struct RankingView: View {
     @FetchRequest(
         entity: User.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \User.averageScore, ascending: true),
+            NSSortDescriptor(keyPath: \User.averageScore, ascending: false),
         ]
     ) var users : FetchedResults<User>
     
+    func resultsToArray() -> [User]{
+        var use = [User]()
+        users.forEach { user in
+            use.append(user)
+        }
+        return use
+    }
     var body: some View {
-
-        let userData = users.map({ (users) -> UserScores in
-            return UserScores(name: users.name!, score: String(users.calculateScore()))
-        })
+//        List{
+//        ForEach(wh()){ user in
+//            UserScores(name: user.name!, score: String(user.averageScore*100) + "%")
+//        }}
+//        let userData = users.map({ (users) -> UserScores in
+//            return UserScores(name: users.name!, score: String(users.averageScore * 100) + "%")
+//        })
         
         VStack {
             Color.lightPurpleGray
@@ -52,8 +62,8 @@ struct RankingView: View {
                 .frame(height: 0)
             
             HStack{
-                List(userData){ data in
-                    Text("User: \(data.name) - Score: \(data.score)")
+                List(resultsToArray()){ data in
+                    Text("User: \(data.name!) - Score: \(data.averageScore * 100) %")
                         .foregroundColor(.white)
                         .font(.system(size: 20))
                         .fontWeight(.bold)

@@ -22,8 +22,6 @@ struct AdminView: View {
     func createQuiz() {
         let qbank = QuestionBank(context: context)
         qbank.addQ()
-        print("QBank 1")
-        print(qbank)
         do{
             try context.save()
             print("question bank created")
