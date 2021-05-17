@@ -12,12 +12,15 @@ import CoreData
 
 public class User: NSManagedObject{
 
-    func calculateScore(){
-//        var quizArray = quizes?.array as! [Quiz]
-//        for item in quizArray{
-//
-//        }
-        self.quizScore = 0.0
+    func calculateScore() -> Double{
+        var scoreCounter = 0.0
+        for item in quizes?.array as! [Quiz]{
+            print(item.grade)
+            scoreCounter += item.grade
+        }
+
+        self.averageScore = scoreCounter / Double(25 * quizes!.count)
+        return averageScore
     }
     func setupInvalidUser(){
         self.name = "invalid"

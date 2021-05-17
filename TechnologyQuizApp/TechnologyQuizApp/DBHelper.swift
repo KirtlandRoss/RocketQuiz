@@ -14,6 +14,21 @@ class DBHelper{
 
     let context = SceneDelegate().context
 
+
+    func updateQuizQuestions(_ username : String, _ qArray : [Bool]){
+        let quizFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
+        quizFetchReq.predicate = NSPredicate(format: "user.name == %@", username)
+        let quiz = try! context?.fetch(quizFetchReq).first as! Quiz
+
+        for (n, _) in qArray.enumerated(){
+           let quest = quiz.questions![n] as! QuizQuestion
+            quest.answeredCorrect = qArray[n]
+            print(qArray.count)
+        }
+        quiz.calculateGrade()
+        try! context?.save()
+    }
+
     func createQuiz(_ username : String){
         let qbFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "QuestionBank")
         qbFetchReq.returnsObjectsAsFaults = false
@@ -95,12 +110,12 @@ class DBHelper{
         var users = [User]()
         var posts : [Post] = []
 
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
-            let sort = NSSortDescriptor(key: "date", ascending: false)
-            request.sortDescriptors = [sort]
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
+        let sort = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [sort]
 
 
-//        fetchReq.returnsObjectsAsFaults = false
+        //        fetchReq.returnsObjectsAsFaults = false
         
         do {
             posts = try context!.fetch(request) as! [Post]

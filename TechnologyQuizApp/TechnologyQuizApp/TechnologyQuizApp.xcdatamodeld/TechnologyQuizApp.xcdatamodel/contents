@@ -43,6 +43,7 @@
         <relationship name="quiz" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quiz" inverseName="questions" inverseEntity="Quiz"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES" codeGenerationType="category">
+        <attribute name="averageScore" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="firstName" attributeType="String"/>
         <attribute name="hasSubscription" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -50,7 +51,6 @@
         <attribute name="name" attributeType="String"/>
         <attribute name="password" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="quizScore" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="user" inverseEntity="Post"/>
         <relationship name="quizes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Quiz" inverseName="user" inverseEntity="Quiz"/>
     </entity>
@@ -62,6 +62,6 @@
         <element name="QuestionBank" positionX="93.81982421875" positionY="6.472564697265625" width="128" height="44"/>
         <element name="Quiz" positionX="-160.1611328125" positionY="-238.367431640625" width="128" height="104"/>
         <element name="QuizQuestion" positionX="-342" positionY="-342" width="128" height="14"/>
-        <element name="User" positionX="-541.1171875" positionY="-408.2961120605469" width="128" height="14"/>
+        <element name="User" positionX="-541.1171875" positionY="-408.2961120605469" width="128" height="179"/>
     </elements>
 </model>

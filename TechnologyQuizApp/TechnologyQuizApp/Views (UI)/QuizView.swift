@@ -29,18 +29,16 @@ struct QuizView: View{
         sortDescriptors: []
 
     ) var fetchedQuizes : FetchedResults<Quiz>
-
+    private var dbHelp = DBHelper()
     @Binding var mode : String
-
+    @State private var quizHandler = QuizHandler()
+    
     var username : String
 
     init (mode: Binding<String>,username : String) {
         self._mode = mode
         self.username = username
-        
-
         UITableView.appearance().backgroundColor = .clear
-
 
 
     }
@@ -51,19 +49,23 @@ struct QuizView: View{
                 //get questions out of quiz for correct user
                 ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [QuizQuestion]){ q in
                     NavigationLink(
-                        destination: QuizViewContent( question: q, username: username),
+                        destination: QuizViewContent( question: q, username: username, $quizHandler),
                         label: {
-                            Text("Question " + String(q.number) + ": " + String(q.question!))
+                            Text("Question " + String(q.number + 1) + ": " + String(q.question!))
                         })
                 }
                 Button(action: { submitQuiz() }){
                     Text("Submit Quiz")
                 }
             } .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top , endPoint: .bottom ))
+            .ignoresSafeArea()
+
         }
     }
     func submitQuiz(){
         self.mode = "LI"
+        dbHelp.updateQuizQuestions(username, quizHandler.correctAnswers)
+        
         //Submit all questions
 
     }
@@ -87,14 +89,15 @@ struct QuizViewContent: View {
     var questionnumber : Int = 1
     var question : QuizQuestion
     var cAnswer : Int?
+    @Binding var qHandler : QuizHandler
     @State private var selected = 5
     var ans = [String]()
-    init(question : QuizQuestion, username: String ){
-
+    init(question : QuizQuestion, username: String, _ corAnsArray : Binding<QuizHandler> ){
+        _qHandler = corAnsArray
 
         self.username = username
         self.question = question
-        print(question.number)
+
         //put all answers in an array
         self.ans = [question.correctAnswer!] + question.incorrectAnswers!
         //shuffle
@@ -199,10 +202,7 @@ struct QuizViewContent: View {
     func checkAnswer(_ a : Int){
         selected = a
         if a == cAnswer{
-            question.answeredCorrect = true
-        }
-        else {
-            question.answeredCorrect = false
+            qHandler.updateScore(a)
         }
     }
 }
