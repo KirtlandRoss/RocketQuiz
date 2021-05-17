@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 
-public class BankedQuestion: NSManagedObject {
+public class BankedQuestion: NSManagedObject
+{
 
 }
