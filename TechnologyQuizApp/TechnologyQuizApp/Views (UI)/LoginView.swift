@@ -51,7 +51,7 @@ struct LoginView: View {
             QuizView(mode: $selector)
         }
         else if selector == "AD"{
-//            AdminView(selector: $selector)
+            AdminView(selector: $selector)
         }
         else if selector == "LV"{
             LoginView()
@@ -64,6 +64,11 @@ struct LoginView: View {
         else if selector == "DS"{
             SideMenu(username: $username, selector: $selector){
                 DiscussionBoardUI(user: $username)
+            }
+        }
+        else if selector == "SS"{
+            SideMenu(username: $username, selector: $selector){
+                SubscriptionView()
             }
         }
         else {
@@ -174,7 +179,7 @@ struct LoginView: View {
                                     .cornerRadius(15.0)
                                     .offset(x: 0, y: 30)
                             }}
-                    }
+                    }.padding()
                 }
                 .navigationBarTitle("")
                 .navigationBarHidden(true)

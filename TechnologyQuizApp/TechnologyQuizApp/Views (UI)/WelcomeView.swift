@@ -18,8 +18,14 @@ struct WelcomeView: View {
     @Binding var selection : String
     @Binding var username : String
     //    @ObservedObject var selector : GlobalSelector
+    @State var subscribed : String = "Subscribed"
+    @State var notSubscribed : String = "Not subscribed"
+    
     
     var body: some View {
+        
+//        let paidSubscription = DBHelper.inst.getSubscriptionData(username: "Scott")
+        let paidSubscription = true
         
         ZStack { // ZStack for whole view
             Color.purpleGray
@@ -57,12 +63,22 @@ struct WelcomeView: View {
                 .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width: 4)
                 .cornerRadius(10)
                 
+                Text("Subscription Status: \(paidSubscription ? subscribed : notSubscribed)")
+                    .font(.system(size: 20))
+                    .fontWeight(.heavy)
+                    .padding(.top, 40)
+                    .foregroundColor(Color.white)
+                Button(action: {print(DBHelper.inst.getUserData())}) {
+                    Text("button")
+                }.foregroundColor(.white)
+                
                 Spacer()
                 Spacer()
                 Spacer()
             }
         }
     }
+    
     func setSelector(_ st : String){
         self.selection = st
     }

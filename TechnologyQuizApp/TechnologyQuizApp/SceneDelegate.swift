@@ -35,9 +35,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
 //        let user = User()
+        @State var user = User()
+        @State var st = ""
         
         let contentView = LoginView().environment(\.managedObjectContext, context!)
-//        let contentView = DiscussionBoardUI().environment(\.managedObjectContext, context!)
+//        let contentView = WelcomeView(selection: $st, username: $st).environment(\.managedObjectContext, context!)
 
 
 
