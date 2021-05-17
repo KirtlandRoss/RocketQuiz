@@ -41,7 +41,6 @@ class DBHelper{
                let quiz = Quiz(context: context!)
                quiz.setQuizQuestions(qbFetch.getQs())
                 quiz.user = user
-
         }
         else{
             let qbank = QuestionBank(context: context!)
@@ -50,15 +49,7 @@ class DBHelper{
             quiz.setQuizQuestions(qbank.getQs())
             quiz.user = user
         }
-
-
-
-
-
-
-
         try! context?.save()
-
     }
 
     

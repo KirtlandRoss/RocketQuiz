@@ -34,29 +34,29 @@ struct SubscriptionView: View {
                     .fontWeight(.bold)
                     .padding()
                 Spacer()
-                CustomTextField(isSecure: false, placeholder: Text("First Name"), text: $firstName)
+                CustomTextField(isSecure: false, placeholder: Text("First Name (Character limit: 20)").foregroundColor(.gray), text: $firstName)
                     .padding()
                     .foregroundColor(.white)
                     .background(Color.lightPurpleGray)
                     .cornerRadius(20.0)
-                CustomTextField(isSecure: false, placeholder: Text("Last Name"), text: $lastName)
+                CustomTextField(isSecure: false, placeholder: Text("Last Name (Character limit: 20)").foregroundColor(.gray), text: $lastName)
                     .padding()
                     .foregroundColor(.white)
                     .background(Color.lightPurpleGray)
                     .cornerRadius(20.0)
-                CustomTextField(isSecure: false, placeholder: Text("Card Number (ex: 1234567890123412)"), text: $cardNumber)
+                CustomTextField(isSecure: false, placeholder: Text("Card Number (ex: 1234567890123412)").foregroundColor(.gray), text: $cardNumber)
                     .keyboardType(.numberPad)
                     .padding()
                     .foregroundColor(.white)
                     .background(Color.lightPurpleGray)
                     .cornerRadius(20.0)
-                CustomTextField(isSecure: false, placeholder: Text("Expiration Date - MMYY (ex: 1231)"), text: $expiration)
+                CustomTextField(isSecure: false, placeholder: Text("Expiration Date - MMYY (ex: 1231)").foregroundColor(.gray), text: $expiration)
                     .keyboardType(.numberPad)
                     .padding()
                     .foregroundColor(.white)
                     .background(Color.lightPurpleGray)
                     .cornerRadius(20.0)
-                CustomTextField(isSecure: false, placeholder: Text("CVV (ex: 123)"), text: $cvvNumber)
+                CustomTextField(isSecure: false, placeholder: Text("CVV (ex: 123)").foregroundColor(.gray), text: $cvvNumber)
                     .keyboardType(.numberPad)
                     .padding()
                     .foregroundColor(.white)
@@ -92,6 +92,7 @@ struct SubscriptionView: View {
     
     func submit() {
         if validateData() {
+            expiration.insert("/", at: expiration.index(expiration.startIndex, offsetBy: 2)) // adds "/" to date, ex: 12/22"
             validFields = true
             warningText = "Submitted"
             DBHelper.inst.updateSubscriptionStatus(name: username, subscriptionStatus: true)
@@ -121,6 +122,7 @@ struct SubscriptionView: View {
             return false
         }
         else if expiration.count != 4 {
+            
             print("Expiration invalid")
             return false
         }
