@@ -168,7 +168,7 @@ struct LoginView: View {
                                     }
                                 }
                              }) {
-                                Text(logged ? "Logout" : "Log In With Facebook")
+                                Text(logged && invalidLogin ? "Logout" : "Log In With Facebook")
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                                     .padding(.vertical, 10)
