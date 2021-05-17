@@ -28,8 +28,9 @@ class DBHelper{
 			{
 				plyr.averageScore = plyr.calculateScore()
 			}
-			
-			usrL.sort()
+            usrL.sort()
+			usrL.reverse()
+
 		}
 		catch
 		{
