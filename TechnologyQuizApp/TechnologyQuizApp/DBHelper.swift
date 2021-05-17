@@ -45,6 +45,73 @@ class DBHelper{
 
     }
 
+    
+    func updateSubscriptionStatus(name: String, subscriptionStatus: Bool) {
+        var user = User()
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+
+        fetchReq.returnsObjectsAsFaults = false
+
+        fetchReq.predicate = NSPredicate(format: "name == %@", name)
+        
+        do {
+            let userFetch = try context!.fetch(fetchReq)
+            
+            if (userFetch.count != 0) {
+                user = userFetch.first as! User
+                user.hasSubscription = subscriptionStatus
+                try context!.save()
+                print("User info updated")
+            }
+        } catch {
+            print("Error while trying to update user info")
+        }
+    }
+    
+    func getUserData() -> [User]{
+        var stu = [User]()
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        do{
+            stu=try context!.fetch(fetchReq) as! [User]
+        }
+        catch{
+            print("cannot get data")
+        }
+        return stu
+    }
+    
+    func getSubscriptionData(username : String) -> Bool {
+        
+        var user = User()
+        let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
+        fetchReq.returnsObjectsAsFaults = false
+        fetchReq.predicate = NSPredicate(format: "username == %@", username)
+        
+        fetchReq.fetchLimit = 1
+        do {
+            let req = try context?.fetch(fetchReq) as! [User]
+            
+            if req.count != 0 {
+                user = req.first!
+            } else {
+                print("User not found")
+            }
+        } catch {
+            print("Error while trying to retrieve user")
+        }
+        return user.hasSubscription
+    }
+    
+    func deleteUserData(_ name: String){
+        let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
+        fetchReq.predicate = NSPredicate(format: "name == %@", name)
+        do {
+            let st = try context!.fetch(fetchReq)
+            context!.delete(st.first as! User)
+            try context!.save()
+            print("data deleted")
+
+
     func updateUserPassword (object: [String : String]) {
         var user = User()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")

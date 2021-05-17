@@ -58,6 +58,11 @@ struct LoginView: View {
                 DiscussionBoardUI(user: $username)
             }
         }
+        else if selector == "SS"{
+            SideMenu(username: $username, selector: $selector){
+                SubscriptionView()
+            }
+        }
         else {
             NavigationView {
                 ZStack {
@@ -166,7 +171,7 @@ struct LoginView: View {
                                     .cornerRadius(15.0)
                                     .offset(x: 0, y: 30)
                             }}
-                    }
+                    }.padding()
                 }
                 .navigationBarTitle("")
                 .navigationBarHidden(true)

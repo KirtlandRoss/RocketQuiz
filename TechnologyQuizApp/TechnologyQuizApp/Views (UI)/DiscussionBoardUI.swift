@@ -74,11 +74,11 @@ struct DiscussionBoardUI: View {
             
             VStack {
                 
-                Button(action: {
-                    print(colorScheme)
-                }) {
-                    Text("Get Posts")
-                }
+//                Button(action: {
+//                    print(colorScheme)
+//                }) {
+//                    Text("Get Posts")
+//                }
                 Text("Enter message below to add to the discussion.")
                     .foregroundColor(.white)
                     .font(.system(size: 15))
@@ -116,7 +116,6 @@ struct DiscussionBoardUI: View {
     }
     func submit(name: String, message: String) {
         DBHelper().addDiscussionPost(name, message)
-        
     }
 }
 

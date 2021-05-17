@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FBSDKLoginKit
 
 struct MenuView: View {
     @Environment(\.managedObjectContext) var context
@@ -27,9 +28,7 @@ struct MenuView: View {
     func quiz() {
        let dbhelp = DBHelper()
         dbhelp.createQuiz(username)
-
         selector = "QZ"
-        
     }
     
     func ranking() {
@@ -37,11 +36,16 @@ struct MenuView: View {
     }
     
     func logout () {
+        AccessToken.current = nil
         selector = "LV"
     }
     
     func discussion () {
         selector = "DS"
+    }
+    
+    func subscribe () {
+        selector = "SS"
     }
 
     var body: some View {
@@ -65,7 +69,7 @@ struct MenuView: View {
                 discussion()
             }){
                 HStack {
-                    Image(systemName: "mail")
+                    Image(systemName: "text.bubble")
                         .foregroundColor(.white)
                         .imageScale(.large)
                     Text("Discussion")
@@ -78,7 +82,7 @@ struct MenuView: View {
                 ranking()
             }){
                 HStack {
-                    Image(systemName: "star")
+                    Image(systemName: "rosette")
                         .foregroundColor(.white)
                         .imageScale(.large)
                     Text("Rankings")
@@ -100,6 +104,19 @@ struct MenuView: View {
             }
             .padding(.top, 30)
             }
+            Button(action:  {
+                subscribe()
+            }){
+                HStack {
+                    Image(systemName: "star")
+                        .foregroundColor(.white)
+                        .imageScale(.large)
+                    Text("Subscribe")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                }
+                .padding(.top, 30)
+            }
             Spacer()
             Button(action: {
                 logout()
@@ -114,7 +131,6 @@ struct MenuView: View {
                     .cornerRadius(15.0)
                     .padding()
             }
-            
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
