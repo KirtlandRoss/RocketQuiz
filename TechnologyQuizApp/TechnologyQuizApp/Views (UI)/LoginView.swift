@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import FBSDKLoginKit
 
 struct LoginView: View {
     
@@ -18,12 +19,16 @@ struct LoginView: View {
             NSSortDescriptor(keyPath: \User.name, ascending: true),
         ]
     ) var users : FetchedResults<User>
-    
 
     @State private var username: String = UserDefaults.standard.string(forKey: "rememberedUsername") ?? ""
     @State private var password: String = UserDefaults.standard.string(forKey: "rememberedPassword") ?? ""
     @State private var rememberMe = UserDefaults.standard.bool(forKey: "switchBool")
     @State private var user : User?
+    
+    @AppStorage("logged") var logged = false
+    @AppStorage("email") var email = ""
+    @State var manager = LoginManager()
+
     let userDef = UserDefaults.standard
     
     @State var selector = ""
@@ -60,7 +65,12 @@ struct LoginView: View {
         }
         else if selector == "SS"{
             SideMenu(username: $username, selector: $selector){
-                SubscriptionView()
+                SubscriptionView(username: $username)
+            }
+        }
+        else if logged == true && AccessToken.current != nil {
+            SideMenu(username: $username, selector: $selector){
+                WelcomeView(selection: $selector, username: $username)
             }
         }
         else {
@@ -124,8 +134,48 @@ struct LoginView: View {
                             if rememberMe {
                             }
 
-                            FacebookButton()
-                                .frame(width: 20, height: 30, alignment: .center)
+//                            FacebookButton()
+//                                .frame(width: 20, height: 30, alignment: .center)
+                            
+                            Button(action: {
+                                if logged {
+                                    manager.logOut()
+                                    email = ""
+                                    logged = false
+                                } else {
+                                    manager.logIn(permissions: ["public_profile", "email"], from: nil) {
+                                        (result, err) in
+                                        
+                                        if err != nil {
+                                            print(err!.localizedDescription)
+                                            return
+                                        }
+                                        
+                                        if !result!.isCancelled {
+                                            logged = true
+                                            
+                                            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email"])
+                                            
+                                            request.start {(_, res, _) in
+                                                
+                                                guard let profileData = res as? [String: Any] else {return}
+                                                
+                                                email = profileData["email"] as! String
+                                                selector = "LI"
+                                            }
+                                        }
+                        
+                                    }
+                                }
+                             }) {
+                                Text(logged ? "Logout" : "Log In With Facebook")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, 35)
+                                    .background(Color.blue)
+                                    .clipShape(Capsule())
+                            }
 
                             Button(action: {(
                                 submit()
@@ -170,7 +220,8 @@ struct LoginView: View {
                                     .padding()
                                     .cornerRadius(15.0)
                                     .offset(x: 0, y: 30)
-                            }}
+                            }
+                        }
                     }.padding()
                 }
                 .navigationBarTitle("")
@@ -178,7 +229,6 @@ struct LoginView: View {
             }
         }
     }
-
     
     func submit(){
         //        checks if data is valid and if database contains a user with the same username
@@ -254,12 +304,9 @@ struct LoginView: View {
         username = userDef.string(forKey: "rememberedUsername") ?? ""
         password = userDef.string(forKey: "rememberedPassword") ?? ""
         rememberMe = userDef.bool(forKey: "switchBool")
-        
     }
-    
+
 }
-
-
 
 class GlobalSelector : ObservableObject{
     @Published var selector : String = ""

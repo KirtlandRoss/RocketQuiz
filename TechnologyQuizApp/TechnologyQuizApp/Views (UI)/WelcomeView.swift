@@ -24,7 +24,7 @@ struct WelcomeView: View {
 
     var body: some View {
         
-        let paidSubscription = DBHelper.inst.getSubscriptionData(username: "Scott")
+        let paidSubscription = DBHelper.inst.getSubscriptionData(username: username)
         
         ZStack { // ZStack for whole view
             Color.purpleGray
@@ -46,7 +46,7 @@ struct WelcomeView: View {
                                     .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ), lineWidth: 4))
                         .shadow(radius: 10)
                 }
-                Text("User")
+                Text(username)
                     .font(.system(size: 30))
                     .fontWeight(.heavy)
                     .padding(.top, 40)
@@ -67,9 +67,6 @@ struct WelcomeView: View {
                     .fontWeight(.heavy)
                     .padding(.top, 40)
                     .foregroundColor(Color.white)
-                Button(action: {print(DBHelper.inst.getUserData())}) {
-                    Text("button")
-                }.foregroundColor(.white)
                 
                 Spacer()
                 Spacer()
@@ -89,7 +86,7 @@ struct WelcomeView_Previews: PreviewProvider {
     @State static var st = ""
     static var previews: some View {
         
-        WelcomeView( selection: $st, username: $st)
+        WelcomeView(selection: $st, username: $st)
         
     }
 }

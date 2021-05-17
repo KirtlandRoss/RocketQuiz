@@ -15,7 +15,7 @@ struct SubscriptionView: View {
     @State private var cvvNumber : String = ""
     @State private var warningText: String = ""
     @State private var validFields : Bool = false
-    var username: String = "Scott"
+    @Binding var username : String
     
     var body: some View {
         
@@ -135,8 +135,8 @@ struct SubscriptionView: View {
     
 }
 
-struct SubscriptionView_Previews: PreviewProvider {
-    static var previews: some View {
-        SubscriptionView()
-    }
-}
+//struct SubscriptionView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SubscriptionView(username: "")
+//    }
+//}

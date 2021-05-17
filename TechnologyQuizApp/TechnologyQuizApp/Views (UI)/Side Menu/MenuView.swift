@@ -11,6 +11,7 @@ import FBSDKLoginKit
 struct MenuView: View {
     @Environment(\.managedObjectContext) var context
     @Binding var selector : String
+    @State var username : String
 
     @FetchRequest(
         entity: User.entity(),
@@ -22,8 +23,7 @@ struct MenuView: View {
         entity: QuestionBank.entity(),
         sortDescriptors:[]
     ) var fetchedQBank : FetchedResults<QuestionBank>
-    @State var username : String
-    func action() {}
+    
 
     func quiz() {
        let dbhelp = DBHelper()
@@ -47,6 +47,10 @@ struct MenuView: View {
     func subscribe () {
         selector = "SS"
     }
+    
+    func welcome () {
+        selector = "LI"
+    }
 
     var body: some View {
         VStack (alignment: .leading){
@@ -59,12 +63,25 @@ struct MenuView: View {
                 .overlay(Circle()
                             .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ), lineWidth: 4))
                 .shadow(radius: 10)
-                Text("User")
+                Text(username)
                     .font(.system(size: 20))
                     .fontWeight(.heavy)
                     .padding(.top, 10)
                     .foregroundColor(Color.white)
             }.padding(.top, 125).padding(.leading, 40)
+            Button(action:  {
+                welcome()
+            }){
+                HStack {
+                    Image(systemName: "house")
+                        .foregroundColor(.white)
+                        .imageScale(.large)
+                    Text("Home")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                }
+                .padding(.top, 30)
+            }
             Button(action:  {
                 discussion()
             }){
@@ -76,9 +93,9 @@ struct MenuView: View {
                         .foregroundColor(.white)
                         .font(.headline)
                 }
-                .padding(.top, 100)
+                .padding(.top, 30)
             }
-            Button(action:  {
+            Button(action: {
                 ranking()
             }){
                 HStack {
@@ -120,6 +137,7 @@ struct MenuView: View {
             Spacer()
             Button(action: {
                 logout()
+                
             }){
                 Text("Sign Out")
                     .font(.headline)
