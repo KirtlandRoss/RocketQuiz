@@ -14,39 +14,40 @@ class DBHelper{
 
     let context = SceneDelegate().context
 
-	func avrgScore() -> [User]
-	{
-		var usrL = [User]()
-		let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-		fetchReq.predicate = NSPredicate(format: "name != %@", "Admin") // use predicate to reject the admin from the fetch
-		
-		do
-		{
-			usrL = try context!.fetch(fetchReq) as! [User]
-			
-			for plyr in usrL
-			{
-				plyr.averageScore = plyr.calculateScore()
-			}
-            usrL.sort()
-			usrL.reverse()
+    //MARK:-- Rankings view related
+    func avrgScore() -> [User]
+    {
+        var usrL = [User]()
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        fetchReq.predicate = NSPredicate(format: "name != %@", "Admin") // use predicate to reject the admin from the fetch
 
-		}
-		catch
-		{
-			print("Fetch attempt in DBHelper.avrgScore failed. error: \(error)")
-		}
-		
-		return usrL
-	}
-	
+        do
+        {
+            usrL = try context!.fetch(fetchReq) as! [User]
+
+            for plyr in usrL
+            {
+                plyr.averageScore = plyr.calculateScore()
+            }
+            usrL.sort()
+            usrL.reverse()
+
+        }
+        catch
+        {
+            print("Fetch attempt in DBHelper.avrgScore failed. error: \(error)")
+        }
+
+        return usrL
+    }
+    //MARK:-- Quiz related
     func updateQuizQuestions(_ username : String, _ qArray : [Bool]){
         let quizFetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
         quizFetchReq.predicate = NSPredicate(format: "user.name == %@", username)
         let quiz = try! context?.fetch(quizFetchReq).first as! Quiz
 
         for (n, _) in qArray.enumerated(){
-           let quest = quiz.questions![n] as! QuizQuestion
+            let quest = quiz.questions![n] as! QuizQuestion
             quest.answeredCorrect = qArray[n]
             print(qArray.count)
         }
@@ -63,9 +64,9 @@ class DBHelper{
 
         if let qbFetch = try? context?.fetch(qbFetchReq).first as? QuestionBank{
 
-               let quiz = Quiz(context: context!)
-               quiz.setQuizQuestions(qbFetch.getQs())
-                quiz.user = user
+            let quiz = Quiz(context: context!)
+            quiz.setQuizQuestions(qbFetch.getQs())
+            quiz.user = user
 
         }
         else{
@@ -75,18 +76,42 @@ class DBHelper{
             quiz.setQuizQuestions(qbank.getQs())
             quiz.user = user
         }
-
-
-
-
-
-
-
         try! context?.save()
-
+    }
+    //MARK:-- QuestionBank related
+    func createQuestionBank(){
+        let qbank = QuestionBank(context: context!)
+        qbank.addQ()
+        do{
+            try context!.save()
+            print("question bank created")
+        }
+        catch{
+            self.context!.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            print("conflicts found, attempting overwrite")
+            try! context!.save()
+        }
     }
 
-    
+    func appendQuestionBank(question: String, answer: String, incorrectAnswers: [String]){
+        let qbankFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
+        let qBank = try! context?.fetch(qbankFetch).first as! QuestionBank
+
+        var qBankQuestion = BankedQuestion(context: context!)
+        qBankQuestion.question = question
+        qBankQuestion.correctAnswer = answer
+        qBankQuestion.incorrectAnswers = incorrectAnswers
+
+        qBank.addToQuestions(qBankQuestion)
+        do{
+            try context?.save()
+        }
+        catch{
+            print("DBHelper.appendQuestionBank failure")
+        }
+
+    }
+    //MARK:-- User management related
     func updateSubscriptionStatus(name: String, subscriptionStatus: Bool) {
         var user = User()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
@@ -94,10 +119,10 @@ class DBHelper{
         fetchReq.returnsObjectsAsFaults = false
 
         fetchReq.predicate = NSPredicate(format: "name == %@", name)
-        
+
         do {
             let userFetch = try context!.fetch(fetchReq)
-            
+
             if (userFetch.count != 0) {
                 user = userFetch.first as! User
                 user.hasSubscription = subscriptionStatus
@@ -108,7 +133,7 @@ class DBHelper{
             print("Error while trying to update user info")
         }
     }
-    
+
     func getUserData() -> [User]{
         var stu = [User]()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
@@ -120,18 +145,18 @@ class DBHelper{
         }
         return stu
     }
-    
+
     func getSubscriptionData(username : String) -> Bool {
-        
+
         var user = User()
         let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
         fetchReq.returnsObjectsAsFaults = false
         fetchReq.predicate = NSPredicate(format: "name == %@", username)
-        
+
         fetchReq.fetchLimit = 1
         do {
             let req = try context?.fetch(fetchReq) as! [User]
-            
+
             if req.count != 0 {
                 user = req.first!
             } else {
@@ -142,7 +167,7 @@ class DBHelper{
         }
         return user.hasSubscription
     }
-    
+
     func deleteUserData(_ name: String){
         let fetchReq = NSFetchRequest<NSManagedObject>.init(entityName: "User")
         fetchReq.predicate = NSPredicate(format: "name == %@", name)
@@ -178,7 +203,7 @@ class DBHelper{
             print("Error while trying to update user info")
         }
     }
-
+    //MARK:-- Discussion Board related
     func addDiscussionPost(_ name: String, _ message: String){
         var user = User()
         var posts : Array<Any>
@@ -187,13 +212,13 @@ class DBHelper{
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         fetchReq.predicate = NSPredicate(format: "name == %@", name)
         fetchReq.returnsObjectsAsFaults = false
-        
+
         let date = Date()
-        
+
         do {
             let userFetch = try context!.fetch(fetchReq)
             print(userFetch)
-            
+
             if (userFetch.count != 0) {
                 user = userFetch.first as! User
                 print(user)
@@ -217,7 +242,7 @@ class DBHelper{
             print("Error while trying to update user info")
         }
     }
-    
+
     func getAllDiscussionPosts () -> [Dictionary<String, String>] {
         var users = [User]()
         var posts : [Post] = []
@@ -228,7 +253,7 @@ class DBHelper{
 
 
         //        fetchReq.returnsObjectsAsFaults = false
-        
+
         do {
             posts = try context!.fetch(request) as! [Post]
 
@@ -239,7 +264,7 @@ class DBHelper{
             ["name": String(Post.user!.name!), "content": String(Post.content!)]
         }
     }
-    
+
 }
 
 enum NilError : Error{
