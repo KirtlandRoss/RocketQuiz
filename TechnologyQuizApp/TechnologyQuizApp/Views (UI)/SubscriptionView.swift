@@ -26,7 +26,6 @@ struct SubscriptionView: View {
                 .font(.system(size: 40))
                 .fontWeight(.bold)
                 .padding(.top, 110)
-
             VStack {
                 Spacer()
                 Text("Enter payment information below")

@@ -49,7 +49,7 @@ struct QuizView: View{
                 //get questions out of quiz for correct user
                 ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [QuizQuestion]){ q in
                     NavigationLink(
-                        destination: QuizViewContent( question: q, username: username, $quizHandler),
+                        destination: QuizViewContent( question: q, username: username, $quizHandler, Int(q.number)),
                         label: {
                             Text("Question " + String(q.number + 1) + ": " + String(q.question!))
                         })
@@ -62,8 +62,11 @@ struct QuizView: View{
 
         }
     }
+
+    //MARK: Submit quiz
     func submitQuiz(){
         self.mode = "LI"
+        print(quizHandler.correctAnswers)
         dbHelp.updateQuizQuestions(username, quizHandler.correctAnswers)
         
         //Submit all questions
@@ -86,15 +89,15 @@ struct QuizViewContent: View {
     }
     var time : String = "2:00"
     var username : String
-    var questionnumber : Int = 1
+    var questionnumber : Int
     var question : QuizQuestion
     var cAnswer : Int?
     @Binding var qHandler : QuizHandler
     @State private var selected = 5
     var ans = [String]()
-    init(question : QuizQuestion, username: String, _ corAnsArray : Binding<QuizHandler> ){
+    init(question : QuizQuestion, username: String, _ corAnsArray : Binding<QuizHandler>, _ questionNum : Int){
         _qHandler = corAnsArray
-
+        questionnumber = questionNum
         self.username = username
         self.question = question
 
@@ -202,7 +205,7 @@ struct QuizViewContent: View {
     func checkAnswer(_ a : Int){
         selected = a
         if a == cAnswer{
-            qHandler.updateScore(a)
+            qHandler.updateScore(Int(question.number))
         }
     }
 }

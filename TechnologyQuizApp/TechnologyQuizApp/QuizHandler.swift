@@ -21,5 +21,6 @@ class QuizHandler{
     func updateScore(_ i : Int){
         correctAnswers[i] = true
     }
+    
 
 }
