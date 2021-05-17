@@ -10,11 +10,11 @@ import XCTest
 
 class TechnologyQuizAppTests: XCTestCase {
 
-    func testQuestionOutput(){
-        let qb = QuestionBank(context: SceneDelegate().context!)
-        qb.addQ()
-        print(qb.categoryGroups![3])
-    }
 
+    func testFetchScore(){
+        var dbhelp = DBHelper()
+        dbhelp.avrgScore()
+
+    }
 
 }
