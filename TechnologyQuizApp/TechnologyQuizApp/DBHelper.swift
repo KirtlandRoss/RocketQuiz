@@ -19,11 +19,15 @@ class DBHelper{
     {
         var usrL = [User]()
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-        fetchReq.predicate = NSPredicate(format: "name != %@", "Admin") // use predicate to reject the admin from the fetch
+        let adminPredicate = NSPredicate(format: "name != %@", "Admin") // use predicate to reject the admin from the fetch
+        let invalidPredicate = NSPredicate(format: "name != %@", "invalid") //get rid of invalid user
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [adminPredicate, invalidPredicate]) //combine predicates
 
+        fetchReq.predicate = compoundPredicate
         do
         {
             usrL = try context!.fetch(fetchReq) as! [User]
+
 
             for plyr in usrL
             {

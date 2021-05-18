@@ -36,14 +36,6 @@ struct RankingView: View {
         ]
     ) var users : FetchedResults<User>
     let dbHelp = DBHelper()
-    func resultsToArray() -> [User]{
-        var use = [User]()
-
-        users.forEach { user in
-            use.append(user)
-        }
-        return use
-    }
     var body: some View {
         
         VStack {
