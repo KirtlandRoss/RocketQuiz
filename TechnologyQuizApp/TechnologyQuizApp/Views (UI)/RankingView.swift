@@ -15,6 +15,7 @@ struct UserRankings : Identifiable {
 
 struct RankingRow: View {
     var score : UserScores
+
     var body: some View {
         List {
             HStack {
@@ -34,22 +35,16 @@ struct RankingView: View {
             NSSortDescriptor(keyPath: \User.averageScore, ascending: false),
         ]
     ) var users : FetchedResults<User>
-    
+    let dbHelp = DBHelper()
     func resultsToArray() -> [User]{
         var use = [User]()
+
         users.forEach { user in
             use.append(user)
         }
         return use
     }
     var body: some View {
-//        List{
-//        ForEach(wh()){ user in
-//            UserScores(name: user.name!, score: String(user.averageScore*100) + "%")
-//        }}
-//        let userData = users.map({ (users) -> UserScores in
-//            return UserScores(name: users.name!, score: String(users.averageScore * 100) + "%")
-//        })
         
         VStack {
             Color.lightPurpleGray
@@ -62,7 +57,7 @@ struct RankingView: View {
                 .frame(height: 0)
             
             HStack{
-                List(resultsToArray()){ data in
+                List(dbHelp.avrgScore()){ data in
                     Text("User: \(data.name!) - Score: \(data.averageScore * 100) %")
                         .foregroundColor(.white)
                         .font(.system(size: 20))

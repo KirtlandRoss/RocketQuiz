@@ -17,22 +17,9 @@ struct AdminView: View {
         entity: QuestionBank.entity(),
         sortDescriptors:[ NSSortDescriptor(keyPath: \QuestionBank.objectID, ascending: true),]
     ) var fetchedQBank : FetchedResults<QuestionBank>
+    var dbHelp = DBHelper()
     
-    
-    func createQuiz() {
-        let qbank = QuestionBank(context: context)
-        qbank.addQ()
-        do{
-            try context.save()
-            print("question bank created")
-        }
-        catch{
-            self.context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            print("conflicts found, attempting overwrite")
-            try! context.save()
-        }
-        print(fetchedQBank.first!.questions!.firstObject)
-    }
+
     func action(){
 
     }
@@ -58,7 +45,7 @@ struct AdminView: View {
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                    Button(action: { createQuiz() }) {
+                    Button(action: { dbHelp.createQuestionBank() }) {
                         Text("Create Quiz")
                             .font(.headline)
                             .fontWeight(.bold)

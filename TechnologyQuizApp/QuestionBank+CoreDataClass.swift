@@ -14,19 +14,9 @@ import UIKit
 public class QuestionBank: NSManagedObject
 {
 
-    /*
-     Jared's to-do list:
-     - make method(s) to get questions and store in data structure
-     PROGRESS SO FAR
-     - randomization
-     
-     we only want 25 questions in the array per gameplay session. yes there will be more than 25 total in coredata
-     
-     Kirt said there should be a fetch method in property file extensions (Apres fait: C'est vrai)
-     Don't mess w/ property files and settings
-     
-     Kirt's suggestion: Ditch the fetch request and rework to use self.Questions - return array of Questions
-     */
+
+
+
 
 	func addQ()
 	{
@@ -45,7 +35,6 @@ public class QuestionBank: NSManagedObject
 			qList.append(quest)
 
 		}
-
 		qList[0].question = "What company developed Swift?"
 		qList[1].question = "What is a protocol?"
 		qList[2].question = "What language did Swift replace in development for Apple platforms?"
@@ -114,7 +103,7 @@ public class QuestionBank: NSManagedObject
             self.addToQuestions(item)
         }
 
-     
+
 	}
 
     func addQ(newQ : BankedQuestion)
