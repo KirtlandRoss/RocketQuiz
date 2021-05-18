@@ -61,7 +61,6 @@ struct MenuView: View {
 
     var body: some View {
         VStack (alignment: .leading){
-            
             VStack {
                 Image("profileImage")
                 .resizable()

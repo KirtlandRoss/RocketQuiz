@@ -38,8 +38,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         @State var user = User()
         @State var st = ""
         
-        let contentView = LoginView().environment(\.managedObjectContext, context!)
-//        let contentView = WelcomeView(selection: $st, username: $st).environment(\.managedObjectContext, context!)
+//        let contentView = LoginView().environment(\.managedObjectContext, context!)
+        let contentView = FeedbackView().environment(\.managedObjectContext, context!)
 
 
 
