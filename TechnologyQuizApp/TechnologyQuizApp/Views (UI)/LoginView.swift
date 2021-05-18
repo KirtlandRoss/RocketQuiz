@@ -83,7 +83,7 @@ struct LoginView: View {
                     NavigationLink(destination: SignUpView(), tag: "signUp", selection: $selection){EmptyView()}
 
                     VStack {
-                        Text("Quiz App")
+                        Text("RocketQuiz")
                             .font(.system(size: 50))
                             .fontWeight(.bold)
                             .foregroundColor(Color.white)
