@@ -12,7 +12,7 @@ import UIKit
 
 //need to figure out a way to save all questions and then submit
 struct QuizView: View{
-    @Environment(\.managedObjectContext) var context
+    var context = SceneDelegate().context!
     @FetchRequest(
         entity: User.entity(),
         sortDescriptors: [
@@ -41,7 +41,7 @@ struct QuizView: View{
         self._mode = mode
         self.username = username
         self.quizHandler = quizHand
-        //        quizHandler.generateShuffledAnswers(username, context)
+        quizHandler.generateShuffledAnswers(username, context)
         UITableView.appearance().backgroundColor = .clear
 
 

@@ -33,7 +33,7 @@ struct MenuView: View {
     }
     func quiz() {
         let dbhelp = DBHelper()
-        quizHandler.generateShuffledAnswers(username, context)
+//        quizHandler.generateShuffledAnswers(username, context)
         dbhelp.createQuiz(username)
         selector = "QZ"
     }
