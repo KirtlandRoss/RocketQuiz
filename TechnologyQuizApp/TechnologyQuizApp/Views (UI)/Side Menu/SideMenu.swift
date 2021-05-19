@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 struct SideMenu<Content: View> : View {
     @State private var showMenu = false // holds state for menu toggle
-    @Binding var username : String
+    var username : String
     @Binding var selector : String
     @ViewBuilder let content : Content
     @Environment(\.managedObjectContext) var context
@@ -21,6 +21,15 @@ struct SideMenu<Content: View> : View {
     ) var users : FetchedResults<User>
     @State private var user : User?
 
+    private var quizHandler : QuizHandler
+
+    init(_ un : String, _ sel : Binding<String>, _ qh: QuizHandler, @ViewBuilder content: @escaping () -> Content){
+        username = un
+        _selector = sel
+        quizHandler = qh
+        self.content = content()
+    }
+
     var body: some View {
         // allows Drag Gesture to close the side menu.
         let drag = DragGesture()
@@ -31,7 +40,7 @@ struct SideMenu<Content: View> : View {
                    }
                 }
             }
-        
+
         return NavigationView {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
@@ -42,7 +51,7 @@ struct SideMenu<Content: View> : View {
                         // Disable main view if side menu is open.
                         .disabled(self.showMenu ? true : false)
                     if self.showMenu {
-                        MenuView(selector: $selector, username: username)
+                        MenuView( username, $selector, quizHandler)
                             .frame(width: geometry.size.width / 2)
                             // Transition modifier for the menu to move in from the left.
                             .transition(.move(edge: .leading))
@@ -86,8 +95,9 @@ struct MainView: View {
 struct SideMenu_Previews: PreviewProvider {
     @State static var user = User()
     @State static var selector = ""
+    @State static var quizHanlder = QuizHandler()
     static var previews: some View {
        // SideMenu(user: $user){SignUpView()}
-        SideMenu(username: $selector, selector: $selector){WelcomeView(selection: $selector, username: $selector)}
+        SideMenu( selector,  $selector, quizHanlder){WelcomeView(selection: $selector, username: $selector)}
     }
 }
