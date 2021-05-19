@@ -23,52 +23,72 @@ struct QuizView: View{
         entity: QuestionBank.entity(),
         sortDescriptors: [ ]
     ) var fetchedQBank : FetchedResults<QuestionBank>
-
     @FetchRequest(
         entity: Quiz.entity(),
         sortDescriptors: []
 
     ) var fetchedQuizes : FetchedResults<Quiz>
+
+
     private var dbHelp = DBHelper()
     @Binding var mode : String
     @State private var quizHandler = QuizHandler()
-    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var timeRemaining = 1800
     var username : String
 
-    init (mode: Binding<String>,username : String) {
+    init (mode: Binding<String>, username : String) {
         self._mode = mode
         self.username = username
+        quizHandler.generateShuffledAnswers(username, context)
         UITableView.appearance().backgroundColor = .clear
 
 
     }
 
     var body: some View{
-        NavigationView{
-            Form{
-                //get questions out of quiz for correct user
-                ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [QuizQuestion]){ q in
-                    NavigationLink(
-                        destination: QuizViewContent( question: q, username: username, $quizHandler, Int(q.number)),
-                        label: {
-                            Text("Question " + String(q.number + 1) + ": " + String(q.question!))
-                        })
-                }
-                Button(action: { submitQuiz() }){
-                    Text("Submit Quiz")
-                }
-            } .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top , endPoint: .bottom ))
-            .ignoresSafeArea()
+        ZStack{
+            Color.purpleGray
+                .ignoresSafeArea()
+            NavigationView{
+                Form{
+                    Text("Time left: \(timeRemaining/60): \(timeRemaining%60)")
+                        .onReceive(timer) { _ in
+                            if timeRemaining > 0 {
+                                timeRemaining -= 1
+                            }
+                            else{
+                                submitQuiz()
+                            }
+                        }
+                    //get questions out of quiz for correct user
+                    ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [QuizQuestion]){ q in
+                        NavigationLink(
+                            destination: QuizViewContent(question: q, username: username, $quizHandler, Int(q.number)),
+                            label: {
+                                Text("Question " + String(q.number + 1) + ": " + String(q.question!))
+                            })
+                    }
+                    Button(action: { submitQuiz() }){
+                        Text("Submit Quiz")
+                    }
 
+                } .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top , endPoint: .bottom ))
+                .ignoresSafeArea()
+
+                Text("Time left: \(timeRemaining/60): \(timeRemaining%60)")
+                    .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .trailing ))
+                    .foregroundColor(.white)
+                    .font(.system(size: 23))
+            }
         }
     }
-
     //MARK: Submit quiz
     func submitQuiz(){
         self.mode = "LI"
         print(quizHandler.correctAnswers)
         dbHelp.updateQuizQuestions(username, quizHandler.correctAnswers)
-        
+
         //Submit all questions
 
     }
@@ -77,6 +97,7 @@ struct QuizView: View{
 //MARK: QuizContent
 struct QuizViewContent: View {
     @Environment(\.managedObjectContext) var context
+
     @FetchRequest(
         entity: QuizQuestion.entity(),
         sortDescriptors: [
@@ -87,15 +108,19 @@ struct QuizViewContent: View {
     func action() {
         print("hello")
     }
-    var time : String = "2:00"
+
     var username : String
     var questionnumber : Int
     var question : QuizQuestion
     var cAnswer : Int?
+
+
     @Binding var qHandler : QuizHandler
     @State private var selected = 5
     var ans = [String]()
+
     init(question : QuizQuestion, username: String, _ corAnsArray : Binding<QuizHandler>, _ questionNum : Int){
+
         _qHandler = corAnsArray
         questionnumber = questionNum
         self.username = username
@@ -195,10 +220,9 @@ struct QuizViewContent: View {
                     }
                 }.offset(x: 0, y: -10)
                 // Display for remaining time to take quiz
-                Text("Time remaining: \(time)")
+                Spacer()
                     .offset(x: 10, y: 10)
-                    .foregroundColor(.white)
-                    .font(.system(size: 23))
+
             }
         }
     }
