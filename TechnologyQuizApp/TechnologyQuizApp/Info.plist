@@ -91,5 +91,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Record speech to provide feedback.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Utilize microphone to record speech for feedback.</string>
 </dict>
 </plist>

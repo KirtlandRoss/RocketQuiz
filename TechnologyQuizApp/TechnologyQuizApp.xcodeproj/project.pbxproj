@@ -14,6 +14,7 @@
 		5E371AF4264DC14B00CDCF54 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E371AF3264DC14B00CDCF54 /* RankingView.swift */; };
 		5E4ED2342651A6DF00361F88 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ED2332651A6DF00361F88 /* SubscriptionView.swift */; };
 		5E71EC2F265466F40045AC5A /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E71EC2E265466F40045AC5A /* FeedbackView.swift */; };
+		5E71EC3126548EE80045AC5A /* SpeechRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E71EC3026548EE70045AC5A /* SpeechRecognition.swift */; };
 		5EA643072649CD4E008519F1 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA643062649CD4E008519F1 /* SideMenu.swift */; };
 		5EA643092649CEB3008519F1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA643082649CEB3008519F1 /* MenuView.swift */; };
 		5EE60BCD264ACA7B00BC2735 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */; };
@@ -90,6 +91,7 @@
 		5E371AF3264DC14B00CDCF54 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		5E4ED2332651A6DF00361F88 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		5E71EC2E265466F40045AC5A /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		5E71EC3026548EE70045AC5A /* SpeechRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognition.swift; sourceTree = "<group>"; };
 		5EA643062649CD4E008519F1 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		5EA643082649CEB3008519F1 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				5EA6430A2649D80C008519F1 /* Side Menu */,
 				5EFE881526477B4900F4C387 /* LoginView.swift */,
 				5EE60BCC264ACA7B00BC2735 /* WelcomeView.swift */,
+				5E71EC3026548EE70045AC5A /* SpeechRecognition.swift */,
 				5E4ED2332651A6DF00361F88 /* SubscriptionView.swift */,
 				5EE60BCE264ADBEC00BC2735 /* QuizView.swift */,
 				5E71EC2E265466F40045AC5A /* FeedbackView.swift */,
@@ -550,6 +553,7 @@
 				5E18CA142648889500AF1F15 /* SignUpView.swift in Sources */,
 				5E18CA162648988900AF1F15 /* ForgotPasswordView.swift in Sources */,
 				BCDD19A8264AE3730023E2C5 /* QuestionBank+CoreDataClass.swift in Sources */,
+				5E71EC3126548EE80045AC5A /* SpeechRecognition.swift in Sources */,
 				BCDD19AA264AE3730023E2C5 /* Quiz+CoreDataClass.swift in Sources */,
 				5E4ED2342651A6DF00361F88 /* SubscriptionView.swift in Sources */,
 				BCDD19A6264AE3730023E2C5 /* User+CoreDataClass.swift in Sources */,

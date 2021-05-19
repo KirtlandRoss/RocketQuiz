@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct FeedbackView: View {
     @State private var starOneTapped = false
@@ -16,6 +17,10 @@ struct FeedbackView: View {
     @State private var submittedText = " "
     @State private var isSubmitted = false
     
+    @State private var transcript = ""
+    private let speechRecognizer = SpeechRecognizer()
+    @State private var isRecording = false
+    
     @State private var count = 1
     
     var body: some View {
@@ -25,14 +30,12 @@ struct FeedbackView: View {
                 .foregroundColor(.white)
                 .font(.system(size: 30))
                 .fontWeight(.bold)
-            Spacer()
             Text("Select rating from 1-5 below")
                 .foregroundColor(.white)
                 .font(.system(size: 20))
                 .fontWeight(.bold)
                 .padding()
             HStack {
-                Spacer()
                 Image(systemName: count >= 1 ? "star.fill" : "star")      .foregroundColor(count >= 1 ? .purple : .white)
                     .font(.system(size: 30))
                     .onTapGesture {
@@ -62,13 +65,41 @@ struct FeedbackView: View {
                     .onTapGesture {
                         count = 5
                     }
-                Spacer()
+                
             }.disabled(isSubmitted == true)
-            Spacer()
             Text(submittedText)
                 .foregroundColor(.green)
                 .font(.system(size: 20))
                 .padding()
+        Spacer()
+        VStack{
+        Text("Type feedback below or record voice(optional)")
+            .foregroundColor(.white)
+        TextEditor(text: $transcript)
+            .frame(width: 400, height: 150, alignment: .leading)
+            .foregroundColor(.black)
+            .padding()
+            .disabled(isSubmitted == true)
+        HStack {
+            Button(action: {
+                if !isRecording {
+                    speechRecognizer.record(to: $transcript)
+                    isRecording = true
+                } else {
+                    speechRecognizer.stopRecording()
+                    isRecording = false
+                }
+                
+            }){
+                Text(isRecording ? "Stop Recording" : "Start Recording")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .frame(width: 175, height: 50)
+                    .background(isRecording ? LinearGradient(gradient: Gradient(colors: [.red, .purple]), startPoint: .leading , endPoint: .bottomTrailing ) : LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .leading , endPoint: .bottomTrailing ))
+                    .cornerRadius(15.0)
+            }.disabled(isSubmitted == true)
+        }
             Button(action: {submit()}){
                 Text("Submit")
                     .font(.headline)
@@ -77,18 +108,27 @@ struct FeedbackView: View {
                     .frame(width: 350, height: 50)
                     .background(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ))
                     .cornerRadius(15.0)
+                    .padding()
             }.disabled(isSubmitted == true)
-            Spacer()
-        }.background(Color.purpleGray)
+        }
+        Spacer()
+    }.background(Color.purpleGray)
         .ignoresSafeArea()
     }
-    
+
     func submit() -> Int {
         submittedText = "Feedback Submitted"
         isSubmitted = true
-        print("Submitted")
+        print("Submitted", count)
+        submitTranscript(transcript: transcript)
         return count
     }
+    
+    func submitTranscript(transcript: String) -> String {
+        print(transcript)
+        return transcript
+    }
+    
 }
 
 struct FeedbackView_Previews: PreviewProvider {
