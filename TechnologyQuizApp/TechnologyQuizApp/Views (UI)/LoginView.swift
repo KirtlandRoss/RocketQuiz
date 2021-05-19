@@ -48,7 +48,7 @@ struct LoginView: View {
             }
         }
         else if selector == "QZ"{
-            QuizView(mode: $selector, username: username)
+            QuizView(mode: $selector, username: username).background(Color.lightPurpleGray)
         }
         else if selector == "AD"{
          AdminView(selector: $selector)

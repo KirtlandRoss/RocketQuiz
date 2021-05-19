@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import CoreData
 
 class QuizHandler{
     var correctAnswers : [Bool]
-
+    var answerArray = [[String]]()
     init(){
         correctAnswers = [Bool]()
         for _ in 1...25{
@@ -21,6 +22,18 @@ class QuizHandler{
     func updateScore(_ i : Int){
         correctAnswers[i] = true
     }
-    
+    func generateShuffledAnswers(_ username : String, _ context: NSManagedObjectContext) {
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
+        let adminPredicate = NSPredicate(format: "User.name == %@", username)
+        var quiz = try! context.fetch(fetchReq).first as! Quiz
+
+
+        for quest in quiz.questions?.array as! [QuizQuestion]{
+            var ansArr = [quest.correctAnswer!, quest.incorrectAnswers![0], quest.incorrectAnswers![1], quest.incorrectAnswers![2]]
+            ansArr.shuffle()
+            answerArray.append(ansArr)
+        }
+
+    }
 
 }
