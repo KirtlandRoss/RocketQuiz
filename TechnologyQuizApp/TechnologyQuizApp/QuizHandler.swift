@@ -11,6 +11,7 @@ import CoreData
 class QuizHandler{
     var correctAnswers : [Bool]
     var answerDict = [Int : [String]]()
+    var corAnsDict = [Int : Int]()
     init(){
         correctAnswers = [Bool]()
         for _ in 1...25{
@@ -27,10 +28,10 @@ class QuizHandler{
         print(username)
         userFetch.predicate = userFetchPred
         var user = try! context.fetch(userFetch).first as! User
-//        print(user)
-//        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
-//        let adminPredicate = NSPredicate(format: " == %@", user.name!)
-//        fetchReq.predicate = adminPredicate
+        //        print(user)
+        //        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
+        //        let adminPredicate = NSPredicate(format: " == %@", user.name!)
+        //        fetchReq.predicate = adminPredicate
         var quiz = user.quizes?.lastObject as! Quiz
 
 
@@ -38,7 +39,15 @@ class QuizHandler{
             var ansArr = [quest.correctAnswer!, quest.incorrectAnswers![0], quest.incorrectAnswers![1], quest.incorrectAnswers![2]]
             ansArr.shuffle()
             answerDict[Int(quest.number)] = ansArr
+            storeCorrectAnswer(Int(quest.number), quest.correctAnswer!)
         }
     }
-
+    func storeCorrectAnswer(_ qNum : Int, _ corAns: String){
+        for i in 0...3{
+            if answerDict[qNum]![i] == corAns{
+                corAnsDict[qNum] = i
+            }
+        }
+    }
 }
+

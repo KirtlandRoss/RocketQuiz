@@ -25,12 +25,12 @@ struct QuizView: View{
     ) var fetchedQBank : FetchedResults<QuestionBank>
     @FetchRequest(
         entity: Quiz.entity(),
-        sortDescriptors: []
+        sortDescriptors: [NSSortDescriptor(keyPath: \Quiz.grade, ascending: true)]
 
     ) var fetchedQuizes : FetchedResults<Quiz>
 
 
-    private var dbHelp = DBHelper()
+    private var dbHelp : DBHelper?
     @Binding var mode : String
     private var quizHandler : QuizHandler
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -65,7 +65,7 @@ struct QuizView: View{
                     //get questions out of quiz for correct user
                     ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [QuizQuestion]){ q in
                         NavigationLink(
-                            destination: QuizViewContent(question: q, username: username, quizHandler, Int(q.number), $timeRemaining),
+                            destination: QuizViewContent(question: q, username: username, quizHandler, questionNum: Int(q.number), $timeRemaining),
                             label: {
                                 Text("Question " + String(q.number + 1) + ": " + String(q.question!))
                             })
@@ -88,7 +88,7 @@ struct QuizView: View{
     func submitQuiz(){
         self.mode = "LI"
         print(quizHandler.correctAnswers)
-        dbHelp.updateQuizQuestions(username, quizHandler.correctAnswers)
+       DBHelper().updateQuizQuestions(username, quizHandler.correctAnswers)
 
         //Submit all questions
 
@@ -120,7 +120,7 @@ struct QuizViewContent: View {
     @State private var selected = 5
     //    var ans = [String]()
 
-    init(question : QuizQuestion, username: String, _ corAnsArray : QuizHandler, _ questionNum : Int, _ time : Binding<Int>){
+    init(question : QuizQuestion, username: String, _ corAnsArray : QuizHandler, questionNum : Int, _ time : Binding<Int>){
         _timeRemaining = time
         qHandler = corAnsArray
         questionnumber = questionNum
@@ -133,11 +133,7 @@ struct QuizViewContent: View {
         //        ans.shuffle()
 
         //find correct answer in shuffled answers
-        for i in 0...3{
-            if qHandler.answerDict[questionnumber]![i] == question.correctAnswer{
-                cAnswer = i
-            }
-        }
+
     }
     var body: some View {
         ZStack { // ZStack for whole view
@@ -150,7 +146,7 @@ struct QuizViewContent: View {
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
                 // Question Number
-                Text("Question: \(question.number)")
+                Text("Question: \(question.number + 1)")
                     .font(.system(size: 20))
                     .foregroundColor(Color.white)
                     .fontWeight(.bold)
@@ -233,7 +229,7 @@ struct QuizViewContent: View {
     }
     func checkAnswer(_ a : Int){
         selected = a
-        if a == cAnswer{
+        if a == qHandler.corAnsDict[questionnumber]{
             qHandler.updateScore(Int(question.number))
         }
     }
