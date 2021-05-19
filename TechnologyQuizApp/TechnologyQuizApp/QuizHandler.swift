@@ -21,9 +21,16 @@ class QuizHandler{
         correctAnswers[i] = true
     }
     func generateShuffledAnswers(_ username : String, _ context: NSManagedObjectContext) {
-        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
-        let adminPredicate = NSPredicate(format: "User.name == %@", username)
-        var quiz = try! context.fetch(fetchReq).first as! Quiz
+        print(username)
+        let userFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        let userFetchPred = NSPredicate(format: "name == %@", username)
+        userFetch.predicate = userFetchPred
+        var user = try! context.fetch(userFetch).first as! User
+//        print(user)
+//        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Quiz")
+//        let adminPredicate = NSPredicate(format: " == %@", user.name!)
+//        fetchReq.predicate = adminPredicate
+        var quiz = user.quizes?.lastObject as! Quiz
 
 
         for quest in quiz.questions?.array as! [QuizQuestion]{
