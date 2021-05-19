@@ -214,6 +214,7 @@ class DBHelper{
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         fetchReq.predicate = NSPredicate(format: "name == %@", name)
         fetchReq.returnsObjectsAsFaults = false
+        
 
         let date = Date()
 
@@ -245,14 +246,21 @@ class DBHelper{
         }
     }
 
-    func getAllDiscussionPosts () -> [Dictionary<String, String>] {
+    func getAllDiscussionPosts () -> [Dictionary<String, Any>] {
         var users = [User]()
         var posts : [Post] = []
 
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
         let sort = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sort]
-
+        
+        let df = DateFormatter()
+        df.timeStyle = .medium
+        df.dateStyle = .medium
+        df.dateFormat = "MM/dd/YYYY - hh:mm:ss"
+//        let dStr = df.string(from: date)
+//
+//        let finalDate = df.date(from: dStr)
 
         //        fetchReq.returnsObjectsAsFaults = false
 
@@ -263,7 +271,7 @@ class DBHelper{
             print("Error fetching user data")
         }
         return posts.map { Post in
-            ["name": String(Post.user!.name!), "content": String(Post.content!)]
+            ["name": String(Post.user!.name!), "content": String(Post.content!), "date": df.string(from: Post.date!) ]
         }
     }
 

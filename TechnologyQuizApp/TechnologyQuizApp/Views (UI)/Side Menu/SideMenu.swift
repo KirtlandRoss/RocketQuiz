@@ -8,7 +8,6 @@
 import SwiftUI
 import CoreData
 struct SideMenu<Content: View> : View {
-   
     @State private var showMenu = false // holds state for menu toggle
     @Binding var username : String
     @Binding var selector : String
@@ -57,6 +56,7 @@ struct SideMenu<Content: View> : View {
                 Button(action: {
                     withAnimation{
                         self.showMenu.toggle()
+                        
                     }
                 }){
                     // Hamburger Button

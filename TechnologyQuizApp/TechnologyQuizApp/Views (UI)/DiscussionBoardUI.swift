@@ -11,6 +11,7 @@ struct MessageInfo: Identifiable {
     var id = UUID()
     let name: String
     let message: String
+    let date: String
 }
 
 struct MessageRow: View {
@@ -22,7 +23,7 @@ struct MessageRow: View {
                 HStack {
                     Text("\(message.name): \(message.message)")
                 }
-            }.frame(width: 360, height: 45).listStyle(PlainListStyle())
+            }.frame(width: 360, height: 100).listStyle(PlainListStyle())
     }
 }
 
@@ -37,7 +38,7 @@ struct DiscussionBoardUI: View {
     var body: some View {
         
         let userData = messages.map({ (message) -> MessageInfo in
-            return MessageInfo(name: message["name"]!, message: message["content"]!)
+            return MessageInfo(name: message["name"]! as! String, message: message["content"]! as! String, date: message["date"] as! String)
         })
         
         VStack{
@@ -54,12 +55,13 @@ struct DiscussionBoardUI: View {
                 
                 List(userData){ data in
                     
-                    Text("\(data.name): \(data.message)")
+                    Text("\(data.date) - \(data.name): \(data.message)")
                         .foregroundColor(.white)
-                        .font(.system(size: 20))
+                        .font(.system(size: 15))
                         .fontWeight(.bold)
-                        .frame(width: 420, height: 50, alignment: .leading)
+                        .frame(width: 410, height: 100, alignment: .leading)
                         .padding(.leading, 10)
+                        .padding(.trailing, 10)
                         .background(Color.lightPurpleGray)
                         .cornerRadius(10)
                         .border(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing), width:4)
