@@ -58,6 +58,12 @@ struct MenuView: View {
     func welcome () {
         selector = "LI"
     }
+    
+    func feedback() {
+       let dbhelp = DBHelper()
+        dbhelp.createQuiz(username)
+        selector = "FD"
+    }
 
     var body: some View {
         VStack (alignment: .leading){
@@ -131,10 +137,23 @@ struct MenuView: View {
                 subscribe()
             }){
                 HStack {
-                    Image(systemName: "star")
+                    Image(systemName: "creditcard")
                         .foregroundColor(.white)
                         .imageScale(.large)
                     Text("Subscribe")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                }
+                .padding(.top, 30)
+            }
+            Button(action:  {
+                feedback()
+            }){
+                HStack {
+                    Image(systemName: "star")
+                        .foregroundColor(.white)
+                        .imageScale(.large)
+                    Text("Rate The App")
                         .foregroundColor(.white)
                         .font(.headline)
                 }

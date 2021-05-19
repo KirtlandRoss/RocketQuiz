@@ -68,6 +68,11 @@ struct LoginView: View {
                 SubscriptionView(username: $username)
             }
         }
+        else if selector == "FD"{
+            SideMenu(username: $username, selector: $selector){
+                FeedbackView()
+            }
+        }
         else if logged == true && AccessToken.current != nil {
             SideMenu(username: $username, selector: $selector){
                 WelcomeView(selection: $selector, username: $username)
