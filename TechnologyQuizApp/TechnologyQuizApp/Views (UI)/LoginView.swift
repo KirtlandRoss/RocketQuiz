@@ -24,7 +24,8 @@ struct LoginView: View {
     @State private var password: String = UserDefaults.standard.string(forKey: "rememberedPassword") ?? ""
     @State private var rememberMe = UserDefaults.standard.bool(forKey: "switchBool")
     @State private var user : User?
-    
+
+    private var quizHandler = QuizHandler()
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
     @State var manager = LoginManager()
@@ -43,38 +44,38 @@ struct LoginView: View {
     var body: some View {
 
         if selector == "LI" {
-            SideMenu(username: $username, selector: $selector){
+            SideMenu(username, $selector, quizHandler){
                 WelcomeView(selection: $selector, username: $username)
             }
         }
         else if selector == "QZ"{
-            QuizView(mode: $selector, username: username).background(Color.lightPurpleGray)
+            QuizView(mode: $selector, username: username, quizHandler).background(Color.lightPurpleGray)
         }
         else if selector == "AD"{
          AdminView(selector: $selector)
         }
         else if selector == "RK"{
-            SideMenu(username: $username, selector: $selector){
+            SideMenu(username, $selector, quizHandler){
                 RankingView()
             }
         }
         else if selector == "DS"{
-            SideMenu(username: $username, selector: $selector){
+            SideMenu(username, $selector, quizHandler){
                 DiscussionBoardUI(user: $username)
             }
         }
         else if selector == "SS"{
-            SideMenu(username: $username, selector: $selector){
+            SideMenu(username, $selector, quizHandler){
                 SubscriptionView(username: $username)
             }
         }
         else if selector == "FD"{
-            SideMenu(username: $username, selector: $selector){
+            SideMenu(username, $selector, quizHandler){
                 FeedbackView()
             }
         }
         else if logged == true && AccessToken.current != nil {
-            SideMenu(username: $username, selector: $selector){
+            SideMenu(username, $selector, quizHandler){
                 WelcomeView(selection: $selector, username: $username)
             }
         }

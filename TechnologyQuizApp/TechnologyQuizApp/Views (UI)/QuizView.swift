@@ -32,15 +32,16 @@ struct QuizView: View{
 
     private var dbHelp = DBHelper()
     @Binding var mode : String
-    @State private var quizHandler = QuizHandler()
+    @State private var quizHandler : QuizHandler?
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var timeRemaining = 1800
     var username : String
 
-    init (mode: Binding<String>, username : String) {
+    init (mode: Binding<String>, username : String, _ quizHand : QuizHandler) {
         self._mode = mode
         self.username = username
-        quizHandler.generateShuffledAnswers(username, context)
+        self.quizHandler = quizHand
+        quizHandler!.generateShuffledAnswers(username, context)
         UITableView.appearance().backgroundColor = .clear
 
 
@@ -64,7 +65,7 @@ struct QuizView: View{
                     //get questions out of quiz for correct user
                     ForEach(fetchedQuizes.first(where: {$0.user?.name == username})!.questions?.array as! [QuizQuestion]){ q in
                         NavigationLink(
-                            destination: QuizViewContent(question: q, username: username, $quizHandler, Int(q.number)),
+                            destination: QuizViewContent(question: q, username: username, quizHandler!, Int(q.number)),
                             label: {
                                 Text("Question " + String(q.number + 1) + ": " + String(q.question!))
                             })
@@ -86,8 +87,8 @@ struct QuizView: View{
     //MARK: Submit quiz
     func submitQuiz(){
         self.mode = "LI"
-        print(quizHandler.correctAnswers)
-        dbHelp.updateQuizQuestions(username, quizHandler.correctAnswers)
+        print(quizHandler!.correctAnswers)
+        dbHelp.updateQuizQuestions(username, quizHandler!.correctAnswers)
 
         //Submit all questions
 
@@ -115,25 +116,25 @@ struct QuizViewContent: View {
     var cAnswer : Int?
 
 
-    @Binding var qHandler : QuizHandler
+    private var qHandler : QuizHandler
     @State private var selected = 5
     var ans = [String]()
 
-    init(question : QuizQuestion, username: String, _ corAnsArray : Binding<QuizHandler>, _ questionNum : Int){
+    init(question : QuizQuestion, username: String, _ corAnsArray : QuizHandler, _ questionNum : Int){
 
-        _qHandler = corAnsArray
+        qHandler = corAnsArray
         questionnumber = questionNum
         self.username = username
         self.question = question
 
-        //put all answers in an array
-        self.ans = [question.correctAnswer!] + question.incorrectAnswers!
-        //shuffle
-        ans.shuffle()
+//       // put all answers in an array
+//        self.ans = [question.correctAnswer!] + question.incorrectAnswers!
+//        //shuffle
+//        ans.shuffle()
 
         //find correct answer in shuffled answers
         for i in 0...3{
-            if ans[i] == question.correctAnswer{
+            if qHandler.answerDict[questionnumber]![i] == question.correctAnswer{
                 cAnswer = i
             }
         }
@@ -237,8 +238,9 @@ struct QuizViewContent: View {
 
 struct QuizView_Previews: PreviewProvider {
     @State static var qb = QuestionBank()
+    @State static var qh = QuizHandler()
     @State static var selector = ""
     static var previews: some View {
-        QuizView(mode: $selector, username: selector)
+        QuizView(mode: $selector, username: selector, qh)
     }
 }

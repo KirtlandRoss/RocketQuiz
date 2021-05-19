@@ -10,15 +10,13 @@ import CoreData
 
 class QuizHandler{
     var correctAnswers : [Bool]
-    var answerArray = [[String]]()
+    var answerDict = [Int : [String]]()
     init(){
         correctAnswers = [Bool]()
         for _ in 1...25{
             correctAnswers.append(false)
         }
-
     }
-
     func updateScore(_ i : Int){
         correctAnswers[i] = true
     }
@@ -31,9 +29,8 @@ class QuizHandler{
         for quest in quiz.questions?.array as! [QuizQuestion]{
             var ansArr = [quest.correctAnswer!, quest.incorrectAnswers![0], quest.incorrectAnswers![1], quest.incorrectAnswers![2]]
             ansArr.shuffle()
-            answerArray.append(ansArr)
+            answerDict[Int(quest.number)] = ansArr
         }
-
     }
 
 }

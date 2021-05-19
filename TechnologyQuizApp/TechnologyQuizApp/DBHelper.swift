@@ -27,8 +27,6 @@ class DBHelper{
         do
         {
             usrL = try context!.fetch(fetchReq) as! [User]
-
-
             for plyr in usrL
             {
                 plyr.averageScore = plyr.calculateScore()

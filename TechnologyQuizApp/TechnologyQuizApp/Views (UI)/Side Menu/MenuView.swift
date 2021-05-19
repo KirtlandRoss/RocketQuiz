@@ -11,7 +11,8 @@ import FBSDKLoginKit
 struct MenuView: View {
     @Environment(\.managedObjectContext) var context
     @Binding var selector : String
-    @State var username : String
+    var username : String = ""
+    private var quizHandler : QuizHandler
 
     @FetchRequest(
         entity: User.entity(),
@@ -25,21 +26,24 @@ struct MenuView: View {
     ) var fetchedQBank : FetchedResults<QuestionBank>
     
 
+    init(_ un : String, _ sel : Binding<String>, _ qh: QuizHandler){
+        _selector = sel
+        quizHandler = qh
+        username = un
+    }
     func quiz() {
-       let dbhelp = DBHelper()
+        let dbhelp = DBHelper()
+        quizHandler.generateShuffledAnswers(username, context)
         dbhelp.createQuiz(username)
         selector = "QZ"
     }
     
     func ranking() {
-
         for user in users{
             user.calculateScore()
         }
         try! context.save()
         selector = "RK"
-
-
     }
     
     func logout () {
@@ -60,7 +64,7 @@ struct MenuView: View {
     }
     
     func feedback() {
-       let dbhelp = DBHelper()
+        let dbhelp = DBHelper()
         dbhelp.createQuiz(username)
         selector = "FD"
     }
@@ -69,12 +73,12 @@ struct MenuView: View {
         VStack (alignment: .leading){
             VStack {
                 Image("profileImage")
-                .resizable()
-                .frame(width: 75, height: 75)
-                .clipShape(Circle())
-                .overlay(Circle()
-                            .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ), lineWidth: 4))
-                .shadow(radius: 10)
+                    .resizable()
+                    .frame(width: 75, height: 75)
+                    .clipShape(Circle())
+                    .overlay(Circle()
+                                .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading , endPoint: .bottomTrailing ), lineWidth: 4))
+                    .shadow(radius: 10)
                 Text(username)
                     .font(.system(size: 20))
                     .fontWeight(.heavy)
@@ -123,15 +127,15 @@ struct MenuView: View {
             Button(action:  {
                 quiz()
             }){
-            HStack {
-                Image(systemName: "questionmark")
-                    .foregroundColor(.white)
-                    .imageScale(.large)
-                Text("Quiz")
-                    .foregroundColor(.white)
-                    .font(.headline)
-            }
-            .padding(.top, 30)
+                HStack {
+                    Image(systemName: "questionmark")
+                        .foregroundColor(.white)
+                        .imageScale(.large)
+                    Text("Quiz")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                }
+                .padding(.top, 30)
             }
             Button(action:  {
                 subscribe()
@@ -185,7 +189,8 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     @State static var selector =  ""
+    @State static var qh =  QuizHandler()
     static var previews: some View {
-        MenuView(selector: $selector, username: selector)
+        MenuView( selector,  $selector, qh)
     }
 }
