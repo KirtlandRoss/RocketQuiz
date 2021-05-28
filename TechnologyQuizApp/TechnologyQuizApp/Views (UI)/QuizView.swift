@@ -223,7 +223,6 @@ struct QuizViewContent: View {
                 // Display for remaining time to take quiz
                 Spacer()
                     .offset(x: 10, y: 10)
-
             }
         }
     }
