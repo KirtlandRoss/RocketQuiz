@@ -1,6 +1,6 @@
 # RocketQuiz
 
-## A quiz application where user can check his/her performance on different technologies like Java, iOS , Swift, Android etc.
+## A quiz application where user can check their performance on different technologies like Java, iOS , Swift, Android etc.
 
 This is a SwiftUI that app quizzes users and persistantly stores their quiz performance and ranks them based on average scores across multiple quizzes. Users can sign in with facebook.
 
@@ -18,7 +18,7 @@ This is a SwiftUI that app quizzes users and persistantly stores their quiz perf
 
 To-do list:
 * Add category sections in quiz
-* Limit number of quizzes for unsubscribed users
+* Allow Questions to be read into the question bank from a CSV file
 
 ## Getting Started
 
